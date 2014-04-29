@@ -1,0 +1,7 @@
+
+
+<!-- display title and summary for all stories -->
+<% for s in @stories do %>
+	<div> Title: <%= link_to(s.title, controller: "stories", action: "view", id: s.id) %> </div>
+	<div> Summary: <%= s.summary%> </div>
+<%end%>

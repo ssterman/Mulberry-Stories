@@ -1,0 +1,25 @@
+
+<h1 class="title"> <%= @story.title %> </h1>
+<h2 class="summary"> <%= @story.summary %> </h2> 
+
+<div class="break"></div>
+
+
+<!-- the container for visualization -->
+<div class="vis" id="viscontainer" onclick = "createnode(event)">
+	<div> Node Visualizaton </div>
+	<% for n in @nodes %>
+		<div class="node" onclick="selectnode(this, 'rwcontainer', '<%= n.text %>')"> <%=n.id%> </div>
+	<%end%>
+</div>
+
+<!-- the read/write interface; should only be able to edit your own nodes; until have users and logins, no editing allowed, only creating new nodes-->
+<div id="rwcontainer">
+<!-- 	<div class="read"></div>
+ -->	<div id="write">
+		<form>
+			<input type="text" name="content">
+		</form>
+	</div>
+</div>
+

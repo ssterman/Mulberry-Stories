@@ -1,0 +1,55 @@
+// Place all the styles related to the stories controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.node {
+	border-style: solid;
+	border-width: 2px;
+	border-color: black;
+
+	width: 100px;
+	height: 20px;
+
+	margin: 10px;
+
+	text-align: center;
+}
+
+.title {
+	text-align: center;
+}
+
+.summary {
+	text-align: center;
+}
+
+.break {
+	border-style: solid;
+	border-width: 2px;
+	border-color: black;
+	margin: 10px;
+}
+
+.vis {
+	width: 49%;
+	border-style: solid;
+	border-width: 1px;
+	border-color: black;
+	position: absolute;
+	right: 0px;
+}
+
+#rwcontainer {
+	width: 49%;
+	border-style: solid;
+	border-width: 1px;
+	border-color: black;
+	height: auto;
+	position: absolute;
+	left: 1px;
+	padding: 10px;
+}
+
+#write {
+	display: none;
+}
