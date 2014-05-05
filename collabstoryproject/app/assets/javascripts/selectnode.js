@@ -41,7 +41,6 @@ function createnode(e) {
 //this displays the nodes in a force-directed graph using d3
 //starter code: http://bl.ocks.org/mbostock/4062045
 function d3visdisplay(json_data) {
-	// console.log(json_str);
 
 	var graph = json_data;
 
@@ -51,7 +50,7 @@ function d3visdisplay(json_data) {
 	var color = d3.scale.category20();
 
 	var force = d3.layout.force()
-	    .charge(-120)
+	    .charge(-250)
 	    .linkDistance(80)
 	    .size([width, height]);
 
@@ -84,10 +83,10 @@ function d3visdisplay(json_data) {
 	  .attr("fixed", function(d){
 	  	if (d.truth == true) {
 	  		d.fixed = true;    //this is kinda hacky, but works
-	  		d.x = 100;
-	  		d.y = 100;
-	  		d.px = 100;
-	  		d.py = 100;
+	  		d.x = d.id*20;
+	  		d.y = d.truth_height*200 + 50;
+	  		d.px = d.id*20;
+	  		d.py = d.truth_height*200 + 50;
 	  		return true;
 	  	}
 	  })

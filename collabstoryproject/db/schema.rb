@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 20140505051138) do
     t.integer  "story_id"
     t.integer  "weight"
     t.boolean  "truth"
+    t.integer  "truth_height", default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
