@@ -2,7 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.node {
+.commented_out_node {
 	border-style: solid;
 	border-width: 2px;
 	border-color: black;
@@ -52,4 +52,15 @@
 
 #write {
 	display: none;
+}
+
+
+.node {
+  stroke: #fff;
+  stroke-width: 1.5px;
+}
+
+.link {
+  stroke: #999;
+  stroke-opacity: .6;
 }

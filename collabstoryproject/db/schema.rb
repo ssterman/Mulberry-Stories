@@ -11,12 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140427013940) do
+ActiveRecord::Schema.define(version: 20140505051138) do
+
+  create_table "links", force: true do |t|
+    t.integer  "source"
+    t.integer  "target"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "nodes", force: true do |t|
     t.string   "text"
     t.integer  "user_id"
     t.integer  "story_id"
+    t.integer  "weight"
+    t.boolean  "truth"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

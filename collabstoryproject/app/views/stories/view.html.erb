@@ -8,9 +8,9 @@
 <!-- the container for visualization -->
 <div class="vis" id="viscontainer" onclick = "createnode(event)">
 	<div> Node Visualizaton </div>
-	<% for n in @nodes %>
-		<div class="node" onclick="selectnode(this, 'rwcontainer', '<%= n.text %>')"> <%=n.id%> </div>
-	<%end%>
+	<!-- <% for n in @nodes %> -->
+		<!-- <div class="node" onclick="selectnode(this, 'rwcontainer', '<%= n.text %>')"> <%=n.id%> </div> -->
+	<!-- <%end%> -->
 </div>
 
 <!-- the read/write interface; should only be able to edit your own nodes; until have users and logins, no editing allowed, only creating new nodes-->
@@ -23,3 +23,7 @@
 	</div>
 </div>
 
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script>
+	d3visdisplay(<%=raw @json_data %>);
+</script>

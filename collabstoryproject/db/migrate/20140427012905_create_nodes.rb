@@ -4,6 +4,8 @@ class CreateNodes < ActiveRecord::Migration
     	t.string :text
 		t.integer :user_id #creator id
 		t.integer :story_id
+		t.integer :weight  #use to size nodes based on votes/views/something
+		t.boolean :truth   #is it a truth node
       t.timestamps
     end
   end

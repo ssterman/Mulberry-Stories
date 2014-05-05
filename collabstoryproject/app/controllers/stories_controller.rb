@@ -15,5 +15,37 @@ class StoriesController < ApplicationController
 		@story = Story.find(params[:id])
 		conds = "story_id == " + @story.id.to_s
 		@nodes = Node.find(:all, :conditions => conds)
+
+		nodes_str = "\"nodes\":["
+		links_str = "\"links\":["
+
+		for n in @nodes do
+			nodes_str += "{\"id\": " + n.id.to_s + ", "
+			nodes_str += "\"truth\": " + n.truth.to_s + "},"
+			# get all links starting with this node
+			links = Link.find(:all, :conditions => "source == " + n.id.to_s)
+			# loop through all the links, add to string based on NODE's INDEX IN ARRAY, not node id
+			for l in links do 
+				source = @nodes.index(Node.find(l.source))
+				links_str += "{\"source\": " +  source.to_s + ","
+				target = @nodes.index(Node.find(l.target))
+				links_str += "\"target\": " + target.to_s + "},"
+			end
+		end
+
+		nodes_str = nodes_str.chop
+		links_str = links_str.chop
+		nodes_str += "]"
+		links_str += "]"
+		@json_str = "{" + nodes_str + "," + links_str + "}"
+		@json_data = JSON.generate(JSON.parse(@json_str)) # turns string to ruby object to JSON
 	end
 end
+
+
+# so create new migration of links
+# store source, target
+
+#add weight to nodes
+
+
