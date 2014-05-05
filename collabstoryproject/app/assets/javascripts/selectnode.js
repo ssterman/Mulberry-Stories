@@ -44,8 +44,8 @@ function d3visdisplay(json_data) {
 
 	var graph = json_data;
 
-	var width = 300;
-    var height = 300;
+	var width = 500;//document.getElementById("viscontainer").width;
+    var height = 500;//document.getElementById("viscontainer").height;
 
 	var color = d3.scale.category20();
 
@@ -84,11 +84,16 @@ function d3visdisplay(json_data) {
 	  	if (d.truth == true) {
 	  		d.fixed = true;    //this is kinda hacky, but works
 	  		d.x = d.id*20;
-	  		d.y = d.truth_height*200 + 50;
+	  		d.y = d.truth_height*200 + 50; //trying to spread out the truth nodes
 	  		d.px = d.id*20;
 	  		d.py = d.truth_height*200 + 50;
 	  		return true;
 	  	}
+	  })
+	  //this controls clicking on a node; displays the text in it
+	  .on("click", function(d) {
+	  	var rwcontainer = document.getElementById("rwcontainer")
+	  	rwcontainer.innerHTML = d.text;
 	  })
 	  .call(force.drag);
 

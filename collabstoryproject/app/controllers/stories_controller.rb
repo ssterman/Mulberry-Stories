@@ -16,12 +16,14 @@ class StoriesController < ApplicationController
 		conds = "story_id == " + @story.id.to_s
 		@nodes = Node.find(:all, :conditions => conds)
 
+		# form json string with desired fields from database
 		nodes_str = "\"nodes\":["
 		links_str = "\"links\":["
 
 		for n in @nodes do
 			nodes_str += "{\"id\": " + n.id.to_s + ", "
 			nodes_str += "\"truth_height\": " + n.truth_height.to_s + ", "
+			nodes_str += "\"text\":\"" + n.text + "\","
 			nodes_str += "\"truth\": " + n.truth.to_s + "},"
 			# get all links starting with this node
 			links = Link.find(:all, :conditions => "source == " + n.id.to_s)
