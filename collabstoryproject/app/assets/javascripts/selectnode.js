@@ -75,7 +75,7 @@ function d3visdisplay2(json_data) {
         console.log("one node added with id: " + id);
         addLink(source, target);
         update();
-        showEditScreen(target);
+        showEditScreen(source, target);
     }
 
     this.removeNode = function (id) {
@@ -176,11 +176,13 @@ function d3visdisplay2(json_data) {
     update();
 }
 
-function showEditScreen(target) {
+function showEditScreen(source, target) {
 	target.text = "You just created a node with id " + target.id + ". You may edit the node below and then save it.";
 	var read_area = document.getElementById("read")
 	read_area.innerHTML = target.text;
 	$("#write").show();
+	$("#node_source").val(source.id);
+	$("#target_source").val(target.id);
 }
 
 function saveNewNode() {

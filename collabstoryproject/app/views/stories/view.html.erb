@@ -20,6 +20,8 @@
 	<div id="write">
 			<%= form_for(@node, :url => {:controller => "nodes", :action => "save"}) do |f| %>
   			<%= f.text_area(:text, size: '50x10') %>
+  			<%=f.hidden_field :source, :value => "some value" %> 			
+  			<%=f.hidden_field :target, :value => "some value" %>
   			<%= f.submit "Save" %>
 		<% end %>	
 	</div>
