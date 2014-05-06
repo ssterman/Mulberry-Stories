@@ -182,7 +182,6 @@ function showEditScreen(source, target) {
 	read_area.innerHTML = target.text;
 	$("#write").show();
 	$("#node_source").val(source.id);
-	$("#target_source").val(target.id);
 }
 
 function saveNewNode() {

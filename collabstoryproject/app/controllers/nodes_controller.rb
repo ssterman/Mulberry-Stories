@@ -11,8 +11,9 @@ class NodesController < ApplicationController
   		new_node.story = Story.find_by(title: "TEST STORY 1")
   		new_node.save
 
-  		_create_link(parameters[:source], parameters[:target])
-  		#new_node.save(:validate => false)
+  		_create_link(parameters[:source], new_node.id)
+  		
+  		new_node.save(:validate => false)
   		redirect_to :controller => 'stories', :action => :view, :id => new_node.story
 	end
 
@@ -24,7 +25,7 @@ class NodesController < ApplicationController
 	end
 
 	def node_params
-		params.require(:node).permit(:text, :source, :target)
+		params.require(:node).permit(:text, :source)
 	end
 
 end

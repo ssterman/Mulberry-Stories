@@ -44,6 +44,8 @@ class StoriesController < ApplicationController
 		links_str += "]"
 		@json_str = "{" + nodes_str + "," + links_str + "}"
 		@json_data = JSON.generate(JSON.parse(@json_str)) # turns string to ruby object to JSON
+		#render json: {note: @json_data, note2: @json_str}, status: 200
+
 	end
 
 
