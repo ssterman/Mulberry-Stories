@@ -18,11 +18,7 @@
 	<div id="read">
 	</div>
 	<div id="write">
-		<!--<form id="write_form" onsubmit="saveNewNode()">
-  			<input id="new_text" name="new_text" type="text" /><br/>
-  			<input name="submit" type="submit" value="Submit" />
-		</form>	-->
-		<%= form_for Node.new, url: {action: "save"} do |f| %>
+			<%= form_for(@node, :url => {:controller => "nodes", :action => "save"}) do |f| %>
   			<%= f.text_area(:text, size: '50x10') %>
   			<%= f.submit "Save" %>
 		<% end %>	
