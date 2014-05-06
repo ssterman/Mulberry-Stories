@@ -1,110 +1,195 @@
 
-//this displays the nodes in a force-directed graph using d3
-//starter code: http://bl.ocks.org/mbostock/4062045
-function d3visdisplay(json_data) {
+//eventually this should be modified to work with whatever
+//visualization we choose; possibly with d3.js
+function selectnode(node, output_div, node_text) {
 
-	var graph = json_data;
+	//reset background color
+	var all_nodes = document.getElementsByClassName('node');
+	var len = all_nodes.length;
+	for (var i = 0; i< len; i++) {
+		var curnode = all_nodes.item(i);
+		curnode.style.backgroundColor = 'white';
+	}
 
-	//would like to have a dynamic resizing, or at least fit to original
-	//window size.  otherwise may want to fix the css to a static size
-	var width = 500;//document.getElementById("viscontainer").width;
-    var height = 500;//document.getElementById("viscontainer").height;
+	//set read text
+	var outdiv = document.getElementById(output_div);
+	outdiv.innerHTML = node_text;
 
-	var color = d3.scale.category20();
-
-	//sets force characteristics
-	var force = d3.layout.force()
-	    .charge(-250)			//how far they repel each other
-	    .linkDistance(80)
-	    .size([width, height]);  //allowable dimensions
-
-	//creats the svg that will hold the visualization
-	var svg = d3.select("#viscontainer").append("svg")
-	    .attr("width", width)
-	    .attr("height", height);
-
-	//initiates force
-	force
-	  .nodes(graph.nodes)
-	  .links(graph.links)
-	  .start();
-
-	//creates links from the data
-	var link = svg.selectAll(".link")
-	  .data(graph.links)
-	.enter().append("line")
-	  .attr("class", "link")
-
-	//creates nodes from the data
-	var node = svg.selectAll(".node")
-	  .data(graph.nodes)
-	.enter().append("circle")
-	  .attr("class", "node")
-	  .attr("r", 20)
-	  //truth nodes are colored darker than other nodes
-	  //may add other color controls in the future
-	  .style("fill", function(d) { 
-	  	if (d.truth == true) {
-	  		return color(1);
-	  	} else {
-	  		return color(2);
-	  	}
-	  })
-	  //makes truth nodes fixed in the visualization layout
-	  .attr("fixed", function(d){
-	  	if (d.truth == true) {
-	  		d.fixed = true;    //this is kinda hacky, but works
-	  		d.x = d.id*20;
-	  		//should get a more flexible way of spreading out truth nodes
-	  		d.y = d.truth_height*200 + 50;
-	  		d.px = d.id*20;
-	  		d.py = d.truth_height*200 + 50;
-	  		return true;
-	  	}
-	  })
-	  //this controls clicking on a node; displays the text in it
-	  .on("click", function(d) {
-	  	var rwcontainer = document.getElementById("rwcontainer")
-	  	rwcontainer.innerHTML = d.text;
-	  })
-	  .call(force.drag);
-
-	//title here is the id of the node; 
-	//may want to replace with a summary, or first sentence
-	node.append("title")
-	  .text(function(d) { return d.id; });
-
-// Per-type markers, as they don't inherit styles.
-	svg.append("defs").selectAll("marker")
-    .data(graph.links)
-  .enter().append("marker")
-    .attr("id", function(d) { return d; })
-    .attr("viewBox", "0 -5 10 10")
-    .attr("refX", 15)
-    .attr("refY", -1.5)
-    .attr("markerWidth", 6)
-    .attr("markerHeight", 6)
-    .attr("orient", "auto")
-  .append("path")
-    .attr("d", "M0,-5L10,0L0,5");
-
-
-	var path = svg.append("g").selectAll("path")
-    .data(graph.links)
-  	.enter().append("path")
-    .attr("class", function(d) { return "node " + d; })
-    .attr("marker-end", function(d) { return "url(#" + d.target + ")"; });
-
-
-	force.on("tick", function() {
-	link.attr("x1", function(d) { return d.source.x; })
-	    .attr("y1", function(d) { return d.source.y; })
-	    .attr("x2", function(d) { return d.target.x; })
-	    .attr("y2", function(d) { return d.target.y; });
-
-	node.attr("cx", function(d) { return d.x; })
-	    .attr("cy", function(d) { return d.y; })
-	});
-
+	//set selected color
+	node.style.backgroundColor = 'red';
 }
+
+
+function createnode(e) {
+// 	if (e.target == document.getElementById("viscontainer")) {
+// 		console.log("creating new node", e);
+
+// 		//create new node div and display
+// 		var newnode = document.createElement('div');
+// 		newnode.className = 'node';
+// 		e.target.appendChild(newnode);
+
+// 		//open the write interface (text input form)
+// 		var write = document.getElementById('write');
+// 		write.style.display = "inline";
+// 		//add entry to database if saved (tie to a form submit)
+// 	}
+}
+
+function setup() {
+	document.addEventListener('mousemove', function(e){ 
+    	$(document).data("mouse", { x: e.pageX, y: e.pageY });
+	}, false);
+}
+
+
+function d3visdisplay2(json_data) {
+
+    // set up the D3 visualisation in the specified element
+    var w = 500,
+        h = 500;
+
+    var vis = this.vis = d3.select("#viscontainer").append("svg:svg")
+        .attr("width", w)
+        .attr("height", h);
+
+    var force = d3.layout.force()
+        .gravity(.05)
+        .distance(80)
+        .charge(-250)
+        .size([w, h]);
+
+    force.nodes(json_data.nodes);
+    force.links(json_data.links);
+    var nodes = force.nodes();
+    var links = force.links();
+
+
+    var color = d3.scale.category20();
+
+    // Add and remove elements on the graph object
+    this.addNode = function (source) {
+    	var id = nodes.length + 1;
+        nodes.push({"id":id});
+        var target = findNode(id);
+        console.log("one node added with id: " + id);
+        addLink(source, target);
+        update();
+        showEditScreen(target);
+    }
+
+    this.removeNode = function (id) {
+        var i = 0;
+        var n = findNode(id);
+        while (i < links.length) {
+            if ((links[i]['source'] == n)||(links[i]['target'] == n)) links.splice(i,1);
+            else i++;
+        }
+        nodes.splice(findNodeIndex(id),1);
+        update();
+    }
+
+    this.addLink = function (source, target) {
+    	console.log("one link added between: " + source.id + " -> " + target.id);
+        links.push({"source": source,"target":target});
+    }
+
+    var findNode = function(id) {
+        for (var i in nodes) {if (nodes[i]["id"] === id) return nodes[i]};
+    }
+
+    var findNodeIndex = function(id) {
+        for (var i in nodes) {if (nodes[i]["id"] === id) return i};
+    }
+
+    var update = function () {
+		var link = vis.selectAll(".link")
+	  		.data(links)
+			.enter().append("line")
+	  		.attr("class", "link")
+
+		var node = vis.selectAll(".node")
+	  		.data(nodes)
+			.enter().append("circle")
+	  		.attr("class", "node")
+	  		.attr("r", 20)
+	  		.style("fill", function(d) { 
+	  		if (d.truth == true) {
+	  			return color(1);
+	  		} else {
+	  			return color(2);
+	  		}
+	  	})
+	  	.attr("fixed", function(d){
+	  		if (d.truth == true) {
+	  			d.fixed = true;    //this is kinda hacky, but works
+	  			d.x = d.id*20;
+	  			d.y = d.truth_height*200 + 50; //trying to spread out the truth nodes
+	  			d.px = d.id*20;
+	  			d.py = d.truth_height*200 + 50;
+	  			return true;
+	  		}
+	  	})
+	  	//this controls clicking on a node; displays the text in it
+	  	// or dragging to create a new node
+	  	.on("mousedown", function(d) {
+	  		console.log("mousedown");
+	  		$(d).data("p0", { x: $(document).data("mouse").x, y: $(document).data("mouse").y });
+	  	}).on("mouseup", function(d) {
+	  		console.log("mouseup");
+	  		var p0 = $(d).data("p0");
+	  		console.log(p0);
+	  		p1 = { x: $(document).data("mouse").x, y: $(document).data("mouse").y };
+	  		dist = Math.sqrt(Math.pow(p1.x - p0.x, 2) + Math.pow(p1.y - p0.y, 2));
+
+	  		if (dist < 10) { // counts as a click
+	  			var read_area = document.getElementById("read")
+	  			read_area.innerHTML = d.text;
+	  		} else {
+	  			//addNode(d);
+	  		}	  	
+	  	}).on("dblclick", function(d) {
+	  		console.log("dbl");
+	  		addNode(d);
+	  	}).call(force.drag);
+
+	  	force.start();
+
+		node.append("title")
+	  		.text(function(d) { return d.id; });
+
+
+    //node.exit().remove();
+
+        force.on("tick", function() {
+          	link.attr("x1", function(d) { return d.source.x; })
+              	.attr("y1", function(d) { return d.source.y; })
+              	.attr("x2", function(d) { return d.target.x; })
+              	.attr("y2", function(d) { return d.target.y; });
+
+          	node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+        	});
+
+        // Restart the force layout.
+        force.start();
+    }
+    update();
+}
+
+function showEditScreen(target) {
+	target.text = "You just created a node with id " + target.id + ". You may edit the node below and then save it.";
+	var read_area = document.getElementById("read")
+	read_area.innerHTML = target.text;
+	$("#write").show();
+}
+
+function saveNewNode() {
+	console.log("hello");
+	$.post('superman', { id: "hello", id2 : "hello2"}, 
+    function(returnedData){
+         console.log("it worked!");
+	});
+}
+
+
 
