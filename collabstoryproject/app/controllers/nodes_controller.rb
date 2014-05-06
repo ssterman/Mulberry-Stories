@@ -8,7 +8,7 @@ class NodesController < ApplicationController
 		new_node.user = User.find_by(username: 'Tester1')
   		new_node.truth = false
   		new_node.truth_height = 0
-  		new_node.story = Story.find_by(title: "TEST STORY 1")
+  		new_node.story = Story.find_by_id(parameters[:story_id])
   		new_node.save
 
   		_create_link(parameters[:source], new_node.id)
@@ -25,7 +25,7 @@ class NodesController < ApplicationController
 	end
 
 	def node_params
-		params.require(:node).permit(:text, :source)
+		params.require(:node).permit(:text, :source, :story_id)
 	end
 
 end

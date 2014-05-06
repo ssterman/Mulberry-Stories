@@ -48,6 +48,9 @@ class StoriesController < ApplicationController
 
 	end
 
+	def objectify(story, nodes)
+
+	end
 
 end
 
