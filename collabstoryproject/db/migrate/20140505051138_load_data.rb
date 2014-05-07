@@ -11,7 +11,7 @@ class LoadData < ActiveRecord::Migration
     ts1.genre = "nonfiction";
   	ts1.save(:validate => false)
 
-  	ts2 = Story.new(:summary => "A traditional folktale about two children abandoned in a forest and a very hungry cannibal witch", :title => "Hansel and Gretel")
+  	ts2 = Story.new(:summary => "A Harry Potter Spinoff", :title => "The Ron/Hermione Relationship Conflict")
   	ts2.user = us2
     ts2.genre = "fiction";
   	ts2.save(:validate => false)
@@ -50,43 +50,57 @@ class LoadData < ActiveRecord::Migration
     n10.save(:validate => false)
 
 
-  	n4 = Node.new(:text => "Hansel and Gretel are abandoned in the forest. They are lost, and their trail home has been eaten.")
+  	n4 = Node.new(:text => "\"Who wouldn't prefer him, what woman would take you, you are nothing, nothing, nothing to him,\" crooned 
+      Riddle-Hermione, and she stretched like a snake and entwined herself around Riddle-Harry, wrapping him in a 
+      close embrace: Their lips met.")
   	n4.user = us2
   	n4.story = ts2
   	n4.truth = true
   	n4.truth_height = 0
   	n4.save(:validate => false)
 
-  	n5 = Node.new(:text => "The two siblings explore the forest.")
+  	n5 = Node.new(:text => "\"Do it, Ron!\" Harry yelled. Ron looked toward him, and Harry thought he saw a trace of scarlet in his eyes.")
   	n5.user = us2
   	n5.story = ts2
   	n5.truth = false
   	n5.save(:validate => false)
 
-  	n6 = Node.new(:text => "They run into a bear and nearly get eaten.")
+  	n6 = Node.new(:text => "Ron turned on them, sword in hand, and Harry saw nothing but the scarlet in Ron's eyes. Harry whirled around, slipping in the snow,
+        wand held ready to defend himself, but Ron was so angry, his eyes fixed on his friends' heads.")
   	n6.user = us2
   	n6.story = ts2
   	n6.truth = false
   	n6.save(:validate => false)
 
-  	n7 = Node.new(:text => "They end up at a house made of candy")
+  	n7 = Node.new(:text => "Slowly, Harry walked back to him, hardly knowing what to say or do. Ron was breathing heavily: His eyes were no longer red at all, but their normal blue: they were also wet.")
   	n7.user = us2
   	n7.story = ts2
   	n7.truth = false
   	n7.save(:validate => false)
 
-  	n8 = Node.new(:text => "Hansel is very scared and sits down to cry")
+  	n8 = Node.new(:text => "On the ground in front of them, Ron's face filled with anguish. he raised the sword high, his arms shaking.
+      The sword flashed, plunged: Harry threw himself out of the way, there as a clang of metal and a long, drawn-out scream.
+
+     The monstrous versions of himself and Hermione were gone: There was only Ron, standing there with the sword held slackly 
+      in his hand, looking down at the shattered remains of the locket on the flat rock.")
   	n8.user = us2
   	n8.story = ts2
-  	n8.truth = false
+  	n8.truth = true
   	n8.save(:validate => false)
 
-  	n9 = Node.new(:text => "The witch locks them up and tries to eat them.")
+  	n9 = Node.new(:text => "\"She's like my sister,\" Harry started. \"I love her like a sister and I reckon that she feels the same way about me. It's always been like that. I thought you knew.\"")
   	n9.user = us2
   	n9.story = ts2
-  	n9.truth = true
+  	n9.truth = false
   	n9.truth_height = 1
   	n9.save(:validate => false)
+
+    n11 = Node.new(:text => "\"I'm...sorry,\" Harry started, shame in his voice. \"I didn't want you to find out like that. We didn't know how to tell you. Hermione...Hermione didn't want-\"")
+    n11.user = us2
+    n11.story = ts2
+    n11.truth = false
+    n11.truth_height = 1
+    n11.save(:validate => false)
 
     l1 = Link.new(:story_id => 1, :source => 1, :target => 2)
     l1.save(:validate => false)
@@ -97,7 +111,7 @@ class LoadData < ActiveRecord::Migration
     l3 = Link.new(:story_id => 2, :source => 5, :target => 6)
     l3.save(:validate => false)
 
-    l4 = Link.new(:story_id => 2, :source => 6, :target => 7)
+    l4 = Link.new(:story_id => 2, :source => 5, :target => 7)
     l4.save(:validate => false)
 
     l6 = Link.new(:story_id => 2, :source => 9, :target => 8)
@@ -111,7 +125,9 @@ class LoadData < ActiveRecord::Migration
 
     l10 = Link.new(:story_id => 2, :source => 6, :target => 9)
     l10.save(:validate => false)
-
+    
+    l11 = Link.new(:story_id => 2, :source => 8, :target => 11)
+    l11.save(:validate => false)
 
   end
 
