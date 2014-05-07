@@ -11,7 +11,7 @@ class LoadData < ActiveRecord::Migration
     ts1.genre = "nonfiction";
   	ts1.save(:validate => false)
 
-  	ts2 = Story.new(:summary => "A Harry Potter Spinoff", :title => "The Ron/Hermione Relationship Conflict")
+  	ts2 = Story.new(:summary => "A Harry Potter Spinoff", :title => "The Ron/Hermione Question")
   	ts2.user = us2
     ts2.genre = "fiction";
   	ts2.save(:validate => false)
@@ -95,7 +95,7 @@ class LoadData < ActiveRecord::Migration
   	n9.truth_height = 1
   	n9.save(:validate => false)
 
-    n11 = Node.new(:text => "\"I'm...sorry,\" Harry started, shame in his voice. \"I didn't want you to find out like that. We didn't know how to tell you. Hermione...Hermione didn't want-\"")
+    n11 = Node.new(:text => "\"I'm...sorry,\" Harry started in a thick voice. \"I didn't want you to find out like that. We didn't know how to tell you. Hermione...Hermione didn't want-\"")
     n11.user = us2
     n11.story = ts2
     n11.truth = false

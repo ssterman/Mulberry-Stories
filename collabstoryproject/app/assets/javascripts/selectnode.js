@@ -56,8 +56,8 @@ function d3visdisplay2(json_data) {
 	    .nodes(json_data.nodes)
 	    .links(json_data.links)
 		.gravity(.05)
-        .distance(80)
-        .charge(-250)
+        .distance(60)
+        .charge(-350)
 	    .on("tick", tick);
 
 	// line displayed when dragging new nodes
@@ -179,7 +179,7 @@ function d3visdisplay2(json_data) {
 	    .classed("link_selected", function(d) { return d === selected_link; });
 
 	  node = node.data(nodes);
-
+	  count = 1;
 	  node.enter().insert("circle")
 	      .attr("class", "node")
 	      .style("fill", function(d) { 
@@ -194,7 +194,8 @@ function d3visdisplay2(json_data) {
 		  			d.fixed = true;    //this is kinda hacky, but works
 		  			d.x = d.id*20;
 		  			//this y calc is super hacky and needs to change
-		  			var y_height = height*d.truth_height/2 + 50;
+		  			var y_height = height*d.truth_height/2 + (50 * count);
+		  			count += 1;
 		  			console.log(y_height);
 		  			d.y = y_height; 
 		  			d.px = d.id*20;
