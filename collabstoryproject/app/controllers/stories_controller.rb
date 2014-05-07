@@ -14,6 +14,7 @@ class StoriesController < ApplicationController
 	# displays a single story with visualization and edit interface
 	def view
 		@node = Node.new
+		@link = Link.new
 		@story = Story.find(params[:id])
 		@nodes = @story.nodes
 		@links = @story.links
