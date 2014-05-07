@@ -1,225 +1,251 @@
 
-//eventually this should be modified to work with whatever
-//visualization we choose; possibly with d3.js
-function selectnode(node, output_div, node_text) {
-
-	//reset background color
-	var all_nodes = document.getElementsByClassName('node');
-	var len = all_nodes.length;
-	for (var i = 0; i< len; i++) {
-		var curnode = all_nodes.item(i);
-		curnode.style.backgroundColor = 'white';
-	}
-
-	//set read text
-	var outdiv = document.getElementById(output_div);
-	outdiv.innerHTML = node_text;
-
-	//set selected color
-	node.style.backgroundColor = 'red';
-}
-
-
-function createnode(e) {
-// 	if (e.target == document.getElementById("viscontainer")) {
-// 		console.log("creating new node", e);
-
-// 		//create new node div and display
-// 		var newnode = document.createElement('div');
-// 		newnode.className = 'node';
-// 		e.target.appendChild(newnode);
-
-// 		//open the write interface (text input form)
-// 		var write = document.getElementById('write');
-// 		write.style.display = "inline";
-// 		//add entry to database if saved (tie to a form submit)
-// 	}
-}
 
 function setup() {
-	document.addEventListener('mousemove', function(e){ 
-    	$(document).data("mouse", { x: e.pageX, y: e.pageY });
-	}, false);
+	// document.addEventListener('mousemove', function(e){ 
+ //    	$(document).data("mouse", { x: e.pageX, y: e.pageY });
+	// }, false);
 }
 
-
+//reference: http://bl.ocks.org/benzguo/4370043
 function d3visdisplay2(json_data) {
+	var width = 500;
+	var height = 500;
 
-	var selected = null;
+	var color = d3.scale.category20();
 
-    // set up the D3 visualisation in the specified element
-    var w = 500,
-        h = 500;
+	// mouse event vars
+	var selected_node = null,
+	    selected_link = null,
+	    mousedown_link = null,
+	    mousedown_node = null,
+	    mouseup_node = null;
 
-    var vis = this.vis = d3.select("#viscontainer").append("svg:svg")
-        .attr("width", w)
-        .attr("height", h);
+	// init svg
+	var outer = d3.select("#viscontainer")
+	  .append("svg:svg")
+	    .attr("width", width)
+	    .attr("height", height)
+	    .attr("pointer-events", "all");
 
-    var force = d3.layout.force()
-        .gravity(.05)
+	var vis = outer
+	  .append('svg:g')
+	    .on("mousemove", mousemove)
+	    .on("mousedown", mousedown)
+	    .on("mouseup", mouseup);
+
+	vis.append('svg:rect')
+	    .attr('width', width)
+	    .attr('height', height)
+	    .attr('fill', 'white');
+
+	// init force layout
+	var force = d3.layout.force()
+	    .size([width, height])
+	    .nodes(json_data.nodes)
+	    .links(json_data.links)
+		.gravity(.05)
         .distance(80)
         .charge(-250)
-        .size([w, h]);
+	    .on("tick", tick);
 
-    force.nodes(json_data.nodes);
-    force.links(json_data.links);
-    var nodes = force.nodes();
-    var links = force.links();
+	// line displayed when dragging new nodes
+	var drag_line = vis.append("line")
+	    .attr("class", "drag_line")
+	    .attr("x1", 0)
+	    .attr("y1", 0)
+	    .attr("x2", 0)
+	    .attr("y2", 0);
 
+	// get layout properties
+	var nodes = force.nodes();
+	var links = force.links();
+	var node = vis.selectAll(".node");
+	var link = vis.selectAll(".link");
 
-    var color = d3.scale.category20();
-
-    // Add and remove elements on the graph object
-    this.addNode = function (source) {
-    	var id = nodes.length + 1;
-        nodes.push({"id":id});
-        var target = findNode(id);
-        console.log("one node added with id: " + id);
-        addLink(source, target);
-        update();
-        showEditScreen(source, target);
-    }
-
-    this.removeNode = function (id) {
-        var i = 0;
-        var n = findNode(id);
-        while (i < links.length) {
-            if ((links[i]['source'] == n)||(links[i]['target'] == n)) links.splice(i,1);
-            else i++;
-        }
-        nodes.splice(findNodeIndex(id),1);
-        update();
-    }
-
-    this.addLink = function (source, target) {
-    	console.log("one link added between: " + source.id + " -> " + target.id);
-        links.push({"source": source,"target":target});
-    }
-
-    var findNode = function(id) {
-        for (var i in nodes) {if (nodes[i]["id"] === id) return nodes[i]};
-    }
-
-    var findNodeIndex = function(id) {
-        for (var i in nodes) {if (nodes[i]["id"] === id) return i};
-    }
-
-    var updateColorOnClick = function() {
-		d3.selectAll(".node")
-	  		.style("fill", function(d) { 
-	  		if (d.id == selected) {
-	  			return "#99CC66";
-	  		} else if (d.truth == true) {
-	  			return color(1);
-	  		} else {
-	  			return color(2);
-	  		}
-	  	});
-    }
-
-    var update = function () {
-
-	  			console.log("here!");
-
-		var link = vis.selectAll(".link")
-	  		.data(links)
-			.enter().append("line")
-	  		.attr("class", "link")
-
-		var node = vis.selectAll(".node")
-	  		.data(nodes)
-			.enter().append("circle")
-	  		.attr("class", "node")
-	  		.attr("r", 20)
-	  		.style("fill", function(d) { 
-	  		console.log(d.id);
-	  		if (d.id == selected) {
-	  			console.log("Here");
-	  		} else if (d.truth == true) {
-	  			return color(1);
-	  		} else {
-	  			return color(2);
-	  		}
-	  	})
-	  	.attr("fixed", function(d){
-	  		if (d.truth == true) {
-	  			d.fixed = true;    //this is kinda hacky, but works
-	  			d.x = d.id*20;
-	  			d.y = d.truth_height*200 + 50; //trying to spread out the truth nodes
-	  			d.px = d.id*20;
-	  			d.py = d.truth_height*200 + 50;
-	  			return true;
-	  		}
-	  	})
-	  	//this controls clicking on a node; displays the text in it
-	  	// or dragging to create a new node
-	  	.on("mousedown", function(d) {
-	  		console.log("mousedown");
-	  		$(d).data("p0", { x: $(document).data("mouse").x, y: $(document).data("mouse").y });
-	  		//d.style("fill", function (d) { return '#ffffff'; });
-	  		console.log(d);
-	  		selected = d.id;
-
-	  		updateColorOnClick();
-
-	  	}).on("mouseup", function(d) {
-	  		console.log("mouseup");
-	  		var p0 = $(d).data("p0");
-	  		console.log(p0);
-	  		p1 = { x: $(document).data("mouse").x, y: $(document).data("mouse").y };
-	  		dist = Math.sqrt(Math.pow(p1.x - p0.x, 2) + Math.pow(p1.y - p0.y, 2));
-
-	  		if (dist < 10) { // counts as a click
-	  			var read_area = document.getElementById("read")
-	  			read_area.innerHTML = d.text;
-	  		} else {
-	  			//addNode(d);
-	  		}	  	
-	  	}).on("dblclick", function(d) {
-	  		console.log("dbl");
-	  		addNode(d);
-	  	}).call(force.drag);
-
-	  	force.start();
-
-		node.append("title")
-	  		.text(function(d) { return d.id; });
+	redraw();
 
 
-    //node.exit().remove();
+	function mousedown() {
+		if (mousedown_node) {
+			var read_area = document.getElementById("read")
+				read_area.innerHTML = mousedown_node.text;
+		}
+	}
 
-        force.on("tick", function() {
-          	link.attr("x1", function(d) { return d.source.x; })
-              	.attr("y1", function(d) { return d.source.y; })
-              	.attr("x2", function(d) { return d.target.x; })
-              	.attr("y2", function(d) { return d.target.y; });
+	function mousemove() {
+	  if (!mousedown_node) return;
 
-          	node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
-        	});
+	  // update drag line
+	  drag_line
+	      .attr("x1", mousedown_node.x)
+	      .attr("y1", mousedown_node.y)
+	      .attr("x2", d3.mouse(this)[0])
+	      .attr("y2", d3.mouse(this)[1]);
+	}
 
-        // Restart the force layout.
-        force.start();
-    }
+	function showEditScreen(source, target) {
+		target.text = "You just created a node with id " + target.id + ". You may edit the node below and then save it.";
+		var read_area = document.getElementById("read")
+		read_area.innerHTML = target.text;
+		$("#write").show();
+		$("#node_source").val(source.id);
+	}
 
-    update();
+	function mouseup() {
+	  if (mousedown_node) {
+	    // hide drag line
+	    drag_line
+	      .attr("class", "drag_line_hidden")
+
+	    if (!mouseup_node) {
+
+	    	//show editing screen
+	        var id = nodes.length + 1;
+	        var source = mousedown_node;
+
+	      // add node
+	      var point = d3.mouse(this);
+	      var node = {x: point[0], y: point[1], "id": id};
+	      var n = nodes.push(node);
+
+
+	        var target = node;
+	      	showEditScreen(source, target);
+
+
+	      // select new node
+	      selected_node = node;
+	      selected_link = null;
+	      
+	      // add link to mousedown node
+	      links.push({source: mousedown_node, target: node});
+	    }
+
+	    redraw();
+	  }
+	  // clear mouse event vars
+	  resetMouseVars();
+	}
+
+	function resetMouseVars() {
+	  mousedown_node = null;
+	  mouseup_node = null;
+	  mousedown_link = null;
+	}
+
+	function tick() {
+	  link.attr("x1", function(d) { return d.source.x; })
+	      .attr("y1", function(d) { return d.source.y; })
+	      .attr("x2", function(d) { return d.target.x; })
+	      .attr("y2", function(d) { return d.target.y; });
+
+	  node.attr("cx", function(d) { return d.x; })
+	      .attr("cy", function(d) { return d.y; });
+	}
+
+	// redraw force layout
+	function redraw() {
+
+	  link = link.data(links);
+
+	  link.enter().insert("line", ".node")
+	      .attr("class", "link")
+	      .on("mousedown", 
+	        function(d) { 
+	          mousedown_link = d; 
+	          if (mousedown_link == selected_link) selected_link = null;
+	          else selected_link = mousedown_link; 
+	          selected_node = null; 
+	          redraw(); 
+	        })
+
+	  link.exit().remove();
+
+	  link
+	    .classed("link_selected", function(d) { return d === selected_link; });
+
+	  node = node.data(nodes);
+
+	  node.enter().insert("circle")
+	      .attr("class", "node")
+	      .style("fill", function(d) { 
+		  		 if (d.truth == true) {
+		  			return color(1);
+		  		} else {
+		  			return color(2);
+		  		}
+		  	})
+		  	.attr("fixed", function(d){
+		  		if (d.truth == true) {
+		  			d.fixed = true;    //this is kinda hacky, but works
+		  			d.x = d.id*20;
+		  			//this y calc is super hacky and needs to change
+		  			var y_height = height*d.truth_height/2 + 50;
+		  			console.log(y_height);
+		  			d.y = y_height; 
+		  			d.px = d.id*20;
+		  			d.py = y_height; 
+		  			return true;
+		  		}
+		  	})
+	      .on("mousedown", 
+	        function(d) { 
+
+	          mousedown_node = d;
+	          if (mousedown_node == selected_node) selected_node = null;
+	          else selected_node = mousedown_node; 
+	          selected_link = null; 
+
+	          // reposition drag line
+	          drag_line
+	              .attr("class", "link")
+	              .attr("x1", mousedown_node.x)
+	              .attr("y1", mousedown_node.y)
+	              .attr("x2", mousedown_node.x)
+	              .attr("y2", mousedown_node.y);
+
+	          redraw(); 
+	        })
+	      .on("mousedrag",
+	        function(d) {
+	          // redraw();
+	        })
+	      .on("mouseup", 
+	        function(d) { 
+	          if (mousedown_node) {
+	            mouseup_node = d; 
+	            if (mouseup_node == mousedown_node) { resetMouseVars(); return; }
+
+	            // add link
+	            var link = {source: mousedown_node, target: mouseup_node};
+	            links.push(link);
+
+	            // select new link
+	            selected_link = link;
+	            selected_node = null;
+
+	            redraw();
+	          } 
+	        })
+	    .transition()
+	      .duration(750)
+	      .ease("elastic")
+	      .attr("r", 15);
+
+	  node.exit().transition()
+	      .attr("r", 0)
+	    .remove();
+
+	  node
+	    .classed("node_selected", function(d) { return d === selected_node; });
+
+	  if (d3.event) {
+	    // prevent browser's default behavior
+	    d3.event.preventDefault();
+	  }
+
+	  force.start();
+
+	}
+
 }
-
-
-function showEditScreen(source, target) {
-	target.text = "You just created a node with id " + target.id + ". You may edit the node below and then save it.";
-	var read_area = document.getElementById("read")
-	read_area.innerHTML = target.text;
-	$("#write").show();
-	$("#node_source").val(source.id);
-}
-
-function saveNewNode() {
-	console.log("hello");
-	$.post('superman', { id: "hello", id2 : "hello2"}, 
-    function(returnedData){
-         console.log("it worked!");
-	});
-}
-
-
-
