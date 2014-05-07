@@ -69,31 +69,31 @@ class LoadData < ActiveRecord::Migration
   	n9.truth_height = 1
   	n9.save(:validate => false)
 
-    l1 = Link.new(:source => 1, :target => 2)
+    l1 = Link.new(:story_id => 1,:source => 1, :target => 2)
     l1.save(:validate => false)
 
-    l2 = Link.new(:source => 1, :target => 3)
+    l2 = Link.new(:story_id => 1, :source => 1, :target => 3)
     l2.save(:validate => false)
 
-    l3 = Link.new(:source => 4, :target => 5)
+    l3 = Link.new(:story_id => 2, :source => 4, :target => 5)
     l3.save(:validate => false)
 
-    l4 = Link.new(:source => 5, :target => 6)
+    l4 = Link.new(:story_id => 2, :source => 5, :target => 6)
     l4.save(:validate => false)
 
-    l5 = Link.new(:source => 5, :target => 6)
+    l5 = Link.new(:story_id => 2, :source => 5, :target => 6)
     l5.save(:validate => false)
 
-    l6 = Link.new(:source => 7, :target => 8)
+    l6 = Link.new(:story_id => 2, :source => 7, :target => 8)
     l6.save(:validate => false)
 
-    l7 = Link.new(:source => 6, :target => 8)
+    l7 = Link.new(:story_id => 2, :source => 6, :target => 8)
     l7.save(:validate => false)
 
-    l8 = Link.new(:source => 7, :target => 9)
+    l8 = Link.new(:story_id => 2, :source => 7, :target => 9)
     l8.save(:validate => false)
 
-    l9 = Link.new(:source => 4, :target => 8)
+    l9 = Link.new(:story_id => 2, :source => 4, :target => 8)
     l9.save(:validate => false)
 
   end

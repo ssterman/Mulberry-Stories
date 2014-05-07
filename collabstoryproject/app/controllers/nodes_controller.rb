@@ -11,7 +11,12 @@ class NodesController < ApplicationController
   		new_node.story = Story.find_by_id(parameters[:story_id])
   		new_node.save
 
-  		_create_link(parameters[:source], new_node.id)
+  		new_node.story.nodes << new_node
+
+  		link = _create_link(parameters[:source], new_node.id)
+
+  		new_node.story.links << link
+  		new_node.story.save
   		
   		new_node.save(:validate => false)
   		redirect_to :controller => 'stories', :action => :view, :id => new_node.story
@@ -22,6 +27,7 @@ class NodesController < ApplicationController
 		new_link.source = source
 		new_link.target = target
 		new_link.save
+		return new_link
 	end
 
 	def node_params
