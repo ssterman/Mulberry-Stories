@@ -87,7 +87,7 @@ class LoadData < ActiveRecord::Migration
     l5 = Link.new(:story_id => 2, :source => 5, :target => 6)
     l5.save(:validate => false)
 
-    l6 = Link.new(:story_id => 2, :source => 7, :target => 8)
+    l6 = Link.new(:story_id => 2, :source => 8, :target => 7)
     l6.save(:validate => false)
 
     l7 = Link.new(:story_id => 2, :source => 6, :target => 8)

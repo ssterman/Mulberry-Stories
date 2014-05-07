@@ -26,6 +26,7 @@ function d3visdisplay2(json_data) {
 	    .attr("width", width)
 	    .attr("height", height)
 	    .attr("pointer-events", "all");
+	    
 
 	var vis = outer
 	  .append('svg:g')
@@ -37,6 +38,16 @@ function d3visdisplay2(json_data) {
 	    .attr('width', width)
 	    .attr('height', height)
 	    .attr('fill', 'white');
+
+	vis.append("svg:defs").append("marker")
+	    .attr("id", "arrowhead")
+	    .attr("refX", 20) /*must be smarter way to calculate shift*/
+	    .attr("refY", 2)
+	    .attr("markerWidth", 6)
+	    .attr("markerHeight", 4)
+	    .attr("orient", "auto")
+	    .append("svg:path")
+        	.attr("d", "M 0,0 V 4 L6,2 Z"); //this is actual shape for arrowhead
 
 	// init force layout
 	var force = d3.layout.force()
@@ -150,6 +161,8 @@ function d3visdisplay2(json_data) {
 
 	  link.enter().insert("line", ".node")
 	      .attr("class", "link")
+		  .attr("marker-end", "url(#arrowhead)")
+		  // .attr("d", diagonal)
 	      .on("mousedown", 
 	        function(d) { 
 	          mousedown_link = d; 
