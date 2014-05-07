@@ -231,13 +231,17 @@ function d3visdisplay2(json_data) {
 
 	            // add link
 	            var link = {source: mousedown_node, target: mouseup_node};
+	            $("#link_source").val(mousedown_node.id);
+	            $("#link_target").val(mouseup_node.id);
 	            links.push(link);
+
 
 	            // select new link
 	            selected_link = link;
 	            selected_node = null;
 
 	            redraw();
+	            $("#new_link_connection").submit();
 	          } 
 	        })
 	    .transition()
