@@ -8,10 +8,12 @@ class LoadData < ActiveRecord::Migration
 
   	ts1 = Story.new(:summary => "Stories about football, from spectators, players, fans, etc.", :title => "Football at Stanford")
   	ts1.user = us
+    ts1.genre = "nonfiction";
   	ts1.save(:validate => false)
 
   	ts2 = Story.new(:summary => "A traditional folktale about two children abandoned in a forest and a very hungry cannibal witch", :title => "Hansel and Gretel")
   	ts2.user = us2
+    ts2.genre = "fiction";
   	ts2.save(:validate => false)
 
     n1 = Node.new(:text => "When freshmen arrive at Stanford, the very first football game of the season is 
@@ -86,32 +88,30 @@ class LoadData < ActiveRecord::Migration
   	n9.truth_height = 1
   	n9.save(:validate => false)
 
-    l1 = Link.new(:story_id => 1,:source => 1, :target => 2)
+    l1 = Link.new(:story_id => 1, :source => 1, :target => 2)
     l1.save(:validate => false)
 
     l2 = Link.new(:story_id => 1, :source => 1, :target => 3)
     l2.save(:validate => false)
 
-    l3 = Link.new(:story_id => 2, :source => 4, :target => 5)
+    l3 = Link.new(:story_id => 2, :source => 5, :target => 6)
     l3.save(:validate => false)
 
-    l4 = Link.new(:story_id => 2, :source => 5, :target => 6)
+    l4 = Link.new(:story_id => 2, :source => 6, :target => 7)
     l4.save(:validate => false)
 
-    l5 = Link.new(:story_id => 2, :source => 5, :target => 6)
-    l5.save(:validate => false)
-
-    l6 = Link.new(:story_id => 2, :source => 8, :target => 7)
+    l6 = Link.new(:story_id => 2, :source => 9, :target => 8)
     l6.save(:validate => false)
 
-    l7 = Link.new(:story_id => 2, :source => 6, :target => 8)
+    l7 = Link.new(:story_id => 2, :source => 7, :target => 9)
     l7.save(:validate => false)
 
-    l8 = Link.new(:story_id => 2, :source => 7, :target => 9)
+    l8 = Link.new(:story_id => 2, :source => 8, :target => 10)
     l8.save(:validate => false)
 
-    l9 = Link.new(:story_id => 2, :source => 4, :target => 8)
-    l9.save(:validate => false)
+    l10 = Link.new(:story_id => 2, :source => 6, :target => 9)
+    l10.save(:validate => false)
+
 
   end
 

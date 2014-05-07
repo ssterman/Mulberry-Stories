@@ -4,6 +4,7 @@ class CreateStories < ActiveRecord::Migration
 		t.integer :user_id #creator id
 		t.string :summary
 		t.string :title
+		t.string :genre
       t.timestamps
     end
   end
