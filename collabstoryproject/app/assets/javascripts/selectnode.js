@@ -57,7 +57,7 @@ function d3visdisplay2(json_data) {
 	    .links(json_data.links)
 		.gravity(.05)
         .distance(60)
-        .charge(-350)
+        .charge(-380)
 	    .on("tick", tick);
 
 	// line displayed when dragging new nodes

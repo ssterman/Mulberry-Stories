@@ -102,6 +102,13 @@ class LoadData < ActiveRecord::Migration
     n11.truth_height = 1
     n11.save(:validate => false)
 
+    n12 = Node.new(:text =>"Simultaneously they walked forward and hugged, Harry gingerly gripping the still-sopping back of Ron's jacket.")
+    n12.user = us2
+    n12.story = ts2
+    n12.truth = true
+    n12.truth_height = 1
+    n12.save(:validate => false)
+
     l1 = Link.new(:story_id => 1, :source => 1, :target => 2)
     l1.save(:validate => false)
 
