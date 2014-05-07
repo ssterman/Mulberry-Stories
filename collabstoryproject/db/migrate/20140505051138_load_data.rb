@@ -6,7 +6,7 @@ class LoadData < ActiveRecord::Migration
   	us2 = User.new(:username => "Tester2")
 
 
-  	ts1 = Story.new(:summary => "This is a test story, in which awesome things happen", :title => "TEST STORY 1")
+  	ts1 = Story.new(:summary => "Stories about football, from spectators, players, fans, etc.", :title => "Football at Stanford")
   	ts1.user = us
   	ts1.save(:validate => false)
 
@@ -14,24 +14,38 @@ class LoadData < ActiveRecord::Migration
   	ts2.user = us2
   	ts2.save(:validate => false)
 
-  	n1 = Node.new(:text => "test node 1 11111111 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ut neque nec felis convallis molestie quis id nisi. Morbi dolor enim, ullamcorper egestas risus at, facilisis semper dolor. Mauris fringilla pulvinar erat, a sodales ligula varius dignissim. Aenean sed purus non magna ornare sagittis. Vestibulum porta, lorem at consequat interdum, massa quam cursus odio, eget vestibulum nisi magna ut magna. Maecenas nec tincidunt nibh. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Suspendisse euismod accumsan leo, id feugiat diam consectetur ut. Donec quis ultrices nulla, in venenatis neque. Nullam non lectus id magna cursus consectetur. Quisque sed ligula ut neque lobortis fringilla. Nam at mi ac velit vehicula consequat. Mauris ullamcorper neque ut aliquet pretium. ")
+    n1 = Node.new(:text => "When freshmen arrive at Stanford, the very first football game of the season is 
+      a big deal.  The dorms take all their students, with chanting and dorm flags, to go see the game.")
   	n1.user = us
   	n1.truth = true
   	n1.truth_height = 0
   	n1.story = ts1
   	n1.save(:validate => false)
 
-  	n2 = Node.new(:text => "test node 2 22222222 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ut neque nec felis convallis molestie quis id nisi. Morbi dolor enim, ullamcorper egestas risus at, facilisis semper dolor. Mauris fringilla pulvinar erat, a sodales ligula varius dignissim. Aenean sed purus non magna ornare sagittis. Vestibulum porta, lorem at consequat interdum, massa quam cursus odio, eget vestibulum nisi magna ut magna. Maecenas nec tincidunt nibh. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Suspendisse euismod accumsan leo, id feugiat diam consectetur ut. Donec quis ultrices nulla, in venenatis neque. Nullam non lectus id magna cursus consectetur. Quisque sed ligula ut neque lobortis fringilla. Nam at mi ac velit vehicula consequat. Mauris ullamcorper neque ut aliquet pretium. ")
-  	n2.story = ts1
+    n2 = Node.new(:text => "That was one of three games I went to.  I sat with some of the people who knew
+      about football.  They narrated the game to me, and even though I had no idea what was going on, the thrill
+      of an entire crowd responding around me was infectious.")
+    n2.story = ts1
   	n2.user = us
   	n2.truth = false
   	n2.save(:validate => false)
 
-  	n3 = Node.new(:text => "test node 3 33333333 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla ut neque nec felis convallis molestie quis id nisi. Morbi dolor enim, ullamcorper egestas risus at, facilisis semper dolor. Mauris fringilla pulvinar erat, a sodales ligula varius dignissim. Aenean sed purus non magna ornare sagittis. Vestibulum porta, lorem at consequat interdum, massa quam cursus odio, eget vestibulum nisi magna ut magna. Maecenas nec tincidunt nibh. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Suspendisse euismod accumsan leo, id feugiat diam consectetur ut. Donec quis ultrices nulla, in venenatis neque. Nullam non lectus id magna cursus consectetur. Quisque sed ligula ut neque lobortis fringilla. Nam at mi ac velit vehicula consequat. Mauris ullamcorper neque ut aliquet pretium. ")
-  	n3.user = us
+  	n3 = Node.new(:text => "Brad and six other guys painted their whole chests.  He had a big red cape as well.  
+      That was the start of a long history of more and more epic football costumes. He ended up in a couple of news
+      articles as the 'picture of Stanford fans', since he was the craziest dressed of anybody there.  Except the
+      band.  Not many people can beat the band.")
+    n3.user = us
   	n3.truth = false
   	n3.story = ts1
   	n3.save(:validate => false)
+
+    n10 = Node.new(:text => "The other big football event is Big Game, where Cal and Stanford face off in the
+      yearly skirmish for the Axe, and the upper hand in an eternal rivalry.")
+    n10.user = us
+    n10.truth = true
+    n10.story = ts1
+    n10.truth_height = 1
+    n10.save(:validate => false)
 
 
   	n4 = Node.new(:text => "Hansel and Gretel are abandoned in the forest. They are lost, and their trail home has been eaten.")
