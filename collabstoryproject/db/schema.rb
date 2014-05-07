@@ -14,6 +14,7 @@
 ActiveRecord::Schema.define(version: 20140505051138) do
 
   create_table "links", force: true do |t|
+    t.integer  "story_id"
     t.integer  "source"
     t.integer  "target"
     t.datetime "created_at"

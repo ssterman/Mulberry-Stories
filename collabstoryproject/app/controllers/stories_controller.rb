@@ -12,7 +12,8 @@ class StoriesController < ApplicationController
 	end
 
 	# displays a single story with visualization and edit interface
-	def view
+	'''def view1
+		@node = Node.new
 		@story = Story.find(params[:id])
 		conds = "story_id == " + @story.id.to_s
 		@nodes = Node.find(:all, :conditions => conds)
@@ -28,7 +29,7 @@ class StoriesController < ApplicationController
 			nodes_str += "\"truth\": " + n.truth.to_s + "},"
 			# get all links starting with this node
 			links = Link.find(:all, :conditions => "source == " + n.id.to_s)
-			# loop through all the links, add to string based on NODE's INDEX IN ARRAY, not node id
+			# loop through all the links, add to string based on NODEs INDEX IN ARRAY, not node id
 			for l in links do 
 				source = @nodes.index(Node.find(l.source))
 				links_str += "{\"source\": " +  source.to_s + ","
@@ -43,21 +44,42 @@ class StoriesController < ApplicationController
 		links_str += "]"
 		@json_str = "{" + nodes_str + "," + links_str + "}"
 		@json_data = JSON.generate(JSON.parse(@json_str)) # turns string to ruby object to JSON
+		#render json: {note: @json_data}, status: 200
+
+	end'''
+
+	def view
+		@node = Node.new
+		@story = Story.find(params[:id])
+		@nodes = @story.nodes
+		@links = @story.links
+		@json_data = JSON.generate((objectify(@story, @nodes, @links)))
+		#render json: story_hash, status: 200 and return
 	end
 
-	def save
-		logger.info "The post was saved and now the user is going to be redirected..."
-		puts "hisfdsf"
-		new_node = Node.new
-		new_node.id = 4
-		new_node.text = "Hello hello!!"
-		new_node.user = User.find_by(username: 'Tester1')
-  		new_node.truth = false
-  		new_node.truth_height = 0
-  		new_node.story = Story.find_by(title: "TEST STORY 1")
-  		#new_node.save(:validate => false)
-  		redirect_to :action => :view, :id => new_node.story
+	def objectify(story, nodes, links)
+		story_hash = Hash.new
+		story_hash["nodes"] = Array.new
+		story_hash["links"] = Array.new
+		nodes.each do |node|
+			node_hash = Hash.new
+			node_hash["id"] = node.id
+			node_hash["truth_height"] = node.truth_height
+			node_hash["text"] = node.text
+			node_hash["truth"] = node.truth
+			story_hash["nodes"] << node_hash
+		end
+
+		links.each do |link|
+			link_hash = Hash.new
+			link_hash["source"] = @nodes.index(Node.find(link.source))
+			link_hash["target"] = @nodes.index(Node.find(link.target))
+			story_hash["links"] << link_hash
+		end
+
+		return story_hash
 	end
+
 end
 
 
