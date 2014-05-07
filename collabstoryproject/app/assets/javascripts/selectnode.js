@@ -45,6 +45,8 @@ function setup() {
 
 function d3visdisplay2(json_data) {
 
+	var selected = null;
+
     // set up the D3 visualisation in the specified element
     var w = 500,
         h = 500;
@@ -102,7 +104,23 @@ function d3visdisplay2(json_data) {
         for (var i in nodes) {if (nodes[i]["id"] === id) return i};
     }
 
+    var updateColorOnClick = function() {
+		d3.selectAll(".node")
+	  		.style("fill", function(d) { 
+	  		if (d.id == selected) {
+	  			return "#99CC66";
+	  		} else if (d.truth == true) {
+	  			return color(1);
+	  		} else {
+	  			return color(2);
+	  		}
+	  	});
+    }
+
     var update = function () {
+
+	  			console.log("here!");
+
 		var link = vis.selectAll(".link")
 	  		.data(links)
 			.enter().append("line")
@@ -114,7 +132,10 @@ function d3visdisplay2(json_data) {
 	  		.attr("class", "node")
 	  		.attr("r", 20)
 	  		.style("fill", function(d) { 
-	  		if (d.truth == true) {
+	  		console.log(d.id);
+	  		if (d.id == selected) {
+	  			console.log("Here");
+	  		} else if (d.truth == true) {
 	  			return color(1);
 	  		} else {
 	  			return color(2);
@@ -135,6 +156,12 @@ function d3visdisplay2(json_data) {
 	  	.on("mousedown", function(d) {
 	  		console.log("mousedown");
 	  		$(d).data("p0", { x: $(document).data("mouse").x, y: $(document).data("mouse").y });
+	  		//d.style("fill", function (d) { return '#ffffff'; });
+	  		console.log(d);
+	  		selected = d.id;
+
+	  		updateColorOnClick();
+
 	  	}).on("mouseup", function(d) {
 	  		console.log("mouseup");
 	  		var p0 = $(d).data("p0");
@@ -173,8 +200,10 @@ function d3visdisplay2(json_data) {
         // Restart the force layout.
         force.start();
     }
+
     update();
 }
+
 
 function showEditScreen(source, target) {
 	target.text = "You just created a node with id " + target.id + ". You may edit the node below and then save it.";
