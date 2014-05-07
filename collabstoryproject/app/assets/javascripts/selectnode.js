@@ -6,7 +6,8 @@ function setup() {
 	// }, false);
 }
 
-//reference: http://bl.ocks.org/benzguo/4370043
+//drag to add reference: http://bl.ocks.org/benzguo/4370043
+//arrows reference: http://logogin.blogspot.com/2013/02/d3js-arrowhead-markers.html
 function d3visdisplay2(json_data) {
 	var width = 500;
 	var height = 500;
