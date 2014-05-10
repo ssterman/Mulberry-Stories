@@ -48,9 +48,4 @@ class StoriesController < ApplicationController
 end
 
 
-# so create new migration of links
-# store source, target
-
-#add weight to nodes
-
 
