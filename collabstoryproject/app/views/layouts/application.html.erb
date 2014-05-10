@@ -6,6 +6,15 @@
   <%= stylesheet_link_tag    "application", media: "all"%>
   <%= javascript_include_tag "application", type: "text/javascript" %>
   <%= csrf_meta_tags %>
+  <object>
+  	<% logged_in = (session[:id] != nil) %>
+  	<% if logged_in %>
+  		Hi <%= User.find_by_id(session[:id]).first_name %>! &#160; | &#160;
+  		<%= link_to ("LOGOUT"), :controller => "users", :action => "logout" %>
+  	<% else %>
+  		<%= link_to ("LOGIN"), :controller => "users", :action => "login" %>
+  	<% end %>
+ </object>
 </head>
 <body>
 

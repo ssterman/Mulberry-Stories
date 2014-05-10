@@ -2,8 +2,8 @@ class LoadData < ActiveRecord::Migration
   def up
   	down
 
-  	us = User.new(:username => "Tester1")
-  	us2 = User.new(:username => "Tester2")
+  	us = User.new(:username => "Tester1", :password => "abcd", :first_name => "a", :last_name => "b")
+  	us2 = User.new(:username => "Tester2", :password => "efgh", :first_name => "c", :last_name => "d")
 
 
   	ts1 = Story.new(:summary => "Stories about football, from spectators, players, fans, etc.", :title => "Football at Stanford")

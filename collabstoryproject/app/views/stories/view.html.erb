@@ -1,4 +1,4 @@
-
+<% if session[:id] %>
 <h1 class="title"> <%= @story.title %> </h1>
 <h2 class="summary"> <%= @story.summary %> </h2> 
 
@@ -32,7 +32,7 @@
   		<% end %>
 	</div>
 </div>
-
+<% end %>
 <script src="http://d3js.org/d3.v3.min.js"></script>
 <script>
 	setup();

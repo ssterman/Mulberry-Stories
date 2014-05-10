@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140505051138) do
+ActiveRecord::Schema.define(version: 20140510051712) do
 
   create_table "links", force: true do |t|
     t.integer  "story_id"
@@ -52,7 +52,11 @@ ActiveRecord::Schema.define(version: 20140505051138) do
   end
 
   create_table "users", force: true do |t|
+    t.string   "first_name"
+    t.string   "last_name"
     t.string   "username"
+    t.string   "password_digest"
+    t.string   "salt"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
