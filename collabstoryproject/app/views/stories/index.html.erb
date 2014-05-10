@@ -1,11 +1,12 @@
 
 
 <h1>Multipath Collaborative Stories</h1>
-
+<% if session[:id] %>
 <!-- display title and summary for all stories -->
 <% for s in @stories do %>
 	<div> <b>Title:</b> <%= link_to(s.title, controller: "stories", action: "view", id: s.id) %> </div>
 	<div> <b>Summary:</b> <%= s.summary%> </div>
 	<div> <b>Type:</b> <%= s.genre %> </div>
 	<div class="small_spacer"></div>
+<%end%>
 <%end%>

@@ -1,0 +1,21 @@
+<% @title = "Login Page" %>
+<div>
+<h1><%= @title %></h1>
+<%= link_to ("New User? Register Here"), :controller => "users", :action => "new" %>
+<% if flash[:alert] %><%= flash[:alert] %><%end%>
+<% @user = flash[:user] %>
+    <%if !@user
+   		@user = User.new
+   	 end %>
+<% if !session[:id] %>
+	<%= form_tag("post_login", :method => "post") do %>
+		<div>
+		<%= label_tag(:login_val, "Enter Your Username Here:") %>
+		<%= text_field_tag(:login_val, @user.username, :size => 20) %>
+		<%= label_tag(:password_val, "Enter your Password Here:") %>
+		<%= password_field_tag(:password_val, nil, :size=>20) %>
+		<%= submit_tag("Login") %>
+	</div>
+	<% end %>
+<% end %>
+</div>
