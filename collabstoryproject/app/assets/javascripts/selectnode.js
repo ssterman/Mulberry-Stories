@@ -1,16 +1,11 @@
 
 
-function setup() {
-	// document.addEventListener('mousemove', function(e){ 
- //    	$(document).data("mouse", { x: e.pageX, y: e.pageY });
-	// }, false);
-}
-
 //drag to add reference: http://bl.ocks.org/benzguo/4370043
 //arrows reference: http://logogin.blogspot.com/2013/02/d3js-arrowhead-markers.html
-function d3visdisplay2(json_data) {
+function display_graph(json_data) {
 	var width = 500;
 	var height = 500;
+	var selected_id;
 
 	var color = d3.scale.category20();
 
@@ -40,6 +35,7 @@ function d3visdisplay2(json_data) {
 	    .attr('height', height)
 	    .attr('fill', 'white');
 
+	//adds the arrows; not that need to change refX to account for size of the circle
 	vis.append("svg:defs").append("marker")
 	    .attr("id", "arrowhead")
 	    .attr("refX", 20) /*must be smarter way to calculate shift*/
@@ -79,7 +75,7 @@ function d3visdisplay2(json_data) {
 
 	function mousedown() {
 		if (mousedown_node) {
-			var read_area = document.getElementById("read")
+			var read_area = document.getElementById("read");
 				read_area.innerHTML = mousedown_node.text;
 		}
 	}
@@ -96,11 +92,39 @@ function d3visdisplay2(json_data) {
 	}
 
 	function showEditScreen(source, target) {
-		target.text = "You just created a node with id " + target.id + ". You may edit the node below and then save it.";
-		var read_area = document.getElementById("read")
-		read_area.innerHTML = target.text;
+		var read_area = document.getElementById("read");
+		read_area.innerHTML = "You just created a node with id " + target.id + ". You may edit the node below and then save it.";
 		$("#write").show();
-		$("#node_source").val(source.id);
+		$("#submit_sourceID").val(source.id);
+		save_to_db();
+	}
+
+	function save_to_db(target) {
+		this.submit_el = document.getElementById("submit_node");
+
+		this.submit_el.onclick = function(event) {
+			event.preventDefault();
+
+			var url = "/nodes/save";
+			var node_text = $("#submit_text_area").val();
+			var content = "text=" + node_text;
+			content += "&source=" + $("#submit_sourceID").val();
+			content += "&storyid=" + 1;//($("#submit_storyID").val());
+
+			$.ajax({ url: url,
+			  type: 'POST',
+			  beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+			  data: content,
+			  success: function(response) {
+			    // $('#someDiv').html(response);
+			    var read_area = document.getElementById("read");
+				read_area.innerHTML = node_text;
+				$("#write").hide();
+				console.log("ajax success", node_text);
+				selected_node.text = node_text;
+			  }
+			});
+		}
 	}
 
 	function mouseup() {
@@ -123,6 +147,7 @@ function d3visdisplay2(json_data) {
 
 	        var target = node;
 	      	showEditScreen(source, target);
+	      	console.log("end of ses");
 
 
 	      // select new node
@@ -132,7 +157,7 @@ function d3visdisplay2(json_data) {
 	      // add link to mousedown node
 	      links.push({source: mousedown_node, target: node});
 	    }
-
+	    console.log('redrawing');
 	    redraw();
 	  }
 	  // clear mouse event vars
@@ -196,7 +221,7 @@ function d3visdisplay2(json_data) {
 		  			//this y calc is super hacky and needs to change
 		  			var y_height = height*d.truth_height/2 + (50 * count);
 		  			count += 1;
-		  			console.log(y_height);
+		  			//console.log(y_height);
 		  			d.y = y_height; 
 		  			d.px = d.id*20;
 		  			d.py = y_height; 
@@ -208,7 +233,10 @@ function d3visdisplay2(json_data) {
 
 	          mousedown_node = d;
 	          if (mousedown_node == selected_node) selected_node = null;
-	          else selected_node = mousedown_node; 
+	          else {
+	          	selected_node = mousedown_node; 
+	          	selected_id = selected_node.id;
+	          }
 	          selected_link = null; 
 
 	          // reposition drag line

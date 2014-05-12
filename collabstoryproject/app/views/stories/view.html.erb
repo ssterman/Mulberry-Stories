@@ -1,40 +1,42 @@
+
 <% if session[:id] %>
-<h1 class="title"> <%= @story.title %> </h1>
-<h2 class="summary"> <%= @story.summary %> </h2> 
+	<h1 class="title"> <%= @story.title %> </h1>
+	<h2 class="summary"> <%= @story.summary %> </h2> 
 
-<div class="break"></div>
+	<div class="break"></div>
 
 
-<!-- the container for visualization -->
-<div class="vis" id="viscontainer">
+	<!-- the container for visualization -->
+	<div class="vis" id="viscontainer">
 
-</div>
-
-<!-- the read/write interface; should only be able to edit your own nodes; until have users and logins, no editing allowed, only creating new nodes-->
-<div id="rwcontainer">
-<!-- 	<div class="read"></div>-->
-	<div id="read">
 	</div>
-	<div id="write">
-		<%= form_for(@node, :url => {:controller => "nodes", :action => "save"}) do |f| %>
-  			<%= f.text_area(:text, size: '50x10') %>
-  			<%=f.hidden_field :source, :value => "some value" %> 		
-  			<%=f.hidden_field :story_id, :value => @story.id %>
-  			<%= f.submit "Save" %>
-		<% end %>	
+
+	<!-- the read/write interface; should only be able to edit your own nodes; until have users and logins, no editing allowed, only creating new nodes-->
+	<div id="rwcontainer">
+	<!-- 	<div class="read"></div>-->
+		<div id="read">
+		</div>
+		<div id="write">
+
+
+			<%= form_tag do %>
+				<%= text_area_tag('submit_text_area') %>
+				<%= hidden_field_tag('submit_sourceID', value: "some value") %>
+				<%= hidden_field_tag('submit_storyID', value: @story.id) %>
+				<%= submit_tag('save!', id: 'submit_node') %>
+			<% end %>		
+		</div>
+		<div id="add_link">
+			<%= form_for(@link, :url => {:controller => "links", :action => "save_link"}, :html => {:id => "new_link_connection"}) do |f| %>
+			  	<%=f.hidden_field :source, :value => "some value" %>
+			  	<%=f.hidden_field :target, :value => "some value" %> 		
+	  			<%=f.hidden_field :story_id, :value => @story.id %>
+	  			<%=f.submit "Save" %>
+	  		<% end %>
+		</div>
 	</div>
-	<div id="add_link">
-		<%= form_for(@link, :url => {:controller => "links", :action => "save_link"}, :html => {:id => "new_link_connection"}) do |f| %>
-		  	<%=f.hidden_field :source, :value => "some value" %>
-		  	<%=f.hidden_field :target, :value => "some value" %> 		
-  			<%=f.hidden_field :story_id, :value => @story.id %>
-  			<%=f.submit "Save" %>
-  		<% end %>
-	</div>
-</div>
 <% end %>
-<script src="http://d3js.org/d3.v3.min.js"></script>
+
 <script>
-	setup();
-	d3visdisplay2(<%=raw @json_data %>);
+	display_graph(<%=raw @json_data %>);
 </script>

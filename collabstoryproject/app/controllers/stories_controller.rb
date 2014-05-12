@@ -19,6 +19,7 @@ class StoriesController < ApplicationController
 		@nodes = @story.nodes
 		@links = @story.links
 		@json_data = JSON.generate((_create_object(@story, @nodes, @links)))
+		@current_node = params[:current]
 		#render json: story_hash, status: 200 and return
 	end
 
