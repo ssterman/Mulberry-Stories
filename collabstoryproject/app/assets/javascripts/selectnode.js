@@ -1,5 +1,5 @@
 
-
+boolean editing = false;
 //drag to add reference: http://bl.ocks.org/benzguo/4370043
 //arrows reference: http://logogin.blogspot.com/2013/02/d3js-arrowhead-markers.html
 function display_graph(json_data) {
@@ -77,6 +77,7 @@ function display_graph(json_data) {
 		if (mousedown_node) {
 			var read_area = document.getElementById("read");
 				read_area.innerHTML = mousedown_node.text;
+			$("#write").hide();
 		}
 	}
 
@@ -92,8 +93,9 @@ function display_graph(json_data) {
 	}
 
 	function showEditScreen(source, target) {
-		var read_area = document.getElementById("read");
-		read_area.innerHTML = "You just created a node with id " + target.id + ". You may edit the node below and then save it.";
+		//var read_area = document.getElementById("read");
+		//read_area.innerHTML = "You just created a node with id " + target.id + ". You may edit the node below and then save it.";
+		editing = true;
 		$("#write").show();
 		$("#submit_sourceID").val(source.id);
 		save_to_db();
@@ -124,6 +126,7 @@ function display_graph(json_data) {
 				$("#write").hide();
 				console.log("ajax success", node_text);
 				selected_node.text = node_formatted;
+				editing = false;
 			  }
 			});
 		}
