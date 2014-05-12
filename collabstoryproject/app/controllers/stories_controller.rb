@@ -53,8 +53,15 @@ class StoriesController < ApplicationController
 	 end
 
 	 def create
+	 	@story = Story.new
 
+	 	@story.title = params[:story][:title]
+	 	@story.summary = params[:story][:summary]
+	 	@story.genre = params[:story][:genre]
+	 	@story.user_id = session[:id]
+	 	@story.save
 
+	 	redirect_to(:action => :index)
 	 end
 
 end
