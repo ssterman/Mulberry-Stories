@@ -1,0 +1,9 @@
+
+
+			<%= form_for(@story, :url => {:controller => "stories", :action => "create"}) do |f| %>
+			  	<%=f.text_field :title, id: "title_field", value: "Title Here"%>
+			  	<%=f.text_field :summary, id: "summary_field", value: "Summary Here" %> 		
+	  			<%=f.text_field :genre, id: "genre_field", value: "Genre Here" %>
+	  			<%=f.hidden_field :user_id, :value => session[:id] %>
+	  			<br><%=f.submit "Save", id: "submit_new_story" %>
+	  		<% end %>

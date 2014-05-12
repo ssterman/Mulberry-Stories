@@ -46,6 +46,17 @@ class StoriesController < ApplicationController
 		return story_hash
 	end
 
+
+	 def new
+	 	@story = Story.new
+
+	 end
+
+	 def create
+
+
+	 end
+
 end
 
 

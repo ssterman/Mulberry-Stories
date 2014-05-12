@@ -4,6 +4,7 @@
 <h3>Explore these stories through the interactive visualization; drag from a node to add scenes, and drag between nodes to connect scenes together!</h3>
 
 <% if session[:id] %>
+	<%= link_to ("Create New Story"), :controller => "stories", :action => "new" %>
 <!-- display title and summary for all stories -->
 <% for s in @stories do %>
 	<div> <b>Title:</b> <%= link_to(s.title, controller: "stories", action: "view", id: s.id) %> </div>
