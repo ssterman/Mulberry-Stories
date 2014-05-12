@@ -1,12 +1,14 @@
 class NodesController < ApplicationController
+	include ActionView::Helpers::TextHelper
+
 	def save
 		logger.info "The post was saved and now the user is going to be redirected..."
-		# parameters = node_params
-		parameters = params
+		parameters = node_params
+
 
 		new_node = Node.new
-		new_node.text = parameters[:text]
-		new_node.user = User.find_by(username: 'Tester1')
+		new_node.text = simple_format(parameters[:text])
+		new_node.user = User.find_by_id(parameters[:userid])
   		new_node.truth = false
   		new_node.truth_height = 0
   		new_node.story = Story.find_by_id(parameters[:storyid])
@@ -31,8 +33,8 @@ class NodesController < ApplicationController
 		return new_link
 	end
 
-	# def node_params
-	# 	params.require(:node).permit(:text, :source, :story_id)
-	# end
+	 def node_params
+	 	params.permit(:text, :source, :storyid, :userid)
+	 end
 
 end

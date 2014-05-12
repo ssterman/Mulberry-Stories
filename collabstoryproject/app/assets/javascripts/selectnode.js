@@ -109,7 +109,8 @@ function display_graph(json_data) {
 			var node_text = $("#submit_text_area").val();
 			var content = "text=" + node_text;
 			content += "&source=" + $("#submit_sourceID").val();
-			content += "&storyid=" + 1;//($("#submit_storyID").val());
+			content += "&storyid=" + $("#submit_storyID").val();
+			content += "&userid=" + $("#submit_userID").val();
 
 			$.ajax({ url: url,
 			  type: 'POST',
@@ -118,10 +119,11 @@ function display_graph(json_data) {
 			  success: function(response) {
 			    // $('#someDiv').html(response);
 			    var read_area = document.getElementById("read");
-				read_area.innerHTML = node_text;
+			    var node_formatted = node_text.replace(/\n/g, '<br />');
+				read_area.innerHTML = node_formatted;
 				$("#write").hide();
 				console.log("ajax success", node_text);
-				selected_node.text = node_text;
+				selected_node.text = node_formatted;
 			  }
 			});
 		}
