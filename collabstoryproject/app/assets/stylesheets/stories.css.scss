@@ -116,7 +116,7 @@ textarea:focus {
 	border: 1px solid #bbb;
 	box-shadow: inset 0 1px 2px #ccc;
 	min-height: 12em;
-	width:95%;
+	width:98%;
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
@@ -124,5 +124,10 @@ textarea:focus {
 
 #submit_node {
 	height: 1.929em;
-	
+
+}
+
+#read {
+	letter-spacing: 0.01rem;
+	line-height: 1.4;
 }

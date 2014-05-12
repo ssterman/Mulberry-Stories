@@ -1,5 +1,7 @@
 
-boolean editing = false;
+var editing = false;
+var currNode = null;
+var currLink = null;
 //drag to add reference: http://bl.ocks.org/benzguo/4370043
 //arrows reference: http://logogin.blogspot.com/2013/02/d3js-arrowhead-markers.html
 function display_graph(json_data) {
