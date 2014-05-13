@@ -49,6 +49,9 @@ class StoriesController < ApplicationController
 
 	 def new
 	 	@story = Story.new
+	 	5.times do
+    		node = @story.nodes.build
+    	end
 
 	 end
 
@@ -60,6 +63,20 @@ class StoriesController < ApplicationController
 	 	@story.genre = params[:story][:genre]
 	 	@story.user_id = session[:id]
 	 	@story.save
+
+	 	count = 0
+	 	nodes = params[:story][:nodes_attributes]
+	 	nodes.each do |n|
+	 		@node = Node.new
+	 		@node.text = simple_format(n[1][:text])
+	 		@node.user_id = session[:id]
+	 		@node.story_id = @story.id
+	 		@node.truth = true
+	 		@node.truth_height = count
+	 		count +=1
+	 		@node.save
+	 	end
+
 
 	 	redirect_to(:action => :index)
 	 end

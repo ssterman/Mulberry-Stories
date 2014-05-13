@@ -8,19 +8,33 @@
 				<%= f.radio_button(:genre, "non-fiction") %>
 				<%= f.label(:genre_non_fiction, "non-fiction") %>
 	  			<%=f.hidden_field :user_id, :value => session[:id] %>
-	  			<br><%=f.submit "Save", id: "submit_new_story" %>
+
+				<div class="small_spacer"></div>
+		  		<div id="truth_container"> Add truth nodes to your story. The order in which you list them is the order they will appear in the story. <p> You can submit up to 5 truth nodes; leave blank if you want fewer. </p>
+		  			<div class="small_spacer"></div>
+				</div>
+
+				<%= f.fields_for :nodes do |b| %>
+					<%= b.label :text, "write a truth scene..." %><br />
+					<%= b.text_area :text, :rows => 10, class: "truth_input" %><br />
+   				<% end %>
+
+				<!-- <div id="add_truth_node" onclick="add_tn_form()">+</div> -->
+
+	  			<br><%=f.submit "Save", id: "submit_new_story", class: "new_story_button" %>
 	  		<% end %>
 
-	  		<div class="small_spacer"></div>
-	  		<div id="truth_container"> Add truth nodes to your story. The order in which you list them is the order they will appear in the story. 
-	  			<div class="small_spacer"></div>
-			</div>
-				<button onclick="add_tn_form()">Add Truth Node </button>
 
+			<%= form_tag(controller: "stories", action: "index") do %>
+			  <%= submit_tag("Cancel", id: "cancel_new_story", class: "new_story_button") %>
+			<% end %>
+	  		
 		<script>
-			function add_tn_form() {
-				var el = document.getElementById("truth_container");
-				el.innerHTML = el.innerHTML + '<textarea class="truth_input">write a truth scene...</textarea><div class="small_spacer"></div>'
-			}
+		// var count = 0;
+		// 	function add_tn_form() {
+		// 		var el = document.getElementById("truth_container");
+		// 		el.innerHTML = el.innerHTML + '<textarea class="truth_input" id="truth_"' + count + '>write a truth scene...</textarea><div class="small_spacer"></div>'
+		// 		count += 1;
+		// 	}
 
 		</script>
