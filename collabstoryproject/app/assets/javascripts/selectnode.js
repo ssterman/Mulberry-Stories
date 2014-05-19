@@ -224,14 +224,18 @@ function display_graph(json_data) {
 		  	.attr("fixed", function(d){
 		  		if (d.truth == true) {
 		  			d.fixed = true;    //this is kinda hacky, but works
-		  			d.x = d.id*20;
+		  			/*d.x = d.id*20;
 		  			//this y calc is super hacky and needs to change
 		  			var y_height = height*d.truth_height/2 + (50 * count);
 		  			count += 1;
 		  			//console.log(y_height);
 		  			d.y = y_height; 
 		  			d.px = d.id*20;
-		  			d.py = y_height; 
+		  			d.py = y_height; */
+
+		  			count += 1;
+		  			d.y = (100 * count) - 150;
+		  			d.x = 250;
 		  			return true;
 		  		}
 		  	})
