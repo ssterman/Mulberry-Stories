@@ -99,9 +99,12 @@ function display_graph(json_data) {
 		//read_area.innerHTML = "You just created a node with id " + target.id + ". You may edit the node below and then save it.";
 		editing = true;
 		$("#write").show();
+		$("#submit_text_area").focus();
 		$("#submit_sourceID").val(source.id);
 		save_to_db();
 	}
+
+
 
 	function save_to_db(target) {
 		this.submit_el = document.getElementById("submit_node");
@@ -110,7 +113,8 @@ function display_graph(json_data) {
 			event.preventDefault();
 
 			var url = "/nodes/save";
-			var node_text = $("#submit_text_area").val();
+			var node_text = $("#submit_text_area").html();
+			$("#submit_text_area").empty();
 			var content = "text=" + node_text;
 			content += "&source=" + $("#submit_sourceID").val();
 			content += "&storyid=" + $("#submit_storyID").val();
