@@ -78,7 +78,7 @@ function display_graph(json_data) {
 	function mousedown() {
 		if (mousedown_node) {
 			var read_area = document.getElementById("read");
-				read_area.innerHTML = mousedown_node.text;
+				read_area.innerHTML = "<p>" + mousedown_node.text + "<\p>";
 			$("#write").hide();
 		}
 	}
