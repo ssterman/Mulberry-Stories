@@ -81,7 +81,7 @@ function display_graph(json_data) {
 			var read_text = "";
 			var selected_node_arr_len = selected_node_arr.length;
 			for (i = 0; i < selected_node_arr_len; i++) {
-				read_text += "<br />" + selected_node_arr[i].text;
+				read_text += "<p>" + selected_node_arr[i].text + "</p>";
 			}
 			//read_area.innerHTML = mousedown_node.text;
 			read_area.innerHTML = read_text;
