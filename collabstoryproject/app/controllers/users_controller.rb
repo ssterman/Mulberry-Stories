@@ -51,4 +51,23 @@ class UsersController < ApplicationController
 			render :action => "login"
 		end
 	end
+
+	def index
+		@users = User.all
+	end
+
+	def view
+		if (!User.exists?(params[:id])) 
+			redirect_to :controller => "users", :action => "index"
+		else
+			@user = User.find(params[:id])
+			@authored = Story.where("user_id = '" + @user.id.to_s + "'")
+			@contributed = Node.where("user_id = '" + @user.id.to_s + "'")
+		end
+		# @contributed = []
+		# for n in nodes do 
+		# 	@contributed.push(Story.find(n.story_id))
+		# end
+
+	end
 end

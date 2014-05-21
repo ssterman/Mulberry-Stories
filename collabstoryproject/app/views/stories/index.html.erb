@@ -6,11 +6,15 @@
 <% if session[:id] %>
 	<%= link_to ("Create New Story"), :controller => "stories", :action => "new" %>
 	<div class="small_spacer"></div>
-<!-- display title and summary for all stories -->
-<% for s in @stories do %>
-	<div> <b>Title:</b> <%= link_to(s.title, controller: "stories", action: "view", id: s.id) %> </div>
-	<div> <b>Summary:</b> <%= s.summary%> </div>
-	<div> <b>Type:</b> <%= s.genre %> </div>
+	<%= link_to ("Browse Users"), :controller => "users", :action => "index" %>
+	
 	<div class="small_spacer"></div>
-<%end%>
+	<!-- display title and summary for all stories -->
+	<% for s in @stories do %>
+		<div> <b>Title:</b> <%= link_to(s.title, controller: "stories", action: "view", id: s.id) %> </div>
+		<div> <b>Summary:</b> <%= s.summary%> </div>
+		<div> <b>Type:</b> <%= s.genre %> </div>
+		<div class="small_spacer"></div>
+	<%end%>
+
 <%end%>

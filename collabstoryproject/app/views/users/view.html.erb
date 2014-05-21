@@ -1,0 +1,17 @@
+<h1> <%= @user.username %> </h1>
+
+<h3> Stories Authored </h3>
+ <% for s in @authored do %>
+	<div> <b>Title:</b> <%= link_to(s.title, controller: "stories", action: "view", id: s.id) %> </div>
+	<div> <b>Summary:</b> <%= s.summary%> </div>
+	<div> <b>Type:</b> <%= s.genre %> </div>
+	<div class="small_spacer"></div>
+<%end%>
+
+<h3> Stories Contributed To</h3>
+ <% for n in @contributed do %>
+ 	<% s = Story.find(n.story_id) %>
+	<div> <b>Title:</b> <%= link_to(s.title, controller: "stories", action: "view", id: s.id) %> </div>
+	<div> <b>Scene: </b> <%= n.text %> </div>
+	<div class="small_spacer"></div>
+<%end%>
