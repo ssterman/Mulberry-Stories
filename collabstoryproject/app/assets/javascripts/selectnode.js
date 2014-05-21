@@ -121,35 +121,28 @@ function display_graph(json_data) {
 
 		//if not a link between mousdown node and last node in array, clear array then add MDN
       	var length = selected_node_arr.length;
-      	var index = length - 1;
-      	//make sure indices are within bounds
-      	if (index > -1) {
-	      	var parent = selected_node_arr[index];
-	      	var child = mousedown_node;
-	      	//using d3 filters to find a link between current node
-	      	//and what ought to be its parent; returns an array
-	      	var directChild = links.filter(function (d) {
-	      		return d.target == child && d.source == parent;
-	      	});
-	    }
-	    index = length - 2;
-      	if (index > -1) {
-	      	parent = selected_node_arr[index];
-	      	var switchChild = links.filter(function (d) {
-	      		return d.target == child && d.source == parent;
-	      	});
-	    }
+      	var index;
+      	var switchChild = links.filter(function (d) {
+      		for (i = 0; i < length; i++) {
+      			var parent = selected_node_arr[i];
+      			if (d.target == mousedown_node && d.source == parent) {
+	      			index = i;
+      				return true;
+      			}
+      		}
+      		return false;
+      	});
 	    //if this is an alternate child on the current branch
 	    //replace the current child with the new child
       	if (switchChild.length != 0) {
-      		selected_node_arr[length-1] = mousedown_node;
-      	}
-      	//if not a switch case, and this isn't a direct child
-      	//clear the selection
-      	else if (directChild.length == 0) {
-        	selected_node_arr = [];
-        	selected_node_arr.push(mousedown_node);
+      		//selected_node_arr[length-1] = mousedown_node;
+      		removeFromSelectedArr(index + 1);
+      		console.log("index", index);
+      		selected_node_arr.push(mousedown_node);
+      	//if there's a gap in the tree, delete everything up
+      	//to here and start again; may not be optimal behavior
         } else {
+        	selected_node_arr = [];
         	selected_node_arr.push(mousedown_node);
         }
 	}
@@ -220,7 +213,7 @@ function display_graph(json_data) {
 	        //bug here about making the newly created node
 	        //highlighted as well; text shows up, but not orange circle
 	        selected_node = node;
-	        addToSelectedArr(source);
+	        addToSelectedArr(node);
 	      	showEditScreen(source, target);
 
 	      	// add link to mousedown node
