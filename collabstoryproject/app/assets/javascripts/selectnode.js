@@ -2,12 +2,12 @@
 var editing = false;
 var currNode = null;
 var currLink = null;
+
 //drag to add reference: http://bl.ocks.org/benzguo/4370043
 //arrows reference: http://logogin.blogspot.com/2013/02/d3js-arrowhead-markers.html
 function display_graph(json_data) {
 	var width = 500;
 	var height = 500;
-	// var selected_id;
 
 	var color = d3.scale.category20();
 
@@ -77,7 +77,6 @@ function display_graph(json_data) {
 
 	redraw();
 
-
 	function updateRead() {
 			var read_area = document.getElementById("read");
 			var read_text = "";
@@ -124,39 +123,37 @@ function display_graph(json_data) {
 
 		//if not a link between mousdown node and last node in array, clear array then add MDN
       	var length = selected_node_arr.length;
-      	var index = length - 1;
-      	//make sure indices are within bounds
-      	if (index > -1) {
-	      	var parent = selected_node_arr[index];
-	      	var child = mousedown_node;
-	      	//using d3 filters to find a link between current node
-	      	//and what ought to be its parent; returns an array
-	      	var directChild = links.filter(function (d) {
-	      		return d.target == child && d.source == parent;
-	      	});
-	    }
-	    index = length - 2;
-      	if (index > -1) {
-	      	parent = selected_node_arr[index];
-	      	var switchChild = links.filter(function (d) {
-	      		return d.target == child && d.source == parent;
-	      	});
-	    }
+      	var index;
+      	var switchChild = links.filter(function (d) {
+      		for (i = 0; i < length; i++) {
+      			var parent = selected_node_arr[i];
+      			if (d.target == mousedown_node && d.source == parent) {
+	      			index = i;
+      				return true;
+      			}
+      		}
+      		return false;
+      	});
 	    //if this is an alternate child on the current branch
 	    //replace the current child with the new child
       	if (switchChild.length != 0) {
-      		selected_node_arr[length-1] = mousedown_node;
-      	}
-      	//if not a switch case, and this isn't a direct child
-      	//clear the selection
-      	else if (directChild.length == 0) {
-        	selected_node_arr = [];
-        	selected_node_arr.push(mousedown_node);
+      		//selected_node_arr[length-1] = mousedown_node;
+      		removeFromSelectedArr(index + 1);
+      		console.log("index", index);
+      		selected_node_arr.push(mousedown_node);
+      	//if there's a gap in the tree, delete everything up
+      	//to here and start again; may not be optimal behavior
         } else {
+        	selected_node_arr = [];
         	selected_node_arr.push(mousedown_node);
         }
 	}
 
+	//removes specified node and all its children
+	function removeFromSelectedArr(index) {
+		var removeNum = selected_node_arr.length - index;
+	    selected_node_arr.splice(index, removeNum);
+	}
 
 	function save_to_db(target) {
 		this.submit_el = document.getElementById("submit_node");
@@ -207,26 +204,28 @@ function display_graph(json_data) {
 	      .attr("class", "drag_line_hidden")
 
 	    if (!mouseup_node) {
-	    	console.log("in orig mouseup");
 	    	//show editing screen
 	        var id = nodes.length + 1;
 	        var source = mousedown_node;
+	        //this deals with the fact that clicking to drag
+	        //to create a new node deselects the parent
 	        if (selected_node_arr.indexOf(source) == -1) {
 	        	addToSelectedArr(source);
 		    }
 
-		    // add node
-		    var point = d3.mouse(this);
-		    var node = {x: point[0], y: point[1], "id": id};
-		    console.log(node);
-		    var n = nodes.push(node);
-
+	        // add node
+	        var point = d3.mouse(this);
+	        var node = {x: point[0], y: point[1], "id": id};
+	        var n = nodes.push(node);
 
 	        var target = node;
 	        updateRead();
-	      	showEditScreen(source, target);
-	      	console.log("end of ses");
 
+	        //bug here about making the newly created node
+	        //highlighted as well; text shows up, but not orange circle
+	        selected_node = node;
+	        addToSelectedArr(node);
+	      	showEditScreen(source, target);
 
 	      // select new node
 	      // selected_node = node;
@@ -237,6 +236,7 @@ function display_graph(json_data) {
 	      links.push({source: mousedown_node, target: node});
 	      console.log(node);
 	      console.log("wtf");
+
 	    }
 	    console.log('redrawing');
 	    redraw();
@@ -339,6 +339,7 @@ function display_graph(json_data) {
 	  //node = node.data(nodes);
 	  node = vis.selectAll("g.gnode").data(nodes);
 	  opened_node = node.enter().append("g").classed("gnode", true);
+
 	  count = 1;
 	  //node.enter().append("g").classed("gnode", true).insert("circle")
 	  opened_node.insert("circle")
@@ -364,24 +365,18 @@ function display_graph(json_data) {
 	        function(d) { 
 
 	          mousedown_node = d;
+	          //index_node is an indicator of whether or not 
+	          //this node is already in the selected_arr or not
 	          var index_node = selected_node_arr.indexOf(mousedown_node);
-	          // if (mousedown_node == selected_node) {
-	          // 	selected_node = null;
-	          // 	selected_node_arr.splice()
-	          // }
   	          if (index_node != -1) {
 	          	selected_node = null;
-	          	selected_node_arr.splice(index_node, 1);
+	          	removeFromSelectedArr(index_node);
 	          }
 	          else {
 	          	selected_node = mousedown_node;
-	          	// selected_id = selected_node.id;
-
 	          	addToSelectedArr(mousedown_node);
 	          	drawSelectedNode(mousedown_node);
-		       
-	          }
-	          // selected_link = null; 
+	         }
 
 	          // reposition drag line
 	          drag_line
@@ -402,12 +397,6 @@ function display_graph(json_data) {
 	          if (mousedown_node) {
 	            mouseup_node = d; 
 	            if (mouseup_node == mousedown_node) {
-    	        //   	selected_node = null;
-    	        //   	var index_node = selected_node_arr.indexOf(mousedown_node);
-    	        //   	if (index_node != -1) {
-    	        //   		console.log("deleting selection, " + mousedown_node.id);
-	          		// 	selected_node_arr.splice(index_node, 1);
-	          		// } 
 	            	resetMouseVars(); 
 	            	return; 
 	            }
@@ -420,12 +409,6 @@ function display_graph(json_data) {
 	            $("#link_source").val(mousedown_node.id);
 	            $("#link_target").val(mouseup_node.id);
 	            links.push(link);
-
-
-	            // select new link
-	            //selected_link = link;
-	            //selected_node = null;
-	          	//selected_node_arr.splice(selected_node_arr.indexOf(mousedown_node), 1);
 
 	            redraw();
 	            $("#new_link_connection").submit();
