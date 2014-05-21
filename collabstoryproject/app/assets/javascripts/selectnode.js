@@ -204,6 +204,12 @@ function display_graph(json_data) {
 					$("#write").hide();
 					console.log("ajax success", node_text);
 					selected_node.text = node_formatted;
+					opened_node.insert("text")
+			      	  .attr("dx", 18)
+			      	  .attr("dy", ".9em")
+			      	  .text(function(d) { 
+			      		return d.text.substring(0, 15) + "..."; 
+			      	  });
 					editing = false;
 				  }
 				});
