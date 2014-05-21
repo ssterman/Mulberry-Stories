@@ -6,6 +6,9 @@ var currLink = null;
 //drag to add reference: http://bl.ocks.org/benzguo/4370043
 //arrows reference: http://logogin.blogspot.com/2013/02/d3js-arrowhead-markers.html
 function display_graph(json_data) {
+	$("#submit_text_area").empty(); // Must empty the text area on load or else it has a 
+									// fucking weird phantom value of 4.
+
 	var width = 500;
 	var height = 500;
 
@@ -110,6 +113,7 @@ function display_graph(json_data) {
 		$("#write").show();
 		$("#submit_text_area").focus();
 		$("#submit_sourceID").val(source.id);
+		$("#error_msg").hide();
 		save_to_db();
 	}
 
@@ -161,28 +165,42 @@ function display_graph(json_data) {
 
 			var url = "/nodes/save";
 			var node_text = $("#submit_text_area").html();
-			$("#submit_text_area").empty();
-			var content = "text=" + node_text;
-			content += "&source=" + $("#submit_sourceID").val();
-			content += "&storyid=" + $("#submit_storyID").val();
-			content += "&userid=" + $("#submit_userID").val();
+			if (node_text.length === 0) {
+				$("#error_msg").show();
+				//remove_node_reset_writebox();
+			} else {
+				$("#submit_text_area").empty();
+				var content = "text=" + node_text;
+				content += "&source=" + $("#submit_sourceID").val();
+				content += "&storyid=" + $("#submit_storyID").val();
+				content += "&userid=" + $("#submit_userID").val();
 
-			$.ajax({ url: url,
-			  type: 'POST',
-			  beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
-			  data: content,
-			  success: function(response) {
-			    // $('#someDiv').html(response);
-			    var read_area = document.getElementById("read");
-			    var node_formatted = node_text.replace(/\n/g, '<br />');
-				read_area.innerHTML += "<p>" + node_formatted + "</p>";
-				$("#write").hide();
-				console.log("ajax success", node_text);
-				selected_node.text = node_formatted;
-				editing = false;
-			  }
-			});
+				$.ajax({ url: url,
+				  type: 'POST',
+				  beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+				  data: content,
+				  success: function(response) {
+				    // $('#someDiv').html(response);
+				    var read_area = document.getElementById("read");
+				    var node_formatted = node_text.replace(/\n/g, '<br />');
+					read_area.innerHTML += "<p>" + node_formatted + "</p>";
+					$("#write").hide();
+					console.log("ajax success", node_text);
+					selected_node.text = node_formatted;
+					editing = false;
+				  }
+				});
+			}
 		}
+	}
+
+	function remove_node_reset_writebox() {
+		nodes.pop();
+		links.pop();
+		redraw();
+		$("#submit_text_area").empty();
+		$("#write").hide();
+		editing = false;
 	}
 
 	function mouseup() {
@@ -298,9 +316,13 @@ function display_graph(json_data) {
 	          //index_node is an indicator of whether or not 
 	          //this node is already in the selected_arr or not
 	          var index_node = selected_node_arr.indexOf(mousedown_node);
+	          if (editing == true) {
+	          	remove_node_reset_writebox();
+	          }
   	          if (index_node != -1) {
 	          	selected_node = null;
 	          	removeFromSelectedArr(index_node);
+
 	          }
 	          else {
 	          	selected_node = mousedown_node;
@@ -362,5 +384,10 @@ function display_graph(json_data) {
 	  force.start();
 
 	}
+	$("#cancel_btn").click(function() {
+		if (editing == true){
+			remove_node_reset_writebox();
+		}
+	});
 
 }

@@ -22,7 +22,10 @@
 				<%= hidden_field_tag('submit_sourceID', :value => "some value" ) %>
 				<%= hidden_field_tag('submit_storyID', :value => "some value") %>
 				<%= hidden_field_tag('submit_userID', :value => "some value") %>
-				<%= submit_tag('Publish', id: 'submit_node') %>
+				<span id="error_msg">Empty passages don't add much!</span>
+				<button type="button" id="submit_node" class="write_btn">Publish</button>
+				<button type="button" id="cancel_btn" class="write_btn">Delete</button>				
+
 			<% end %>		
 		</div>
 		<div id="add_link">
@@ -39,6 +42,7 @@
 
 <script>
 	display_graph(<%=raw @json_data %>);
+	$("#error_msg").hide();
 	$("#submit_storyID").val(<%=@story.id %>);
 	$("#submit_userID").val(<%=session[:id]%>);
 	$('.placeholder').on('input', function(){
