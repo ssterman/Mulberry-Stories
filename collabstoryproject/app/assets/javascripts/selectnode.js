@@ -13,6 +13,7 @@ function display_graph(json_data) {
 
 	// mouse event vars
 	var selected_node = null,
+		selected_node_arr = [];
 	    selected_link = null,
 	    mousedown_link = null,
 	    mousedown_node = null,
@@ -75,11 +76,21 @@ function display_graph(json_data) {
 	redraw();
 
 
+	function updateRead() {
+			var read_area = document.getElementById("read");
+			var read_text = "";
+			var selected_node_arr_len = selected_node_arr.length;
+			for (i = 0; i < selected_node_arr_len; i++) {
+				read_text += "<br />" + selected_node_arr[i].text;
+			}
+			//read_area.innerHTML = mousedown_node.text;
+			read_area.innerHTML = read_text;
+			$("#write").hide();
+	}
+
 	function mousedown() {
 		if (mousedown_node) {
-			var read_area = document.getElementById("read");
-				read_area.innerHTML = "<p>" + mousedown_node.text + "<\p>";
-			$("#write").hide();
+			updateRead();
 		}
 	}
 
@@ -128,7 +139,7 @@ function display_graph(json_data) {
 			    // $('#someDiv').html(response);
 			    var read_area = document.getElementById("read");
 			    var node_formatted = node_text.replace(/\n/g, '<br />');
-				read_area.innerHTML = node_formatted;
+				read_area.innerHTML += "<p>" + node_formatted + "</p>";
 				$("#write").hide();
 				console.log("ajax success", node_text);
 				selected_node.text = node_formatted;
@@ -139,31 +150,37 @@ function display_graph(json_data) {
 	}
 
 	function mouseup() {
+	console.log('here');
 	  if (mousedown_node) {
 	    // hide drag line
 	    drag_line
 	      .attr("class", "drag_line_hidden")
 
 	    if (!mouseup_node) {
-
+	    	console.log("in orig mouseup");
 	    	//show editing screen
 	        var id = nodes.length + 1;
 	        var source = mousedown_node;
+	        if (selected_node_arr.indexOf(source) == -1) {
+		        selected_node_arr.push(source);
+		    }
 
-	      // add node
-	      var point = d3.mouse(this);
-	      var node = {x: point[0], y: point[1], "id": id};
-	      var n = nodes.push(node);
+		      // add node
+		      var point = d3.mouse(this);
+		      var node = {x: point[0], y: point[1], "id": id};
+		      var n = nodes.push(node);
 
 
 	        var target = node;
+	        updateRead();
 	      	showEditScreen(source, target);
 	      	console.log("end of ses");
 
 
 	      // select new node
 	      selected_node = node;
-	      selected_link = null;
+	      selected_node_arr.push(node);
+	      //selected_link = null;
 	      
 	      // add link to mousedown node
 	      links.push({source: mousedown_node, target: node});
@@ -200,19 +217,19 @@ function display_graph(json_data) {
 	      .attr("class", "link")
 		  .attr("marker-end", "url(#arrowhead)")
 		  // .attr("d", diagonal)
-	      .on("mousedown", 
-	        function(d) { 
-	          mousedown_link = d; 
-	          if (mousedown_link == selected_link) selected_link = null;
-	          else selected_link = mousedown_link; 
-	          selected_node = null; 
-	          redraw(); 
-	        })
+	      // .on("mousedown", 
+	      //   function(d) { 
+	      //     mousedown_link = d; 
+	      //     if (mousedown_link == selected_link) selected_link = null;
+	      //     else selected_link = mousedown_link; 
+	      //     selected_node = null; 
+	      //     redraw(); 
+	      //   })
 
 	  link.exit().remove();
 
-	  link
-	    .classed("link_selected", function(d) { return d === selected_link; });
+	  // link
+	  //   .classed("link_selected", function(d) { return d === selected_link; });
 
 	  node = node.data(nodes);
 	  count = 1;
@@ -247,12 +264,21 @@ function display_graph(json_data) {
 	        function(d) { 
 
 	          mousedown_node = d;
-	          if (mousedown_node == selected_node) selected_node = null;
+	          var index_node = selected_node_arr.indexOf(mousedown_node);
+	          // if (mousedown_node == selected_node) {
+	          // 	selected_node = null;
+	          // 	selected_node_arr.splice()
+	          // }
+  	          if (index_node != -1) {
+	          	selected_node = null;
+	          	selected_node_arr.splice(index_node, 1);
+	          }
 	          else {
-	          	selected_node = mousedown_node; 
+	          	selected_node = mousedown_node;
+	          	selected_node_arr.push(mousedown_node); 
 	          	selected_id = selected_node.id;
 	          }
-	          selected_link = null; 
+	          // selected_link = null; 
 
 	          // reposition drag line
 	          drag_line
@@ -272,7 +298,16 @@ function display_graph(json_data) {
 	        function(d) { 
 	          if (mousedown_node) {
 	            mouseup_node = d; 
-	            if (mouseup_node == mousedown_node) { resetMouseVars(); return; }
+	            if (mouseup_node == mousedown_node) {
+    	        //   	selected_node = null;
+    	        //   	var index_node = selected_node_arr.indexOf(mousedown_node);
+    	        //   	if (index_node != -1) {
+    	        //   		console.log("deleting selection, " + mousedown_node.id);
+	          		// 	selected_node_arr.splice(index_node, 1);
+	          		// } 
+	            	resetMouseVars(); 
+	            	return; 
+	            }
 
 	            // add link
 	            var link = {source: mousedown_node, target: mouseup_node};
@@ -282,8 +317,9 @@ function display_graph(json_data) {
 
 
 	            // select new link
-	            selected_link = link;
-	            selected_node = null;
+	            //selected_link = link;
+	            //selected_node = null;
+	          	//selected_node_arr.splice(selected_node_arr.indexOf(mousedown_node), 1);
 
 	            redraw();
 	            $("#new_link_connection").submit();
@@ -299,7 +335,9 @@ function display_graph(json_data) {
 	    .remove();
 
 	  node
-	    .classed("node_selected", function(d) { return d === selected_node; });
+	    .classed("node_selected", function(d) { //return d === selected_node; });
+	    		return (selected_node_arr.indexOf(d) != -1);
+	    	});
 
 	  if (d3.event) {
 	    // prevent browser's default behavior
