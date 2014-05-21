@@ -208,6 +208,11 @@ function display_graph(json_data) {
 			      	  .attr("dx", 18)
 			      	  .attr("dy", ".9em")
 			      	  .text(function(d) { 
+			      	  	if (d.text == "") {
+			      	  		return "";
+			      	  	} else if (d.text.indexOf("<p>") == 0) {
+			      	  		return d.text.usbstring(3, 18) + "...";
+			      	  	}
 			      		return d.text.substring(0, 15) + "..."; 
 			      	  });
 					editing = false;
@@ -467,7 +472,13 @@ function display_graph(json_data) {
       	  .attr("dx", 18)
       	  .attr("dy", ".9em")
       	  .text(function(d) { 
-      		return d.text.substring(0, 15) + "..."; 
+      	  	if (d.text == "") {
+      	  		return "";
+      	  	} else if (d.text.indexOf("<p>") == 0) {
+      	  		return d.text.substring(3, 18) + "..."; 
+      	  	} else {
+      			return d.text.substring(0, 15) + "..."; 
+      		}
       	  });
 
 	  node.exit().transition()
