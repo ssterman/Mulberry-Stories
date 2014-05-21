@@ -82,6 +82,8 @@ function display_graph(json_data) {
 	    .attr("y1", 0)
 	    .attr("x2", 0)
 	    .attr("y2", 0);
+	drag_line
+	      .attr("class", "drag_line_hidden")
 
 	// get layout properties
 	var nodes = force.nodes();
@@ -417,7 +419,8 @@ function display_graph(json_data) {
 	              .attr("y1", mousedown_node.y)
 	              .attr("x2", mousedown_node.x)
 	              .attr("y2", mousedown_node.y);
-
+	           drag_line
+	      			.attr("class", "drag_line");
 	           console.log("drag line", drag_line);
 	           console.log(mousedown_node.x, mousedown_node.y);
 
