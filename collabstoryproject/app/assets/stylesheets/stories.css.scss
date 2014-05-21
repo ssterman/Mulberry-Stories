@@ -94,9 +94,27 @@ body {
 }
 
 
-.node_selected {
+.node_selected circle {
   fill: #ff7f0e;
   stroke: #ff7f0e;
+}
+
+.gnode text {
+	stroke: #bbbbbb;
+	font-size:10px;
+}
+
+.node_selected text {
+	stroke: #000000;
+}
+
+.node_non_selected text {
+	display:none;
+}
+
+.node_child circle {
+  fill: #ff7f0e;
+  stroke: #949494;
 }
 
 .drag_line {

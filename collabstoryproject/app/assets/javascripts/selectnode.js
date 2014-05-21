@@ -18,6 +18,7 @@ function display_graph(json_data) {
 	    mousedown_link = null,
 	    mousedown_node = null,
 	    mouseup_node = null;
+	    child_nodes = [];
 
 	// init svg
 	var outer = d3.select("#viscontainer")
@@ -69,8 +70,9 @@ function display_graph(json_data) {
 
 	// get layout properties
 	var nodes = force.nodes();
+	console.log(nodes);
 	var links = force.links();
-	var node = vis.selectAll(".node");
+	var node = vis.selectAll("g.gnode");
 	var link = vis.selectAll(".link");
 
 	redraw();
@@ -188,6 +190,15 @@ function display_graph(json_data) {
 		}
 	}
 
+	function drawSelectedNode(node) {
+		child_nodes = [];
+		links.forEach(function(link) {
+			if (link.source == node) {
+				child_nodes.push(link.target);
+			}
+		});
+	}
+
 	function mouseup() {
 	console.log('here');
 	  if (mousedown_node) {
@@ -204,10 +215,11 @@ function display_graph(json_data) {
 	        	addToSelectedArr(source);
 		    }
 
-		      // add node
-		      var point = d3.mouse(this);
-		      var node = {x: point[0], y: point[1], "id": id};
-		      var n = nodes.push(node);
+		    // add node
+		    var point = d3.mouse(this);
+		    var node = {x: point[0], y: point[1], "id": id};
+		    console.log(node);
+		    var n = nodes.push(node);
 
 
 	        var target = node;
@@ -223,6 +235,8 @@ function display_graph(json_data) {
 	      
 	      // add link to mousedown node
 	      links.push({source: mousedown_node, target: node});
+	      console.log(node);
+	      console.log("wtf");
 	    }
 	    console.log('redrawing');
 	    redraw();
@@ -238,21 +252,74 @@ function display_graph(json_data) {
 	}
 
 	function tick() {
+	  //console.log("tick");
+	  /*link.attr("x1", function(d) { 
+	  	if (isNaN(d.source.x)) {
+	  		console.log("accepted");
+	  		d.source.x = 250;
+	  		return 250;
+	  	}
+	  	else return d.source.x; 
+	  })
+	      .attr("y1", function(d) { 
+
+	        if (isNaN(d.source.y)) {
+	        	d.source.y = 250;
+	  			return 250;
+	  		}
+	      	else return d.source.y; 
+	      })
+	      .attr("x2", function(d) { 
+	        if (isNaN(d.target.x)) {
+	        	d.target.x = 250;
+	  			return 250;
+	  		}	      	
+	      	else return d.target.x; 
+	      })
+	      .attr("y2", function(d) { 
+	        if (isNaN(d.target.y)) {
+	        	d.target.y = 250;
+	  			return 250;
+	  		}
+	      	else return d.target.y; 
+	      });
+        
+
+	  node.attr("transform", function(d) { 
+	  	  var x_val = 250;
+	  	  var y_val = 250;
+	  	  if (!isNaN(d.x)) {
+	  	  	x_val = d.x;
+	  	  } else {
+	  	  	d.x = x_val;
+	  	  }
+	  	  if (!isNaN(d.y)) {
+	  	  	y_val = d.y;
+	  	  } else {
+	  	  	d.y = y_val;
+	  	  }
+    	  return 'translate(' + [x_val, y_val] + ')'; 
+	  });*/
 	  link.attr("x1", function(d) { return d.source.x; })
 	      .attr("y1", function(d) { return d.source.y; })
 	      .attr("x2", function(d) { return d.target.x; })
 	      .attr("y2", function(d) { return d.target.y; });
-
-	  node.attr("cx", function(d) { return d.x; })
-	      .attr("cy", function(d) { return d.y; });
+	      console.log("ticked");
+	  /*node.attr("cx", function(d) { return d.x; })
+	      .attr("cy", function(d) { return d.y; });*/
+	   node.attr("transform", function(d) { 
+	   		console.log("addressed");
+    		return 'translate(' + [d.x, d.y] + ')'; 
+			});
 	}
 
 	// redraw force layout
 	function redraw() {
 
-	  link = link.data(links);
+	  //link = link.data(links);
+	  link = vis.selectAll(".link").data(links);
 
-	  link.enter().insert("line", ".node")
+	  link.enter().insert("line", "g.gnode")
 	      .attr("class", "link")
 		  .attr("marker-end", "url(#arrowhead)")
 		  // .attr("d", diagonal)
@@ -269,10 +336,12 @@ function display_graph(json_data) {
 
 	  // link
 	  //   .classed("link_selected", function(d) { return d === selected_link; });
-
-	  node = node.data(nodes);
+	  //node = node.data(nodes);
+	  node = vis.selectAll("g.gnode").data(nodes);
+	  opened_node = node.enter().append("g").classed("gnode", true);
 	  count = 1;
-	  node.enter().insert("circle")
+	  //node.enter().append("g").classed("gnode", true).insert("circle")
+	  opened_node.insert("circle")
 	      .attr("class", "node")
 	      .style("fill", function(d) { 
 		  		 if (d.truth == true) {
@@ -284,14 +353,6 @@ function display_graph(json_data) {
 		  	.attr("fixed", function(d){
 		  		if (d.truth == true) {
 		  			d.fixed = true;    //this is kinda hacky, but works
-		  			/*d.x = d.id*20;
-		  			//this y calc is super hacky and needs to change
-		  			var y_height = height*d.truth_height/2 + (50 * count);
-		  			count += 1;
-		  			//console.log(y_height);
-		  			d.y = y_height; 
-		  			d.px = d.id*20;
-		  			d.py = y_height; */
 
 		  			count += 1;
 		  			d.y = (100 * count) - 150;
@@ -317,6 +378,7 @@ function display_graph(json_data) {
 	          	// selected_id = selected_node.id;
 
 	          	addToSelectedArr(mousedown_node);
+	          	drawSelectedNode(mousedown_node);
 		       
 	          }
 	          // selected_link = null; 
@@ -352,6 +414,9 @@ function display_graph(json_data) {
 
 	            // add link
 	            var link = {source: mousedown_node, target: mouseup_node};
+	            console.log("here");
+	            console.log(mouseup_node);
+	            console.log("wtf");
 	            $("#link_source").val(mousedown_node.id);
 	            $("#link_target").val(mouseup_node.id);
 	            links.push(link);
@@ -371,6 +436,13 @@ function display_graph(json_data) {
 	      .ease("elastic")
 	      .attr("r", 15);
 
+	     opened_node.insert("text")
+      	  .attr("dx", 18)
+      	  .attr("dy", ".9em")
+      	  .text(function(d) { 
+      		return d.text.substring(0, 15) + "..."; 
+      	  });
+
 	  node.exit().transition()
 	      .attr("r", 0)
 	    .remove();
@@ -378,7 +450,19 @@ function display_graph(json_data) {
 	  node
 	    .classed("node_selected", function(d) { //return d === selected_node; });
 	    		return (selected_node_arr.indexOf(d) != -1);
-	    	});
+	  });
+	  node
+	    .classed("node_non_selected", function(d) { //return d === selected_node; });
+	    		return (selected_node_arr.indexOf(d) == -1 && child_nodes.indexOf(d) < 0);
+	  });
+	  node
+	    .classed("node_child", function(d) { 
+	    	if (child_nodes.indexOf(d) >= 0) {
+	    		return true;
+	    	} else {
+	    		return false;
+	    	}
+	  });
 
 	  if (d3.event) {
 	    // prevent browser's default behavior
