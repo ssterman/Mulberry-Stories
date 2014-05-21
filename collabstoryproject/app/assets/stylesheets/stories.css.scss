@@ -278,3 +278,7 @@ input[id='summary_field'] {
 	text-rendering: optimizeLegibility;
 
 }
+
+.write_btn:focus {
+	outline:none;
+}
