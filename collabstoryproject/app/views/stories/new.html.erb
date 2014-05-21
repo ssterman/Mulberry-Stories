@@ -1,8 +1,8 @@
 
 
 			<%= form_for(@story, :url => {:controller => "stories", :action => "create"}) do |f| %>
-			  	<%=f.text_field :title, id: "title_field", value: "Title Here"%>
-			  	<%=f.text_field :summary, id: "summary_field", value: "Summary Here" %> 		
+			  	<%=f.text_field :title, id: "title_field"%>
+			  	<%=f.text_field :summary, id: "summary_field" %> 		
 				<%= f.radio_button(:genre, "fiction") %>
 				<%= f.label(:genre_fiction, "fiction") %>
 				<%= f.radio_button(:genre, "non-fiction") %>
@@ -37,4 +37,6 @@
 		// 		count += 1;
 		// 	}
 
+     	$("#title_field").attr("placeholder", "Title");
+     	$("#summary_field").attr("placeholder", "Summary");
 		</script>

@@ -45,11 +45,4 @@
 	$("#error_msg").hide();
 	$("#submit_storyID").val(<%=@story.id %>);
 	$("#submit_userID").val(<%=session[:id]%>);
-	$('.placeholder').on('input', function(){
-    if ($(this).text().length > 0) {
-        $(this).removeClass('placeholder');
-    } else {
-        $(this).addClass('placeholder');
-    }
-});
 </script>

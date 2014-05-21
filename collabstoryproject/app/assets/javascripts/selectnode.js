@@ -5,6 +5,17 @@ var currLink = null;
 
 //drag to add reference: http://bl.ocks.org/benzguo/4370043
 //arrows reference: http://logogin.blogspot.com/2013/02/d3js-arrowhead-markers.html
+function init_placeholder() {
+	$("#submit_text_area").addClass('placeholder');
+	$('.placeholder').on('input', function(){
+	    if ($(this).text().length > 0) {
+	        $(this).removeClass('placeholder');
+	    } else {
+	        $(this).addClass('placeholder');
+	    }
+	});
+}
+
 function display_graph(json_data) {
 	$("#submit_text_area").empty(); // Must empty the text area on load or else it has a 
 									// fucking weird phantom value of 4.
@@ -109,7 +120,7 @@ function display_graph(json_data) {
 	function showEditScreen(source, target) {
 		//var read_area = document.getElementById("read");
 		//read_area.innerHTML = "You just created a node with id " + target.id + ". You may edit the node below and then save it.";
-		editing = true;
+		init_placeholder();
 		$("#write").show();
 		$("#submit_text_area").focus();
 		$("#submit_sourceID").val(source.id);
