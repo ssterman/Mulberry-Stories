@@ -161,7 +161,9 @@ function display_graph(json_data) {
 	    	//show editing screen
 	        var id = nodes.length + 1;
 	        var source = mousedown_node;
-	        selected_node_arr.push(source);
+	        if (selected_node_arr.indexOf(source) == -1) {
+		        selected_node_arr.push(source);
+		    }
 
 		      // add node
 		      var point = d3.mouse(this);
