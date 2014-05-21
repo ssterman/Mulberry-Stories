@@ -63,6 +63,7 @@ function display_graph(json_data) {
 	// line displayed when dragging new nodes
 	var drag_line = vis.append("line")
 	    .attr("class", "drag_line")
+	    .attr("stroke-width", 3)
 	    .attr("x1", 0)
 	    .attr("y1", 0)
 	    .attr("x2", 0)
@@ -70,7 +71,7 @@ function display_graph(json_data) {
 
 	// get layout properties
 	var nodes = force.nodes();
-	console.log(nodes);
+	// console.log(nodes);
 	var links = force.links();
 	var node = vis.selectAll("g.gnode");
 	var link = vis.selectAll(".link");
@@ -103,6 +104,7 @@ function display_graph(json_data) {
 	      .attr("y1", mousedown_node.y)
 	      .attr("x2", d3.mouse(this)[0])
 	      .attr("y2", d3.mouse(this)[1]);
+	      console.log(drag_line);
 	}
 
 	function showEditScreen(source, target) {
@@ -118,10 +120,10 @@ function display_graph(json_data) {
 
 	//constraints on multiselect paths
 	function addToSelectedArr() {
-		var directChild = [];
 		var switchChild = [];
 
-		//if not a link between mousdown node and last node in array, clear array then add MDN
+		//checks for a link between mousedown node and last node in array;
+		//if not, then clear array then add MDN
       	var length = selected_node_arr.length;
       	var index;
       	var switchChild = links.filter(function (d) {
@@ -137,10 +139,9 @@ function display_graph(json_data) {
 	    //if this is an alternate child on the current branch
 	    //replace the current child with the new child
       	if (switchChild.length != 0) {
-      		//selected_node_arr[length-1] = mousedown_node;
       		removeFromSelectedArr(index + 1);
-      		console.log("index", index);
       		selected_node_arr.push(mousedown_node);
+
       	//if there's a gap in the tree, delete everything up
       	//to here and start again; may not be optimal behavior
         } else {
@@ -179,7 +180,7 @@ function display_graph(json_data) {
 			    var node_formatted = node_text.replace(/\n/g, '<br />');
 				read_area.innerHTML += "<p>" + node_formatted + "</p>";
 				$("#write").hide();
-				console.log("ajax success", node_text);
+				// console.log("ajax success", node_text);
 				selected_node.text = node_formatted;
 				editing = false;
 			  }
@@ -197,9 +198,10 @@ function display_graph(json_data) {
 	}
 
 	function mouseup() {
-	console.log('here');
+	// console.log('here');
 	  if (mousedown_node) {
 	    // hide drag line
+	    console.log("hiding drag line");
 	    drag_line
 	      .attr("class", "drag_line_hidden")
 
@@ -215,7 +217,7 @@ function display_graph(json_data) {
 
 	        // add node
 	        var point = d3.mouse(this);
-	        var node = {x: point[0], y: point[1], "id": id};
+	        var node = {x: point[0], y: point[1], "id": id, "text": ""};
 	        var n = nodes.push(node);
 
 	        var target = node;
@@ -226,16 +228,12 @@ function display_graph(json_data) {
 	        selected_node = node;
 	        addToSelectedArr(node);
 	      	showEditScreen(source, target);
-
-	      // select new node
-	      // selected_node = node;
-	      // selected_node_arr.push(node);
-	      //selected_link = null;
 	      
 	      // add link to mousedown node
 	      links.push({source: mousedown_node, target: node});
-	      console.log(node);
-	      console.log("wtf");
+	      console.log("pushing link: ", mousedown_node, node);
+	      // console.log(node);
+	      // console.log("wtf");
 
 	    }
 	    console.log('redrawing');
@@ -304,11 +302,11 @@ function display_graph(json_data) {
 	      .attr("y1", function(d) { return d.source.y; })
 	      .attr("x2", function(d) { return d.target.x; })
 	      .attr("y2", function(d) { return d.target.y; });
-	      console.log("ticked");
+	      // console.log("ticked");
 	  /*node.attr("cx", function(d) { return d.x; })
 	      .attr("cy", function(d) { return d.y; });*/
 	   node.attr("transform", function(d) { 
-	   		console.log("addressed");
+	   		// console.log("addressed");
     		return 'translate(' + [d.x, d.y] + ')'; 
 			});
 	}
@@ -363,7 +361,7 @@ function display_graph(json_data) {
 		  	})
 	      .on("mousedown", 
 	        function(d) { 
-
+	        	console.log("inner mousedown");
 	          mousedown_node = d;
 	          //index_node is an indicator of whether or not 
 	          //this node is already in the selected_arr or not
@@ -386,6 +384,9 @@ function display_graph(json_data) {
 	              .attr("x2", mousedown_node.x)
 	              .attr("y2", mousedown_node.y);
 
+	           console.log("drag line", drag_line);
+	           console.log(mousedown_node.x, mousedown_node.y);
+
 	          redraw(); 
 	        })
 	      .on("mousedrag",
@@ -403,12 +404,12 @@ function display_graph(json_data) {
 
 	            // add link
 	            var link = {source: mousedown_node, target: mouseup_node};
-	            console.log("here");
-	            console.log(mouseup_node);
-	            console.log("wtf");
+	            
+	            //this handles links between exisitng nodes
 	            $("#link_source").val(mousedown_node.id);
 	            $("#link_target").val(mouseup_node.id);
 	            links.push(link);
+	            console.log("pushing other link: ", mousedown_node, mouseup_node);
 
 	            redraw();
 	            $("#new_link_connection").submit();
