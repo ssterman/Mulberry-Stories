@@ -121,6 +121,7 @@ function display_graph(json_data) {
 		//var read_area = document.getElementById("read");
 		//read_area.innerHTML = "You just created a node with id " + target.id + ". You may edit the node below and then save it.";
 		init_placeholder();
+		editing = true;
 		$("#write").show();
 		$("#submit_text_area").focus();
 		$("#submit_sourceID").val(source.id);
