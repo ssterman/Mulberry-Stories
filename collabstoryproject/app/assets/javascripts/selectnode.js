@@ -7,7 +7,7 @@ var currLink = null;
 function display_graph(json_data) {
 	var width = 500;
 	var height = 500;
-	var selected_id;
+	// var selected_id;
 
 	var color = d3.scale.category20();
 
@@ -116,6 +116,22 @@ function display_graph(json_data) {
 	}
 
 
+	function addToSelectedArr() {
+		//if not a link between mousdown node and last node in array, clear array then add MDN
+      	var parent = selected_node_arr[selected_node_arr.length - 1];
+      	var child = mousedown_node;
+      	var matching = links.filter(function (d) {
+      		console.log(d.target, child, d.source, parent);
+      		return d.target == child && d.source == parent;
+      	});
+      	console.log(matching, "matching");
+      	//if the parent is not included, clear the selection
+      	if (matching.length == 0) {
+        	selected_node_arr = [];
+        }
+    	selected_node_arr.push(mousedown_node);
+	}
+
 
 	function save_to_db(target) {
 		this.submit_el = document.getElementById("submit_node");
@@ -162,7 +178,7 @@ function display_graph(json_data) {
 	        var id = nodes.length + 1;
 	        var source = mousedown_node;
 	        if (selected_node_arr.indexOf(source) == -1) {
-		        selected_node_arr.push(source);
+	        	addToSelectedArr(source);
 		    }
 
 		      // add node
@@ -178,8 +194,8 @@ function display_graph(json_data) {
 
 
 	      // select new node
-	      selected_node = node;
-	      selected_node_arr.push(node);
+	      // selected_node = node;
+	      // selected_node_arr.push(node);
 	      //selected_link = null;
 	      
 	      // add link to mousedown node
@@ -275,8 +291,10 @@ function display_graph(json_data) {
 	          }
 	          else {
 	          	selected_node = mousedown_node;
-	          	selected_node_arr.push(mousedown_node); 
-	          	selected_id = selected_node.id;
+	          	// selected_id = selected_node.id;
+
+	          	addToSelectedArr(mousedown_node);
+		       
 	          }
 	          // selected_link = null; 
 
