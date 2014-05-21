@@ -79,8 +79,7 @@ function display_graph(json_data) {
 	function updateRead() {
 			var read_area = document.getElementById("read");
 			var read_text = "";
-			var selected_node_arr_len = selected_node_arr.length;
-			for (i = 0; i < selected_node_arr_len; i++) {
+			for (i = 0; i < selected_node_arr.length; i++) {
 				read_text += "<p>" + selected_node_arr[i].text + "</p>";
 			}
 			//read_area.innerHTML = mousedown_node.text;
@@ -116,20 +115,44 @@ function display_graph(json_data) {
 	}
 
 
+	//constraints on multiselect paths
 	function addToSelectedArr() {
+		var directChild = [];
+		var switchChild = [];
+
 		//if not a link between mousdown node and last node in array, clear array then add MDN
-      	var parent = selected_node_arr[selected_node_arr.length - 1];
-      	var child = mousedown_node;
-      	var matching = links.filter(function (d) {
-      		console.log(d.target, child, d.source, parent);
-      		return d.target == child && d.source == parent;
-      	});
-      	console.log(matching, "matching");
-      	//if the parent is not included, clear the selection
-      	if (matching.length == 0) {
+      	var length = selected_node_arr.length;
+      	var index = length - 1;
+      	//make sure indices are within bounds
+      	if (index > -1) {
+	      	var parent = selected_node_arr[index];
+	      	var child = mousedown_node;
+	      	//using d3 filters to find a link between current node
+	      	//and what ought to be its parent; returns an array
+	      	var directChild = links.filter(function (d) {
+	      		return d.target == child && d.source == parent;
+	      	});
+	    }
+	    index = length - 2;
+      	if (index > -1) {
+	      	parent = selected_node_arr[index];
+	      	var switchChild = links.filter(function (d) {
+	      		return d.target == child && d.source == parent;
+	      	});
+	    }
+	    //if this is an alternate child on the current branch
+	    //replace the current child with the new child
+      	if (switchChild.length != 0) {
+      		selected_node_arr[length-1] = mousedown_node;
+      	}
+      	//if not a switch case, and this isn't a direct child
+      	//clear the selection
+      	else if (directChild.length == 0) {
         	selected_node_arr = [];
+        	selected_node_arr.push(mousedown_node);
+        } else {
+        	selected_node_arr.push(mousedown_node);
         }
-    	selected_node_arr.push(mousedown_node);
 	}
 
 
