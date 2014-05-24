@@ -11,7 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140510051712) do
+ActiveRecord::Schema.define(version: 20140524201255) do
+
+  create_table "constraints", force: true do |t|
+    t.integer  "story_id"
+    t.string   "title"
+    t.string   "text"
+    t.integer  "constraint_num"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "links", force: true do |t|
     t.integer  "story_id"
@@ -27,7 +36,10 @@ ActiveRecord::Schema.define(version: 20140510051712) do
     t.integer  "story_id"
     t.integer  "weight"
     t.boolean  "truth"
-    t.integer  "truth_height", default: 0
+    t.integer  "constraint_num"
+    t.integer  "constraint_id"
+    t.integer  "annotation"
+    t.integer  "truth_height",   default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end

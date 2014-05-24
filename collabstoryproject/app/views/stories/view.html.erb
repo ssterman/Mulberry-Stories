@@ -22,7 +22,10 @@
 				<%= hidden_field_tag('submit_sourceID', :value => "some value" ) %>
 				<%= hidden_field_tag('submit_storyID', :value => "some value") %>
 				<%= hidden_field_tag('submit_userID', :value => "some value") %>
+				<%= hidden_field_tag('submit_truth', :value => "false") %>
+				<%= hidden_field_tag('submit_constraint_num', :value => 0) %>
 				<span id="error_msg">Empty passages don't add much!</span>
+				<!--<span id="tagline" contenteditable="true" class="placeholder"></span>-->
 				<button type="button" id="submit_node" class="write_btn">Publish</button>
 				<button type="button" id="cancel_btn" class="write_btn">Delete</button>				
 
@@ -41,6 +44,7 @@
 <% end %>
 
 <script>
+	$("#tagline").attr("placeholder", "Tagline");
 	display_graph(<%=raw @json_data %>);
 	$("#error_msg").hide();
 	$("#submit_storyID").val(<%=@story.id %>);

@@ -6,6 +6,9 @@ class CreateNodes < ActiveRecord::Migration
   		t.integer :story_id
   		t.integer :weight  #use to size nodes based on votes/views/something
   		t.boolean :truth   #is it a truth node
+      t.integer :constraint_num
+      t.integer :constraint_id
+      t.integer :annotation
   		t.integer :truth_height, default: 0 #determines the "chronological order" of truth nodes
       t.timestamps
     end

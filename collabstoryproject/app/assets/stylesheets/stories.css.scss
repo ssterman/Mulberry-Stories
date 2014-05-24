@@ -173,8 +173,14 @@ body {
 	cursor:pointer;
 }
 
-.placeholder:after {
+#submit_text_area.placeholder:after {
 	content: "Continue the story...";
+	position: absolute;
+	color:#a9a9a9;
+}
+
+#tagline.placeholder:after {
+	content: "Plot tagline";
 	position: absolute;
 	color:#a9a9a9;
 }
@@ -231,10 +237,19 @@ input[id='summary_field'] {
     width: 70px;
 }
 
+#first_node {
+	margin-top:20px;
+	margin-bottom:20px;
+}
+
 .truth_input {
 	font-family: 'Lato', sans-serif;
 	width: 80%;
 	height: 120px;
+}
+
+.truth_title {
+	display:block;
 }
 
 #error_msg {
@@ -254,6 +269,10 @@ input[id='summary_field'] {
 	text-align: center;
 }
 
+#tagline {
+	margin-top: 3px;
+	display: inline-block;
+}
 .write_btn {
 	height: 34px;
 	float: right;

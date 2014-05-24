@@ -4,7 +4,8 @@ class LoadData < ActiveRecord::Migration
 
   	us = User.new(:username => "Tester1", :password => "abcd", :first_name => "a", :last_name => "b")
   	us2 = User.new(:username => "Tester2", :password => "efgh", :first_name => "c", :last_name => "d")
-
+    us3 = User.new(:username => "skipper", :password => "pickles", :first_name => "Jess", :last_name => "L")
+    us3.save
 
   	ts1 = Story.new(:summary => "Stories about football, from spectators, players, fans, etc.", :title => "Football at Stanford")
   	ts1.user = us
@@ -56,6 +57,7 @@ class LoadData < ActiveRecord::Migration
   	n4.user = us2
   	n4.story = ts2
   	n4.truth = true
+    n4.constraint_num = 1
   	n4.truth_height = 0
   	n4.save(:validate => false)
 
@@ -63,6 +65,7 @@ class LoadData < ActiveRecord::Migration
   	n5.user = us2
   	n5.story = ts2
   	n5.truth = false
+    n5.constraint_num = 1
   	n5.save(:validate => false)
 
   	n6 = Node.new(:text => "Ron turned on them, sword in hand, and Harry saw nothing but the scarlet in Ron's eyes. Harry whirled around, slipping in the snow,
@@ -70,12 +73,14 @@ class LoadData < ActiveRecord::Migration
   	n6.user = us2
   	n6.story = ts2
   	n6.truth = false
+    n6.constraint_num = 1
   	n6.save(:validate => false)
 
   	n7 = Node.new(:text => "Slowly, Harry walked back to him, hardly knowing what to say or do. Ron was breathing heavily: His eyes were no longer red at all, but their normal blue: they were also wet.")
   	n7.user = us2
   	n7.story = ts2
   	n7.truth = false
+    n7.constraint_num = 2
   	n7.save(:validate => false)
 
   	n8 = Node.new(:text => "On the ground in front of them, Ron's face filled with anguish. he raised the sword high, his arms shaking.
@@ -86,12 +91,14 @@ class LoadData < ActiveRecord::Migration
   	n8.user = us2
   	n8.story = ts2
   	n8.truth = true
+    n8.constraint_num = 2
   	n8.save(:validate => false)
 
   	n9 = Node.new(:text => "\"She's like my sister,\" Harry started. \"I love her like a sister and I reckon that she feels the same way about me. It's always been like that. I thought you knew.\"")
   	n9.user = us2
   	n9.story = ts2
   	n9.truth = false
+    n9.constraint_num = 2
   	n9.truth_height = 1
   	n9.save(:validate => false)
 
@@ -99,6 +106,7 @@ class LoadData < ActiveRecord::Migration
     n11.user = us2
     n11.story = ts2
     n11.truth = false
+    n11.constraint_num = 2
     n11.truth_height = 1
     n11.save(:validate => false)
 

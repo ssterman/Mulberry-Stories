@@ -5,13 +5,21 @@ class NodesController < ApplicationController
 		logger.info "The post was saved and now the user is going to be redirected..."
 		parameters = node_params
 
+		parent_node = Node.find_by_id(parameters[:source])
 
 		new_node = Node.new
 		new_node.text = simple_format(parameters[:text])
 		new_node.user = User.find_by_id(parameters[:userid])
-  		new_node.truth = false
   		new_node.truth_height = 0
   		new_node.story = Story.find_by_id(parameters[:storyid])
+
+  		if parameters[:truth] == "true"
+  		  	new_node.truth = true
+  		  	new_node.constraint_num = parent_node.constraint_num + 1
+  		else
+  			new_node.truth = false
+  			new_node.constraint_num = parent_node.constraint_num
+
   		new_node.save
 
   		new_node.story.nodes << new_node
@@ -34,7 +42,7 @@ class NodesController < ApplicationController
 	end
 
 	 def node_params
-	 	params.permit(:text, :source, :storyid, :userid)
+	 	params.permit(:text, :source, :storyid, :userid, :truth)
 	 end
 
 end

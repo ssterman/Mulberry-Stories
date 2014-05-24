@@ -5,6 +5,8 @@ var currLink = null;
 
 //drag to add reference: http://bl.ocks.org/benzguo/4370043
 //arrows reference: http://logogin.blogspot.com/2013/02/d3js-arrowhead-markers.html
+
+
 function init_placeholder() {
 	$("#submit_text_area").addClass('placeholder');
 	$('.placeholder').on('input', function(){
@@ -19,7 +21,7 @@ function init_placeholder() {
 function display_graph(json_data) {
 	$("#submit_text_area").empty(); // Must empty the text area on load or else it has a 
 									// fucking weird phantom value of 4.
-
+	console.log(json_data);
 	var width = 500;
 	var height = 500;
 
@@ -131,7 +133,9 @@ function display_graph(json_data) {
 		$("#write").show();
 		$("#submit_text_area").focus();
 		$("#submit_sourceID").val(source.id);
+		$("#submit_constraint_num").val(source.constraint_num);
 		$("#error_msg").hide();
+		$("#tagline").show();
 		save_to_db();
 	}
 
@@ -183,6 +187,7 @@ function display_graph(json_data) {
 			var url = "/nodes/save";
 			var node_text = $("#submit_text_area").html();
 			if (node_text.length === 0) {
+				$("#tagline").hide();
 				$("#error_msg").show();
 				//remove_node_reset_writebox();
 			} else {
@@ -191,6 +196,7 @@ function display_graph(json_data) {
 				content += "&source=" + $("#submit_sourceID").val();
 				content += "&storyid=" + $("#submit_storyID").val();
 				content += "&userid=" + $("#submit_userID").val();
+				content += "&truth=" + $("#submit_truth").val();
 
 				$.ajax({ url: url,
 				  type: 'POST',
@@ -255,7 +261,7 @@ function display_graph(json_data) {
 
 	        // add node
 	        var point = d3.mouse(this);
-	        var node = {x: point[0], y: point[1], "id": id, "text": ""};
+	        var node = {x: point[0], y: point[1], "id": id, "text": "", "constraint_num": mousedown_node.constraint_num};
 	        var n = nodes.push(node);
 
 	        var target = node;
