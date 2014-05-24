@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140524201255) do
+ActiveRecord::Schema.define(version: 20140505051138) do
 
   create_table "constraints", force: true do |t|
     t.integer  "story_id"

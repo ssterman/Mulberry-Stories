@@ -17,6 +17,13 @@ class LoadData < ActiveRecord::Migration
     ts2.genre = "fiction";
   	ts2.save(:validate => false)
 
+    ts3 = Story.new(:summary =>"Harry finally has the horcrux, but...", :title => "Thirteen")
+    ts3.user = us3
+    ts3.genre = "fiction"
+    ts3.save(:validate => false)
+
+
+
     n1 = Node.new(:text => "When freshmen arrive at Stanford, the very first football game of the season is 
       a big deal.  The dorms take all their students, with chanting and dorm flags, to go see the game.")
   	n1.user = us
@@ -117,6 +124,18 @@ class LoadData < ActiveRecord::Migration
     n12.truth_height = 1
     n12.save(:validate => false)
 
+    n13 = Node.new(:text => "<p>\"LET'S GO!\" Harry yelled. He seized Hermione by the hand and Ron by the arm and turned on the stop.</p>
+      <p>Darkness engulfed them, along with the sensation of compressing hands, but something was wrong.... Hermione's hand seemed to be 
+      sliding out of his grip....</p>
+      <p>He wondered whether he was going to suffocate; he could not breathe or see and the only solid things in the world were Ron's arm and Hermione's fingers, which were slowly slipping away....</p>
+      <p>And then he saw the door to number twelve, Grimmauld Place, with its serpent door knocker, but before he could draw breath, there was a scream and a flash of purple light: 
+      Hermione's hand was suddenly vicelike upon his and everything went dark again.</p>")
+    n13.user = us3
+    n13.truth = false
+    n13.truth_height = 0
+    n13.story = ts3
+    n13.save(:validate => false)
+
     l1 = Link.new(:story_id => 1, :source => 1, :target => 2)
     l1.save(:validate => false)
 
@@ -143,6 +162,15 @@ class LoadData < ActiveRecord::Migration
     
     l11 = Link.new(:story_id => 2, :source => 8, :target => 11)
     l11.save(:validate => false)
+
+    c1 = Constraint.new(:story_id => 3, :title => "Quiet House", :text => "Harry wakes up in a quiet house. It smells like wood burning.", :constraint_num => 1 )
+    c1.save
+
+    c2 = Constraint.new(:story_id => 3, :title => "Ron's Decision", :text => "Ron is conflicted, but knows he has to decide--he chooses Hermione.", :constraint_num => 2 )
+    c2.save
+
+    c3 = Constraint.new(:story_id => 3, :title => "Turn-back", :text => "When he turns around, Harry realizes that they've taken him back; all the way back. He is standing in the remains of 4 Privet Drive, but he has nothing with him--no wand, no broom, no money.", :constraint_num =>3 )
+    c3.save
 
   end
 
