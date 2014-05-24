@@ -4,6 +4,7 @@
 
 body {
 	font-family: 'Lato', sans-serif;
+	font-weight:300;
 }
 
 
@@ -32,10 +33,12 @@ body {
 
 .title {
 	text-align: center;
+	font-weight:300;
 }
 
 .summary {
 	text-align: center;
+	font-weight:300;
 }
 
 .break {
@@ -46,6 +49,56 @@ body {
 }
 
 .vis {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	right: 0px;
+	top:40px;
+}
+
+#constraint-bar {
+	width: 100%;
+	right: 0px;
+	position: absolute;
+	height: 40px;
+	
+}
+
+/* constraint bar styles */
+
+.constraint-tabs {
+	text-align: center; 
+	padding:0px;
+}
+
+.constraint-tabs-list {
+	width: 100%;
+	text-align: center;
+	padding:0px;
+	font-weight:700;
+	font-size:11px;
+}
+
+.constraint {
+	display: inline-block;
+	padding-bottom: 10px;
+	list-style-type: none;
+	border-bottom: 2px solid black;
+	float:left;
+	width:20%;
+	opacity: 0.1;
+}
+
+.constraint-finished {
+    opacity: 1;
+    color: rgb(31, 119, 180);
+    border-color: rgb(31, 119, 180);
+}
+
+.constraint-selected {
+}
+
+#vis-wrapper {
 	width: 49%;
 	height: 100%;
 	border-style: solid;
@@ -53,7 +106,7 @@ body {
 	border-top-width: 0px;
 	border-color: #F0F0F0;
 	position: absolute;
-	right: 0px;
+	right: 0px;	
 }
 
 #rwcontainer {

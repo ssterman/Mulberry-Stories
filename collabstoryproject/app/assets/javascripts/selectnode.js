@@ -135,6 +135,13 @@ function display_graph(json_data) {
 		save_to_db();
 	}
 
+	function updateConstraintBar(index) {
+		$(".constraint").removeClass("constraint-finished");
+		$(".constraint").removeClass("constraint-selected");
+		$( ".constraint-tabs-list li:eq(" + index + ")" ).addClass("constraint-selected");
+		$( ".constraint-selected" ).prevAll().addClass("constraint-finished");
+
+	}
 
 	//constraints on multiselect paths
 	function addToSelectedArr() {
@@ -166,12 +173,19 @@ function display_graph(json_data) {
         	selected_node_arr = [];
         	selected_node_arr.push(mousedown_node);
         }
+        updateConstraintBar(3); // later mousedown_node.constraint
 	}
 
 	//removes specified node and all its children
 	function removeFromSelectedArr(index) {
 		var removeNum = selected_node_arr.length - index;
 	    selected_node_arr.splice(index, removeNum);
+	    var len = selected_node_arr.length;
+	    if (len > 0) {
+	    	updateConstraintBar(2); // selected_node_arr[len - 1].constraint
+	    } else {
+	    	updateConstraintBar(0);
+	    }
 	}
 
 	function save_to_db(target) {

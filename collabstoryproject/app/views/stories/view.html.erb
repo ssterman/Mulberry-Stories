@@ -6,9 +6,7 @@
 	<div class="break"></div>
 
 	<!-- the container for visualization -->
-	<div class="vis" id="viscontainer">
 
-	</div>
 
 	<!-- the read/write interface; should only be able to edit your own nodes; until have users and logins, no editing allowed, only creating new nodes-->
 	<div id="rwcontainer">
@@ -36,6 +34,25 @@
 	  			<%=f.hidden_field :user_id, :value => session[:id] %>
 	  			<%=f.submit "Save" %>
 	  		<% end %>
+		</div>
+	</div>
+	<div id="vis-wrapper">
+		<div id="constraint-bar">
+
+		<nav class="constraint-tabs">
+			<ul class="constraint-tabs-list">
+				<li class="constraint">EVENT 1</li>
+				<li class="constraint">EVENT 2</li>
+				<li class="constraint">EVENT 3</li>
+				<li class="constraint">EVENT 4</li>
+				<li class="constraint">EVENT 5</li>
+			</ul>
+		</nav>
+
+		</div>
+
+		<div class="vis" id="viscontainer">
+
 		</div>
 	</div>
 <% end %>
