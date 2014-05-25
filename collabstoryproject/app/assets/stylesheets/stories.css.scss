@@ -374,6 +374,11 @@ input[id='summary_field'] {
 	cursor:pointer;
 }
 
+#write:hover #add_constraint{
+	display:block;
+	cursor:pointer;
+}
+
 #add_constraint::before {
 	font-family:feather;
 	font-size: 14px;
