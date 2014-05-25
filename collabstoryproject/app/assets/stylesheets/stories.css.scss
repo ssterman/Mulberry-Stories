@@ -335,7 +335,7 @@ input[id='summary_field'] {
 	display: inline-block;
 }
 .write_btn {
-	height: 34px;
+	height: 32px;
 	float: right;
 	margin-right: 8px;
 	line-height: 30px;
@@ -397,7 +397,7 @@ input[id='summary_field'] {
 	height: 40px;
 	padding: 0;
 	color: #7d878a;
-	background: #1a1c1d;
+	/*background: #1a1c1d;*/
 	position: fixed;
 	bottom: 0;
 	left: 0;
@@ -405,7 +405,7 @@ input[id='summary_field'] {
 	z-index: 900;
 	box-shadow: 0 -2px 8px rgba(0,0,0,0.2);
 	-webkit-transform: translateZ(0);
-	width:50%;
+	width:50.8%;
 }
 
 nav {
@@ -429,6 +429,7 @@ nav {
 
 .right {
 	float:right;
+	margin-top:4px;
 }
 
 .tag-label {
@@ -445,11 +446,16 @@ nav {
 	font-weight: normal;
 	font-style: normal;
 	vertical-align: -7%;
+	height:20px;
+	margin:auto 0;
 	text-transform: none;
 	speak: none;
 	line-height: 1;
 	-webkit-font-smoothing: antialiased;
 	content: "\e085";
+	vertical-align: 80%;
+	padding: 0 5px 0 0;
+	color: #7d878a;
 }
 .tag-input {
 	box-sizing: border-box;
@@ -470,10 +476,40 @@ nav {
 	float: left;
 }
 
+.tags-div {
+	position: relative;
+	display: inline-block;
+	vertical-align: middle;
+	width: auto;
+	height: 26px;
+	padding-left: 5px;
+	padding-bottom: 20px;
+	overflow-x: auto;
+	overflow-y: hidden;
+	white-space: nowrap;
+	-webkit-transition: width 0.2s linear;
+	-moz-transition: width 0.2s linear;
+	transition: width 0.2s linear;
+}
+
 .minus::before {
 	font-family:feather;
 	font-size: 14px;
 	color: rgba(0,0,0,0.4);
 	font-weight: bold;
 	content: "\e041";
+}
+
+#tag-input {
+	display: inline-block;
+	padding: 0;
+	line-height:1.2;
+	vertical-align: top;
+	font-size:14px;
+	font-family: Lato;
+	color: rgba(0,0,0,0.8);
+	font-weight: normal;
+	background: transparent;
+	border: none;
+	width:400px;
 }

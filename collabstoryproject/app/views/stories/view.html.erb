@@ -26,11 +26,7 @@
 				<%= hidden_field_tag('submit_storyID', :value => "some value") %>
 				<%= hidden_field_tag('submit_userID', :value => "some value") %>
 				<%= hidden_field_tag('submit_truth', :value => "false") %>
-				<%= hidden_field_tag('submit_constraint_num', :value => 0) %>
-				<span id="error_msg">Empty passages don't add much!</span>
-				<!--<span id="tagline" contenteditable="true" class="placeholder"></span>-->
-				<button type="button" id="submit_node" class="write_btn">Publish</button>
-				<button type="button" id="cancel_btn" class="write_btn">Delete</button>				
+				<%= hidden_field_tag('submit_constraint_num', :value => 0) %>		
 
 			<% end %>		
 		</div>
@@ -67,11 +63,16 @@
 		<nav>
 			<section id="tags" href="#" class="left">
 				<label class="tag-label" for="tags" title="Tags">
-					<span class="hidden">Tags</span>
+					<span class="hidden"></span>
+					<div class="tags-div" style="max_width:400px;"></div>
+					<input type="hidden" class="tags-holder" id="tags-holder">
+					<input class="tag-input" id="tag-input" type="text" maxLength="16" placeholder="Tagline ex. Harry chooses to fight">
 				</label>
 			</section>
 			<div class="right">
-
+				<span id="error_msg">Empty passages don't add much!</span>
+				<button type="button" id="submit_node" class="write_btn">Publish</button>
+				<button type="button" id="cancel_btn" class="write_btn">Delete</button>		
 			</div>
 		</nav>
 	</footer>
