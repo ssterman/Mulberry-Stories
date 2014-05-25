@@ -379,7 +379,7 @@ input[id='summary_field'] {
 	cursor:pointer;
 }
 
-#add_constraint::before {
+.plus::before {
 	font-family:feather;
 	font-size: 14px;
 	color: rgba(0,0,0,0.4);
@@ -387,7 +387,7 @@ input[id='summary_field'] {
 	content: "\e040";
 }
 
-#add_constraint {
+.plus {
 	display:none;
 	cursor:pointer;
 }
@@ -468,4 +468,12 @@ nav {
 }
 .left {
 	float: left;
+}
+
+.minus::before {
+	font-family:feather;
+	font-size: 14px;
+	color: rgba(0,0,0,0.4);
+	font-weight: bold;
+	content: "\e041";
 }

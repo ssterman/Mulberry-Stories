@@ -26,7 +26,15 @@ function display_graph(json_data) {
 	console.log(json_data);
 	
 	$("#add_constraint").click(function() {
-		alert("YO!");
+		if ($(this).hasClass("plus")) {
+			$("#submit_text_area2").show();
+			$(this).removeClass("plus");
+			$(this).addClass("minus");
+		} else {
+			$("#submit_text_area2").hide();
+			$(this).removeClass("minus");
+			$(this).addClass("plus");
+		}
 	});
 
 	var width = 500;
