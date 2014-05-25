@@ -361,6 +361,10 @@ input[id='summary_field'] {
 	src: url(feather-webfont.ttf);
 }
 
+#write:hover #add_constraint::before {
+	display:block;
+	cursor:pointer;
+}
 
 #add_constraint::before {
 	font-family:feather;
@@ -368,5 +372,11 @@ input[id='summary_field'] {
 	color: rgba(0,0,0,0.4);
 	font-weight: bold;
 	content: "\e040";
+	display:none;
+	cursor:pointer;
+}
 
+#add_constraint{
+
+	cursor:pointer;
 }
