@@ -8,7 +8,7 @@ var currLink = null;
 
 
 function init_placeholder() {
-	$("#submit_text_area").addClass('placeholder');
+	$(".editable_text").addClass('placeholder');
 	$('.placeholder').on('input', function(){
 	    if ($(this).text().length > 0) {
 	        $(this).removeClass('placeholder');
@@ -19,7 +19,7 @@ function init_placeholder() {
 }
 
 function display_graph(json_data) {
-	$("#submit_text_area").empty(); // Must empty the text area on load or else it has a 
+	$(".editable_text").empty(); // Must empty the text area on load or else it has a 
 									// fucking weird phantom value of 4.
 	console.log(json_data);
 	var width = 500;
@@ -131,7 +131,7 @@ function display_graph(json_data) {
 		init_placeholder();
 		editing = true;
 		$("#write").show();
-		$("#submit_text_area").focus();
+		$("#submit_text_area2").focus();
 		$("#submit_sourceID").val(source.id);
 		$("#submit_constraint_num").val(source.constraint_num);
 		$("#error_msg").hide();
@@ -246,7 +246,7 @@ function display_graph(json_data) {
 		nodes.pop();
 		links.pop();
 		redraw();
-		$("#submit_text_area").empty();
+		$(".editable_text").empty();
 		$("#write").hide();
 		editing = false;
 	}

@@ -14,10 +14,13 @@
 		<div id="read">
 		</div>
 		<div id="write">
-			<div id="submit_text_area" contenteditable="true" class="placeholder">
+			<div id="submit_text_area" class="editable_text" contenteditable="true" class="placeholder">
 
 			</div>
 			<div id="add_constraint"></div>
+			<div id="submit_text_area2" class="editable_text" contenteditable="true" class="placeholder">
+
+			</div>
 			<%= form_tag :html => {:id => 'write-box'} do %>
 				<%= hidden_field_tag('submit_sourceID', :value => "some value" ) %>
 				<%= hidden_field_tag('submit_storyID', :value => "some value") %>
