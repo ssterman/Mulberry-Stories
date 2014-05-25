@@ -40,6 +40,7 @@ function display_graph(json_data) {
 	$("#add_constraint").click(function() {
 		if ($(this).hasClass("plus")) {
 			$("#submit_text_area2").show();
+			$("#submit_text_area2").focus();
 			var cur_constraint = selected_node_arr.pop().constraint_num;
 			var intro_text = "<p>Plot twist challenge!</p>" + "<p style='font-weight:300'>" +
 				json_data.constraints[cur_constraint].title + ": " + 
@@ -236,12 +237,17 @@ function display_graph(json_data) {
 
 			var url = "/nodes/save";
 			var node_text = $("#submit_text_area").html();
+			if ($("#add_constraint").hasClass("minus")) {
+				node_text += " " + $("#submit_text_area2").html();
+			}
 			if (node_text.length === 0) {
 				$("#tagline").hide();
 				$("#error_msg").show();
 				//remove_node_reset_writebox();
 			} else {
+				console.log(node_text);
 				$("#submit_text_area").empty();
+				$("#submit_text_area2").empty();
 				var content = "text=" + node_text;
 				content += "&source=" + $("#submit_sourceID").val();
 				content += "&storyid=" + $("#submit_storyID").val();
