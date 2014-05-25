@@ -399,3 +399,15 @@ input[id='summary_field'] {
 	font-weight: bold;
 	content: "\e041";
 }
+
+#constraint_content {
+	position:relative;
+	top:0px;
+	left:30px;
+	width:93%;
+	display:none;
+	color: #1f77b4;
+	padding-bottom:13px;
+	font-family: 'Lato', sans-serif;
+	font-weight: 700;
+}
