@@ -19,7 +19,8 @@ class NodesController < ApplicationController
   		else
   			new_node.truth = false
   			new_node.constraint_num = parent_node.constraint_num
-
+  		end
+  		
   		new_node.save
 
   		new_node.story.nodes << new_node
