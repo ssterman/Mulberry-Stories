@@ -15,6 +15,7 @@
 		</div>
 		<div id="write">
 			<div id="submit_text_area" contenteditable="true" class="placeholder">
+				<span id="add_constraint"></span>
 			</div>
 			<%= form_tag :html => {:id => 'write-box'} do %>
 				<%= hidden_field_tag('submit_sourceID', :value => "some value" ) %>

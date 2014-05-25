@@ -354,3 +354,16 @@ input[id='summary_field'] {
 .write_btn:focus {
 	outline:none;
 }
+
+@font-face
+{
+	font-family: feather;
+	src: url(feather-webfont.ttf);
+}
+
+
+#add_constraint {
+	font-family:feather;
+	content: "\e040";
+
+}
