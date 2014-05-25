@@ -18,10 +18,17 @@ function init_placeholder() {
 	});
 }
 
+
+
 function display_graph(json_data) {
 	$(".editable_text").empty(); // Must empty the text area on load or else it has a 
 									// fucking weird phantom value of 4.
 	console.log(json_data);
+	
+	$("#add_constraint").click(function() {
+		alert("YO!");
+	});
+
 	var width = 500;
 	var height = 500;
 
