@@ -133,6 +133,7 @@ class LoadData < ActiveRecord::Migration
     n13.user = us3
     n13.truth = false
     n13.truth_height = 0
+    n13.constraint_num = 0
     n13.story = ts3
     n13.save(:validate => false)
 
