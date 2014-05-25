@@ -391,3 +391,81 @@ input[id='summary_field'] {
 	display:none;
 	cursor:pointer;
 }
+
+#publish-bar {
+	box-sizing: border-box;
+	height: 40px;
+	padding: 0;
+	color: #7d878a;
+	background: #1a1c1d;
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	z-index: 900;
+	box-shadow: 0 -2px 8px rgba(0,0,0,0.2);
+	-webkit-transform: translateZ(0);
+	width:50%;
+}
+
+nav {
+
+	color: #7d878a;
+}
+
+#tags {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	text-transform: none; /* All useless up until here */
+	padding: 10px 0 0 0;
+}
+
+#tags::after {
+
+}
+
+.right {
+	float:right;
+}
+
+.tag-label {
+	display: block;
+	float: left;
+	padding: 1px 8px 0 8px;
+	-webkit-transition: all 0.15s ease-out 0;
+	-moz-transition: all 0.15s ease-out 0;
+	transition: all 0.15s ease-out 0;
+}
+
+.tag-label::before {
+	font-family: feather;
+	font-weight: normal;
+	font-style: normal;
+	vertical-align: -7%;
+	text-transform: none;
+	speak: none;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+	content: "\e085";
+}
+.tag-input {
+	box-sizing: border-box;
+	width: 280px;
+	padding: 5px 7px;
+	margin: 0;
+	outline: 0;
+	font-size: 1.1em;
+	line-height: 1.4em;
+	background: #fff;
+	border: #e3e1d5 1px solid;
+	border-radius: 2px;
+	-webkit-transition: all 0.15s ease-in-out;
+	-moz-transition: all 0.15s ease-in-out;
+	transition: all 0.15s ease-in-out;
+}
+.left {
+	float: left;
+}
