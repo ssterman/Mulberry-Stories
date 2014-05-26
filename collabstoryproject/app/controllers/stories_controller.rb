@@ -36,6 +36,7 @@ class StoriesController < ApplicationController
 			node_hash["truth_height"] = node.truth_height
 			node_hash["text"] = node.text
 			node_hash["truth"] = node.truth
+			node_hash["annotation"] = node.annotation
 			node_hash["constraint_num"] = node.constraint_num
 			story_hash["nodes"] << node_hash
 		end
@@ -101,6 +102,7 @@ class StoriesController < ApplicationController
 	 		@node.user_id = session[:id]
 	 		@node.story_id = @story.id
 	 		@node.truth = true
+	 		@node.annotation = ""
 	 		@node.constraint_num = 0
 	 		@node.truth_height = count
 	 		count +=1

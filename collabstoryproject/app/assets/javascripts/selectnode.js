@@ -240,6 +240,7 @@ function display_graph(json_data) {
 
 			var url = "/nodes/save";
 			var node_text = $("#submit_text_area").html();
+			var node_annotation = $("#tag-input").html();
 			if ($("#add_constraint").hasClass("minus")) {
 				node_text += " " + $("#submit_text_area2").html();
 			}
@@ -256,6 +257,7 @@ function display_graph(json_data) {
 				content += "&storyid=" + $("#submit_storyID").val();
 				content += "&userid=" + $("#submit_userID").val();
 				content += "&truth=" + $("#submit_truth").val();
+				content += "&annotation=" + node_annotation;
 
 				$.ajax({ url: url,
 				  type: 'POST',
@@ -276,10 +278,15 @@ function display_graph(json_data) {
 			      	  .text(function(d) { 
 			      	  	if (d.text == "") {
 			      	  		return "";
+			      	  	} else if (d.annotation != ""){
+			      	  		alert("ANNOTATE!");
+			      	  		return d.annotation;
 			      	  	} else if (d.text.indexOf("<p>") == 0) {
-			      	  		return d.text.usbstring(3, 18) + "...";
+			      	  		alert("ABBREVIATE!");
+			      	  		return d.text.usbstring(3, 25) + "...";
 			      	  	}
-			      		return d.text.substring(0, 15) + "..."; 
+			      	  	alert("RETURN!");
+			      		return d.text.substring(0, 22) + "..."; 
 			      	  });
 					editing = false;
 				  }

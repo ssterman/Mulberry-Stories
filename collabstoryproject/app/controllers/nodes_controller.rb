@@ -12,6 +12,7 @@ class NodesController < ApplicationController
 		new_node.user = User.find_by_id(parameters[:userid])
   		new_node.truth_height = 0
   		new_node.story = Story.find_by_id(parameters[:storyid])
+  		new_node.annotation = parameters[:annotation]
 
   		if parameters[:truth] == "true"
   		  	new_node.truth = true
@@ -43,7 +44,7 @@ class NodesController < ApplicationController
 	end
 
 	 def node_params
-	 	params.permit(:text, :source, :storyid, :userid, :truth)
+	 	params.permit(:text, :source, :storyid, :userid, :truth, :annotation)
 	 end
 
 end
