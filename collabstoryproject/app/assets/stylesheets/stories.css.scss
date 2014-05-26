@@ -342,7 +342,7 @@ input[id='summary_field'] {
 	padding: 0 16px;
 	position: relative;
 	vertical-align: middle;
-	border: 1px solid rgba(0,0,0,0.15);
+	border: 1px solid rgba(0,0,0,0.3);
 	color: rgba(0,0,0,0.44);
 	background: rgba(0,0,0,0);
 	letter-spacing: -0.02em;
@@ -394,6 +394,7 @@ input[id='summary_field'] {
 
 #publish-bar {
 	box-sizing: border-box;
+	background: rgba(0,0,0,0.05);
 	height: 40px;
 	padding: 0;
 	color: #7d878a;
@@ -406,6 +407,7 @@ input[id='summary_field'] {
 	box-shadow: 0 -2px 8px rgba(0,0,0,0.2);
 	-webkit-transform: translateZ(0);
 	width:50.8%;
+	display:none;
 }
 
 nav {
@@ -464,6 +466,7 @@ nav {
 	margin: 0;
 	outline: 0;
 	font-size: 1.1em;
+	color: rgba(0, 0, 0, 0.8);
 	line-height: 1.4em;
 	background: #fff;
 	border: #e3e1d5 1px solid;
@@ -472,6 +475,9 @@ nav {
 	-moz-transition: all 0.15s ease-in-out;
 	transition: all 0.15s ease-in-out;
 }
+
+
+
 .left {
 	float: left;
 }
@@ -512,4 +518,9 @@ nav {
 	background: transparent;
 	border: none;
 	width:400px;
+	font-weight:bold;
+}
+
+#tag-input::-webkit-input-placeholder{
+	font-weight:normal;
 }

@@ -66,7 +66,7 @@
 					<span class="hidden"></span>
 					<div class="tags-div" style="max_width:400px;"></div>
 					<input type="hidden" class="tags-holder" id="tags-holder">
-					<input class="tag-input" id="tag-input" type="text" maxLength="16" placeholder="Tagline ex. Harry chooses to fight">
+					<input class="tag-input" id="tag-input" type="text" maxLength="22" placeholder="Tagline ex. Harry chooses to fight">
 				</label>
 			</section>
 			<div class="right">
@@ -79,7 +79,6 @@
 <% end %>
 
 <script>
-	$("#tagline").attr("placeholder", "Tagline");
 	display_graph(<%=raw @json_data %>);
 	$("#error_msg").hide();
 	$("#submit_storyID").val(<%=@story.id %>);

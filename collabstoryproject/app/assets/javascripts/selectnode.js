@@ -120,6 +120,7 @@ function display_graph(json_data) {
 			//read_area.innerHTML = mousedown_node.text;
 			read_area.innerHTML = read_text;
 			$("#write").hide();
+			$("#publish-bar").hide();
 	}
 
 	function mousedown() {
@@ -146,11 +147,12 @@ function display_graph(json_data) {
 		init_placeholder();
 		editing = true;
 		$("#write").show();
+		$("#tag-input").empty();
+		$("#publish-bar").show();
 		$("#submit_text_area2").focus();
 		$("#submit_sourceID").val(source.id);
 		$("#submit_constraint_num").val(source.constraint_num);
 		$("#error_msg").hide();
-		$("#tagline").show();
 		save_to_db();
 	}
 
@@ -216,7 +218,7 @@ function display_graph(json_data) {
 			var url = "/nodes/save";
 			var node_text = $("#submit_text_area").html();
 			if (node_text.length === 0) {
-				$("#tagline").hide();
+				//$("#tagline").hide();
 				$("#error_msg").show();
 				//remove_node_reset_writebox();
 			} else {
@@ -237,6 +239,7 @@ function display_graph(json_data) {
 				    var node_formatted = node_text.replace(/\n/g, '<br />');
 					read_area.innerHTML += "<p>" + node_formatted + "</p>";
 					$("#write").hide();
+					$("#publish-bar").hide();
 					console.log("ajax success", node_text);
 					selected_node.text = node_formatted;
 					opened_node.insert("text")
@@ -263,6 +266,7 @@ function display_graph(json_data) {
 		redraw();
 		$(".editable_text").empty();
 		$("#write").hide();
+		$("#publish-bar").hide();
 		editing = false;
 	}
 
