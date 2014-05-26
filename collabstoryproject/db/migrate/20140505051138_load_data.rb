@@ -173,6 +173,41 @@ class LoadData < ActiveRecord::Migration
     c3 = Constraint.new(:story_id => 3, :title => "Turn-back", :text => "When he turns around, Harry realizes that they've taken him back; all the way back. He is standing in the remains of 4 Privet Drive, but he has nothing with him--no wand, no broom, no money.", :constraint_num =>3 )
     c3.save
 
+    c4 = Constraint.new(:story_id => 3, :title => "Crookshank's Secret", :text => "Crookshanks couldn't be an Animagus. He just couldn't be.", :constraint_num =>4 )
+    c4.save
+
+    c5 = Constraint.new(:story_id => 3, :title => "The Descent", :text => "Harry looks down and sees Voldemort in an abyss.", :constraint_num =>5 )
+    c5.save
+
+    c11 = Constraint.new(:story_id => 2, :title => "Quiet House", :text => "Harry wakes up in a quiet house. It smells like wood burning.", :constraint_num => 1 )
+    c11.save
+
+    c12 = Constraint.new(:story_id => 2, :title => "Ron's Decision", :text => "Ron is conflicted, but knows he has to decide--he chooses Hermione.", :constraint_num => 2 )
+    c12.save
+
+    c13 = Constraint.new(:story_id => 2, :title => "Turn-back", :text => "When he turns around, Harry realizes that they've taken him back; all the way back. He is standing in the remains of 4 Privet Drive, but he has nothing with him--no wand, no broom, no money.", :constraint_num =>3 )
+    c13.save
+
+    c14 = Constraint.new(:story_id => 2, :title => "Crookshank's Secret", :text => "Crookshanks couldn't be an Animagus. He just couldn't be.", :constraint_num =>4 )
+    c14.save
+
+    c15 = Constraint.new(:story_id => 2, :title => "The Descent", :text => "Harry looks down and sees Voldemort in an abyss.", :constraint_num =>5 )
+    c15.save
+
+    c21 = Constraint.new(:story_id => 1, :title => "Quiet House", :text => "Harry wakes up in a quiet house. It smells like wood burning.", :constraint_num => 1 )
+    c21.save
+
+    c22 = Constraint.new(:story_id => 1, :title => "Ron's Decision", :text => "Ron is conflicted, but knows he has to decide--he chooses Hermione.", :constraint_num => 2 )
+    c22.save
+
+    c23 = Constraint.new(:story_id => 1, :title => "Turn-back", :text => "When he turns around, Harry realizes that they've taken him back; all the way back. He is standing in the remains of 4 Privet Drive, but he has nothing with him--no wand, no broom, no money.", :constraint_num =>3 )
+    c23.save
+
+    c24 = Constraint.new(:story_id => 1, :title => "Crookshank's Secret", :text => "Crookshanks couldn't be an Animagus. He just couldn't be.", :constraint_num =>4 )
+    c24.save
+
+    c25 = Constraint.new(:story_id => 1, :title => "The Descent", :text => "Harry looks down and sees Voldemort in an abyss.", :constraint_num =>5 )
+    c25.save
   end
 
   def down

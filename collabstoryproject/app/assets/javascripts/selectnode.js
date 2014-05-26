@@ -22,21 +22,7 @@ function init_placeholder() {
 
 function display_graph(json_data) {
 	$(".editable_text").empty(); // Must empty the text area on load or else it has a 
-									// fucking weird phantom value of 4.
-	console.log(json_data);
-	
-	$("#add_constraint").click(function() {
-		if ($(this).hasClass("plus")) {
-			$("#submit_text_area2").show();
-			$(this).removeClass("plus");
-			$(this).addClass("minus");
-		} else {
-			$("#submit_text_area2").hide();
-			$(this).removeClass("minus");
-			$(this).addClass("plus");
-		}
-	});
-
+									// fucking weird phantom value of 4
 	var width = 500;
 	var height = 500;
 
@@ -50,6 +36,28 @@ function display_graph(json_data) {
 	    mousedown_node = null,
 	    mouseup_node = null;
 	    child_nodes = [];
+
+	$("#add_constraint").click(function() {
+		if ($(this).hasClass("plus")) {
+			$("#submit_text_area2").show();
+			$("#submit_text_area2").focus();
+			var cur_constraint = selected_node_arr.pop().constraint_num;
+			var intro_text = "<p>Plot twist challenge!</p>" + "<p style='font-weight:300'>" +
+				json_data.constraints[cur_constraint].title + ": " + 
+				json_data.constraints[cur_constraint].text + "</p>";
+			$("#constraint_content").html(intro_text);
+			$("#constraint_content").show();
+			$(this).removeClass("plus");
+			//$(this).css("color", "#000000");
+			$(this).addClass("minus");
+		} else {
+			$("#submit_text_area2").hide();
+			$("#constraint_content").hide();
+			$(this).removeClass("minus");
+			//$(this).beforecss("color", "#1f77b4");
+			$(this).addClass("plus");
+		}
+	});
 
 	// init svg
 	var outer = d3.select("#viscontainer")
@@ -149,10 +157,15 @@ function display_graph(json_data) {
 		$("#write").show();
 		$("#tag-input").empty();
 		$("#publish-bar").show();
-		$("#submit_text_area2").focus();
+		$("#submit_text_area").focus();
 		$("#submit_sourceID").val(source.id);
 		$("#submit_constraint_num").val(source.constraint_num);
 		$("#error_msg").hide();
+		$("#tagline").show();
+		$("#constraint_content").hide();
+		$("#submit_text_area2").hide();
+		$("#add_constraint").removeClass("minus");
+		$("#add_constraint").addClass("plus");
 		save_to_db();
 	}
 
@@ -162,6 +175,16 @@ function display_graph(json_data) {
 		$( ".constraint-tabs-list li:eq(" + index + ")" ).addClass("constraint-selected");
 		$( ".constraint-selected" ).prevAll().addClass("constraint-finished");
 
+			// setup constraints bar text
+		$(".constraint").each(function( i ) {
+			console.log(json_data);
+			if (i < index) {
+  				$(this).text(json_data.constraints[i].title.toUpperCase());
+  			} else {
+  				var str = "Event " + (index + 1);
+  				$(this).text(str.toUpperCase());
+  			}
+		});
 	}
 
 	//constraints on multiselect paths
@@ -194,7 +217,7 @@ function display_graph(json_data) {
         	selected_node_arr = [];
         	selected_node_arr.push(mousedown_node);
         }
-        updateConstraintBar(3); // later mousedown_node.constraint
+        updateConstraintBar(mousedown_node.constraint_num); // later mousedown_node.constraint
 	}
 
 	//removes specified node and all its children
@@ -203,7 +226,7 @@ function display_graph(json_data) {
 	    selected_node_arr.splice(index, removeNum);
 	    var len = selected_node_arr.length;
 	    if (len > 0) {
-	    	updateConstraintBar(2); // selected_node_arr[len - 1].constraint
+	    	updateConstraintBar(selected_node_arr[len - 1].constraint_num); // selected_node_arr[len - 1].constraint
 	    } else {
 	    	updateConstraintBar(0);
 	    }
@@ -217,12 +240,17 @@ function display_graph(json_data) {
 
 			var url = "/nodes/save";
 			var node_text = $("#submit_text_area").html();
+			if ($("#add_constraint").hasClass("minus")) {
+				node_text += " " + $("#submit_text_area2").html();
+			}
 			if (node_text.length === 0) {
 				//$("#tagline").hide();
 				$("#error_msg").show();
 				//remove_node_reset_writebox();
 			} else {
+				console.log(node_text);
 				$("#submit_text_area").empty();
+				$("#submit_text_area2").empty();
 				var content = "text=" + node_text;
 				content += "&source=" + $("#submit_sourceID").val();
 				content += "&storyid=" + $("#submit_storyID").val();
