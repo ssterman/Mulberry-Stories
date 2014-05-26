@@ -41,7 +41,7 @@ function display_graph(json_data) {
 		if ($(this).hasClass("plus")) {
 			$("#submit_text_area2").show();
 			$("#submit_text_area2").focus();
-			var cur_constraint = selected_node_arr.pop().constraint_num;
+			var cur_constraint = selected_node_arr[selected_node_arr.length - 1].constraint_num;
 			var intro_text = "<p>Plot twist challenge!</p>" + "<p style='font-weight:300'>" +
 				json_data.constraints[cur_constraint].title + ": " + 
 				json_data.constraints[cur_constraint].text + "</p>";
