@@ -48,13 +48,15 @@ function display_graph(json_data) {
 			$("#constraint_content").html(intro_text);
 			$("#constraint_content").show();
 			$(this).removeClass("plus");
-			//$(this).css("color", "#000000");
 			$(this).addClass("minus");
+			if ($("#submit_text_area").html().length === 0) {
+				$("#submit_text_area").hide();
+			}
 		} else {
 			$("#submit_text_area2").hide();
 			$("#constraint_content").hide();
+			$("#submit_text_area").show();
 			$(this).removeClass("minus");
-			//$(this).beforecss("color", "#1f77b4");
 			$(this).addClass("plus");
 		}
 	});
