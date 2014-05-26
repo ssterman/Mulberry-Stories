@@ -3,6 +3,14 @@ var editing = false;
 var currNode = null;
 var currLink = null;
 
+var panX = 0;
+var panY = 0;
+
+var mouseX;
+var mouseY;
+
+var zoom = false;
+
 //drag to add reference: http://bl.ocks.org/benzguo/4370043
 //arrows reference: http://logogin.blogspot.com/2013/02/d3js-arrowhead-markers.html
 
@@ -134,13 +142,37 @@ function display_graph(json_data) {
 			$("#publish-bar").hide();
 	}
 
+
+	//need this to stop weird panning behavior
+	window.onmousedown = function(e) {e.preventDefault();}
+	window.onmouseup = function (e) {zoom = false;}
+
 	function mousedown() {
 		if (mousedown_node) {
 			updateRead();
 		}
+		else {
+			var e = d3.event;
+			zoom = true;
+			mouseX = e.pageX;
+			mouseY = e.pageY;
+		}
 	}
 
+
 	function mousemove() {
+	  console.log(zoom);
+	  if (zoom) {
+	  	var e = d3.event;
+	  	var oldMX = mouseX;
+	  	var oldMY = mouseY;
+	  	mouseX = e.pageX;
+	  	mouseY = e.pageY;
+		panX += mouseX - oldMX;
+		panY += mouseY - oldMY;
+        vis.attr("transform", "translate(" + panX + "," + panY + ")");
+
+	  }
 	  if (!mousedown_node) return;
 
 	  // update drag line
@@ -239,6 +271,35 @@ function display_graph(json_data) {
 	    }
 	}
 
+	//use this function to change the appearance of a newly created constraint node
+	function update_truth_appearance() {
+		var selection = vis.selectAll("g.gnode").data(nodes);
+		console.log("appearancing",  selection);
+
+		selection
+			.insert("circle")
+	      .attr("class", "node")
+	      .style("fill", function(d) { 
+		  		 if (d.truth == true) {
+		  		 	console.log("getting here...");
+		  			return "rgb(31, 119, 180)";//"#1f77b4";
+		  		} else {
+		  			return "rgb(174, 199, 232)";
+		  		}
+		  	})
+		  	.attr("fixed", function(d){
+		  		 if (d.truth == true) {
+		  			d.fixed = true;    //this is kinda hacky, but works
+
+		  			count += 1;
+		  			d.y = (100 * count) - 150;
+		  			d.x = 250;
+		  			return true;
+		  		 }
+		  	});
+		  	redraw();
+	}
+
 	function save_to_db(target) {
 		this.submit_el = document.getElementById("submit_node");
 
@@ -300,12 +361,16 @@ function display_graph(json_data) {
 			      	  		return node_annotation;
 			      	  	} else if (d.text.indexOf("<p>") == 0) {
 			      	  		alert("ABBREVIATE!");
-			      	  		return d.text.usbstring(3, 18) + "...";
+			      	  		return d.text.substring(3, 18) + "...";
 			      	  	}
 			      	  	alert("RETURN!");
 			      		return d.text.substring(0, 15) + "..."; 
 			      	  });
 					editing = false;
+					if (is_truth) {
+						selected_node.truth = true;
+						update_truth_appearance();
+					}
 				  }
 				});
 			}
@@ -335,10 +400,10 @@ function display_graph(json_data) {
 	}
 
 	function mouseup() {
-	// console.log('here');
+	  zoom = false;
+	  console.log('mousing up');
 	  if (mousedown_node) {
 	    // hide drag line
-	    //console.log("hiding drag line");
 	    drag_line
 	      .attr("class", "drag_line_hidden")
 
@@ -368,12 +433,8 @@ function display_graph(json_data) {
 	      
 	      // add link to mousedown node
 	      links.push({source: mousedown_node, target: node});
-	      //console.log("pushing link: ", mousedown_node, node);
-	      // console.log(node);
-	      // console.log("wtf");
 
 	    }
-	    //console.log('redrawing');
 	    redraw();
 	  }
 	  // clear mouse event vars
