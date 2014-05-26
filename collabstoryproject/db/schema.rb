@@ -38,7 +38,7 @@ ActiveRecord::Schema.define(version: 20140505051138) do
     t.boolean  "truth"
     t.integer  "constraint_num"
     t.integer  "constraint_id"
-    t.integer  "annotation"
+    t.string   "annotation"
     t.integer  "truth_height",   default: 0
     t.datetime "created_at"
     t.datetime "updated_at"

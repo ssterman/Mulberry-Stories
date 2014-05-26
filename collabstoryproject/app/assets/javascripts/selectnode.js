@@ -27,6 +27,7 @@ function display_graph(json_data) {
 	var height = 500;
 
 	var color = d3.scale.category20();
+	console.log(json_data);
 
 	// mouse event vars
 	var selected_node = null,
@@ -42,7 +43,7 @@ function display_graph(json_data) {
 			$("#submit_text_area2").show();
 			$("#submit_text_area2").focus();
 			var cur_constraint = selected_node_arr[selected_node_arr.length - 1].constraint_num;
-			var intro_text = "<p>Plot twist challenge!</p>" + "<p style='font-weight:300'>" +
+			var intro_text = "<p class='constraint_p1'>Plot twist challenge!</p>" + "<p class='constraint_p2'>" +
 				json_data.constraints[cur_constraint].title + ": " + 
 				json_data.constraints[cur_constraint].text + "</p>";
 			$("#constraint_content").html(intro_text);
@@ -148,16 +149,20 @@ function display_graph(json_data) {
 	      .attr("y1", mousedown_node.y)
 	      .attr("x2", d3.mouse(this)[0])
 	      .attr("y2", d3.mouse(this)[1]);
-	      console.log(drag_line);
+	      //console.log(drag_line);
 	}
 
 	function showEditScreen(source, target) {
 		//var read_area = document.getElementById("read");
 		//read_area.innerHTML = "You just created a node with id " + target.id + ". You may edit the node below and then save it.";
+		var new_node = target;
+		console.log(new_node);
 		init_placeholder();
 		editing = true;
 		$("#write").show();
-		$("#tag-input").empty();
+		$("#tag-input").val("");
+		$("#submit_text_area").empty();
+		$("#submit_text_area2").empty();
 		$("#publish-bar").show();
 		$("#submit_text_area").focus();
 		$("#submit_sourceID").val(source.id);
@@ -168,7 +173,7 @@ function display_graph(json_data) {
 		$("#submit_text_area2").hide();
 		$("#add_constraint").removeClass("minus");
 		$("#add_constraint").addClass("plus");
-		save_to_db();
+		save_to_db(new_node);
 	}
 
 	function updateConstraintBar(index) {
@@ -179,7 +184,7 @@ function display_graph(json_data) {
 
 			// setup constraints bar text
 		$(".constraint").each(function( i ) {
-			console.log(json_data);
+			//console.log(json_data);
 			if (i < index) {
   				$(this).text(json_data.constraints[i].title.toUpperCase());
   			} else {
@@ -242,24 +247,35 @@ function display_graph(json_data) {
 
 			var url = "/nodes/save";
 			var node_text = $("#submit_text_area").html();
-			var node_annotation = $("#tag-input").html();
+			console.log("NODE TEXT: " + node_text);
+			var node_annotation = $("#tag-input").val();
+			//console.log("annotation is: " + node_annotation);
+			var is_truth = "false";
+			target.truth = "false";
 			if ($("#add_constraint").hasClass("minus")) {
 				node_text += " " + $("#submit_text_area2").html();
+				if (node_text.length > 0) {
+					is_truth = "true";
+					target.truth = "true";
+				}
+				console.log(target);
 			}
 			if (node_text.length === 0) {
 				//$("#tagline").hide();
 				$("#error_msg").show();
 				//remove_node_reset_writebox();
 			} else {
-				console.log(node_text);
-				$("#submit_text_area").empty();
-				$("#submit_text_area2").empty();
+				//console.log(node_text);
+
 				var content = "text=" + node_text;
 				content += "&source=" + $("#submit_sourceID").val();
 				content += "&storyid=" + $("#submit_storyID").val();
 				content += "&userid=" + $("#submit_userID").val();
-				content += "&truth=" + $("#submit_truth").val();
+				content += "&truth=" + is_truth;
 				content += "&annotation=" + node_annotation;
+				content += "&constraint_num=" + target.constraint_num;
+
+				console.log("Truth is: " + is_truth, "constraint_num is : " + target.constraint_num);
 
 				$.ajax({ url: url,
 				  type: 'POST',
@@ -280,15 +296,14 @@ function display_graph(json_data) {
 			      	  .text(function(d) { 
 			      	  	if (d.text == "") {
 			      	  		return "";
-			      	  	} else if (d.annotation != ""){
-			      	  		alert("ANNOTATE!");
-			      	  		return d.annotation;
+			      	  	} else if (node_annotation!= ""){
+			      	  		return node_annotation;
 			      	  	} else if (d.text.indexOf("<p>") == 0) {
 			      	  		alert("ABBREVIATE!");
-			      	  		return d.text.usbstring(3, 25) + "...";
+			      	  		return d.text.usbstring(3, 18) + "...";
 			      	  	}
 			      	  	alert("RETURN!");
-			      		return d.text.substring(0, 22) + "..."; 
+			      		return d.text.substring(0, 15) + "..."; 
 			      	  });
 					editing = false;
 				  }
@@ -302,6 +317,9 @@ function display_graph(json_data) {
 		links.pop();
 		redraw();
 		$(".editable_text").empty();
+		$("#submit_text_area").empty();
+		$("#submit_text_area2").empty();
+		$("#tag-input").empty();
 		$("#write").hide();
 		$("#publish-bar").hide();
 		editing = false;
@@ -320,7 +338,7 @@ function display_graph(json_data) {
 	// console.log('here');
 	  if (mousedown_node) {
 	    // hide drag line
-	    console.log("hiding drag line");
+	    //console.log("hiding drag line");
 	    drag_line
 	      .attr("class", "drag_line_hidden")
 
@@ -336,7 +354,7 @@ function display_graph(json_data) {
 
 	        // add node
 	        var point = d3.mouse(this);
-	        var node = {x: point[0], y: point[1], "id": id, "text": "", "constraint_num": mousedown_node.constraint_num};
+	        var node = {x: point[0], y: point[1], "id": id, "text": "", "constraint_num": mousedown_node.constraint_num, "annotation": mousedown_node.annotation};
 	        var n = nodes.push(node);
 
 	        var target = node;
@@ -350,12 +368,12 @@ function display_graph(json_data) {
 	      
 	      // add link to mousedown node
 	      links.push({source: mousedown_node, target: node});
-	      console.log("pushing link: ", mousedown_node, node);
+	      //console.log("pushing link: ", mousedown_node, node);
 	      // console.log(node);
 	      // console.log("wtf");
 
 	    }
-	    console.log('redrawing');
+	    //console.log('redrawing');
 	    redraw();
 	  }
 	  // clear mouse event vars
@@ -432,7 +450,6 @@ function display_graph(json_data) {
 
 	// redraw force layout
 	function redraw() {
-
 	  //link = link.data(links);
 	  link = vis.selectAll(".link").data(links);
 
@@ -463,9 +480,10 @@ function display_graph(json_data) {
 	      .attr("class", "node")
 	      .style("fill", function(d) { 
 		  		 if (d.truth == true) {
-		  			return color(1);
+
+		  			return "rgb(31, 119, 180)";//"#1f77b4";
 		  		} else {
-		  			return color(2);
+		  			return "rgb(174, 199, 232)";
 		  		}
 		  	})
 		  	.attr("fixed", function(d){
@@ -508,8 +526,8 @@ function display_graph(json_data) {
 	              .attr("y2", mousedown_node.y);
 	           drag_line
 	      			.attr("class", "drag_line");
-	           console.log("drag line", drag_line);
-	           console.log(mousedown_node.x, mousedown_node.y);
+	           //console.log("drag line", drag_line);
+	           //console.log(mousedown_node.x, mousedown_node.y);
 
 	          redraw(); 
 	        })
@@ -533,7 +551,7 @@ function display_graph(json_data) {
 	            $("#link_source").val(mousedown_node.id);
 	            $("#link_target").val(mouseup_node.id);
 	            links.push(link);
-	            console.log("pushing other link: ", mousedown_node, mouseup_node);
+	            //console.log("pushing other link: ", mousedown_node, mouseup_node);
 
 	            redraw();
 	            $("#new_link_connection").submit();
@@ -550,6 +568,8 @@ function display_graph(json_data) {
       	  .text(function(d) { 
       	  	if (d.text == "") {
       	  		return "";
+      	  	} else if (d.annotation && d.annotation != "") {
+      	  		return d.annotation;
       	  	} else if (d.text.indexOf("<p>") == 0) {
       	  		return d.text.substring(3, 18) + "..."; 
       	  	} else {
