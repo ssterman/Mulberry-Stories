@@ -1,8 +1,13 @@
+//drag to add reference: http://bl.ocks.org/benzguo/4370043
+//arrows reference: http://logogin.blogspot.com/2013/02/d3js-arrowhead-markers.html
+
 
 var editing = false;
 var currNode = null;
 var currLink = null;
+var opened_node = null;
 
+//these are global vars for controlling panning
 var panX = 0;
 var panY = 0;
 
@@ -11,8 +16,9 @@ var mouseY;
 
 var zoom = false;
 
-//drag to add reference: http://bl.ocks.org/benzguo/4370043
-//arrows reference: http://logogin.blogspot.com/2013/02/d3js-arrowhead-markers.html
+//need this to stop weird panning behavior
+window.onmousedown = function(e) {e.preventDefault();}
+window.onmouseup = function (e) {zoom = false;}
 
 
 function init_placeholder() {
@@ -75,8 +81,7 @@ function display_graph(json_data) {
 	  .append("svg:svg")
 	    .attr("width", width)
 	    .attr("height", height)
-	    .attr("pointer-events", "all");
-	    
+	    .attr("pointer-events", "all");   
 
 	var vis = outer
 	  .append('svg:g')
@@ -89,7 +94,7 @@ function display_graph(json_data) {
 	    .attr('height', height)
 	    .attr('fill', 'white');
 
-	//adds the arrows; not that need to change refX to account for size of the circle
+	//adds the arrows; note that need to change refX to account for size of the circle
 	vis.append("svg:defs").append("marker")
 	    .attr("id", "arrowhead")
 	    .attr("refX", 20) /*must be smarter way to calculate shift*/
@@ -101,51 +106,56 @@ function display_graph(json_data) {
         	.attr("d", "M 0,0 V 4 L6,2 Z"); //this is actual shape for arrowhead
 
 	// init force layout
-	var force = d3.layout.force()
-	    .size([width, height])
-	    .nodes(json_data.nodes)
-	    .links(json_data.links)
-		.gravity(.05)
-        .distance(60)
-        .charge(-380)
-	    .on("tick", tick);
 
-	// line displayed when dragging new nodes
-	var drag_line = vis.append("line")
-	    .attr("class", "drag_line")
-	    .attr("stroke-width", 3)
-	    .attr("x1", 0)
-	    .attr("y1", 0)
-	    .attr("x2", 0)
-	    .attr("y2", 0);
-	drag_line
-	      .attr("class", "drag_line_hidden")
+	var force;
+	var drag_line;
+	var nodes;
+	var links;
+	var node;
+	var link;
 
-	// get layout properties
-	var nodes = force.nodes();
-	// console.log(nodes);
-	var links = force.links();
-	var node = vis.selectAll("g.gnode");
-	var link = vis.selectAll(".link");
+	function initForceLayout(json_data) {
+		 force = d3.layout.force()
+		    .size([width, height])
+		    .nodes(json_data.nodes)
+		    .links(json_data.links)
+			.gravity(.05)
+	        .distance(60)
+	        .charge(-380)
+		    .on("tick", tick);
 
+		// line displayed when dragging new nodes
+		 drag_line = vis.append("line")
+		    .attr("class", "drag_line")
+		    .attr("stroke-width", 3)
+		    .attr("x1", 0)
+		    .attr("y1", 0)
+		    .attr("x2", 0)
+		    .attr("y2", 0);
+		drag_line
+		      .attr("class", "drag_line_hidden")
+
+		// get layout properties
+		 nodes = force.nodes();
+		 links = force.links();
+		 node = vis.selectAll("g.gnode");
+		 link = vis.selectAll(".link");
+	}
+
+	initForceLayout(json_data);
 	redraw();
 
 	function updateRead() {
-			var read_area = document.getElementById("read");
-			var read_text = "";
-			for (i = 0; i < selected_node_arr.length; i++) {
-				read_text += "<p>" + selected_node_arr[i].text + "</p>";
-			}
-			//read_area.innerHTML = mousedown_node.text;
-			read_area.innerHTML = read_text;
-			$("#write").hide();
-			$("#publish-bar").hide();
+		var read_area = document.getElementById("read");
+		var read_text = "";
+		for (i = 0; i < selected_node_arr.length; i++) {
+			read_text += "<p>" + selected_node_arr[i].text + "</p>";
+		}
+		//read_area.innerHTML = mousedown_node.text;
+		read_area.innerHTML = read_text;
+		$("#write").hide();
+		$("#publish-bar").hide();
 	}
-
-
-	//need this to stop weird panning behavior
-	window.onmousedown = function(e) {e.preventDefault();}
-	window.onmouseup = function (e) {zoom = false;}
 
 	function mousedown() {
 		if (mousedown_node) {
@@ -161,7 +171,7 @@ function display_graph(json_data) {
 
 
 	function mousemove() {
-	  console.log(zoom);
+	//panning behavior on drag
 	  if (zoom) {
 	  	var e = d3.event;
 	  	var oldMX = mouseX;
@@ -171,8 +181,8 @@ function display_graph(json_data) {
 		panX += mouseX - oldMX;
 		panY += mouseY - oldMY;
         vis.attr("transform", "translate(" + panX + "," + panY + ")");
-
 	  }
+
 	  if (!mousedown_node) return;
 
 	  // update drag line
@@ -181,7 +191,6 @@ function display_graph(json_data) {
 	      .attr("y1", mousedown_node.y)
 	      .attr("x2", d3.mouse(this)[0])
 	      .attr("y2", d3.mouse(this)[1]);
-	      //console.log(drag_line);
 	}
 
 	function showEditScreen(source, target) {
@@ -271,35 +280,6 @@ function display_graph(json_data) {
 	    }
 	}
 
-	//use this function to change the appearance of a newly created constraint node
-	function update_truth_appearance() {
-		var selection = vis.selectAll("g.gnode").data(nodes);
-		console.log("appearancing",  selection);
-
-		selection
-			.insert("circle")
-	      .attr("class", "node")
-	      .style("fill", function(d) { 
-		  		 if (d.truth == true) {
-		  		 	console.log("getting here...");
-		  			return "rgb(31, 119, 180)";//"#1f77b4";
-		  		} else {
-		  			return "rgb(174, 199, 232)";
-		  		}
-		  	})
-		  	.attr("fixed", function(d){
-		  		 if (d.truth == true) {
-		  			d.fixed = true;    //this is kinda hacky, but works
-
-		  			count += 1;
-		  			d.y = (100 * count) - 150;
-		  			d.x = 250;
-		  			return true;
-		  		 }
-		  	});
-		  	redraw();
-	}
-
 	function save_to_db(target) {
 		this.submit_el = document.getElementById("submit_node");
 
@@ -351,6 +331,7 @@ function display_graph(json_data) {
 					$("#publish-bar").hide();
 					console.log("ajax success", node_text);
 					selected_node.text = node_formatted;
+
 					opened_node.insert("text")
 			      	  .attr("dx", 18)
 			      	  .attr("dy", ".9em")
@@ -360,21 +341,40 @@ function display_graph(json_data) {
 			      	  	} else if (node_annotation!= ""){
 			      	  		return node_annotation;
 			      	  	} else if (d.text.indexOf("<p>") == 0) {
-			      	  		alert("ABBREVIATE!");
+			      	  		// alert("ABBREVIATE!");
 			      	  		return d.text.substring(3, 18) + "...";
 			      	  	}
-			      	  	alert("RETURN!");
+			      	  	// alert("RETURN!");
 			      		return d.text.substring(0, 15) + "..."; 
 			      	  });
+			      	if (is_truth) {
+			      	}
 					editing = false;
-					if (is_truth) {
-						selected_node.truth = true;
-						update_truth_appearance();
-					}
+					reset_node_data();
 				  }
 				});
 			}
 		}
+	}
+
+	function reset_node_data() {
+		var url = "/stories/getdata/3";
+		$.ajax({ url: url,
+				  type: 'GET',
+				  beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+				  success: function(response) {
+				  	 console.log('lol success on second request');
+				  	 var json = response.substring(response.indexOf("INDEXSTART") + 10, response.indexOf('INDEXEND'));
+				  	 console.log(json);
+				  	 initForceLayout(JSON.parse(json));
+
+					//black magic. 
+					node = vis.selectAll("g.gnode").data(nodes);
+					node.remove();
+					opened_node = node.enter().append("g").classed("gnode", true);
+				  	redraw();
+				}
+		});
 	}
 
 	function remove_node_reset_writebox() {
@@ -448,54 +448,6 @@ function display_graph(json_data) {
 	}
 
 	function tick() {
-	  //console.log("tick");
-	  /*link.attr("x1", function(d) { 
-	  	if (isNaN(d.source.x)) {
-	  		console.log("accepted");
-	  		d.source.x = 250;
-	  		return 250;
-	  	}
-	  	else return d.source.x; 
-	  })
-	      .attr("y1", function(d) { 
-
-	        if (isNaN(d.source.y)) {
-	        	d.source.y = 250;
-	  			return 250;
-	  		}
-	      	else return d.source.y; 
-	      })
-	      .attr("x2", function(d) { 
-	        if (isNaN(d.target.x)) {
-	        	d.target.x = 250;
-	  			return 250;
-	  		}	      	
-	      	else return d.target.x; 
-	      })
-	      .attr("y2", function(d) { 
-	        if (isNaN(d.target.y)) {
-	        	d.target.y = 250;
-	  			return 250;
-	  		}
-	      	else return d.target.y; 
-	      });
-        
-
-	  node.attr("transform", function(d) { 
-	  	  var x_val = 250;
-	  	  var y_val = 250;
-	  	  if (!isNaN(d.x)) {
-	  	  	x_val = d.x;
-	  	  } else {
-	  	  	d.x = x_val;
-	  	  }
-	  	  if (!isNaN(d.y)) {
-	  	  	y_val = d.y;
-	  	  } else {
-	  	  	d.y = y_val;
-	  	  }
-    	  return 'translate(' + [x_val, y_val] + ')'; 
-	  });*/
 	  link.attr("x1", function(d) { return d.source.x; })
 	      .attr("y1", function(d) { return d.source.y; })
 	      .attr("x2", function(d) { return d.target.x; })
@@ -516,16 +468,7 @@ function display_graph(json_data) {
 
 	  link.enter().insert("line", "g.gnode")
 	      .attr("class", "link")
-		  .attr("marker-end", "url(#arrowhead)")
-		  // .attr("d", diagonal)
-	      // .on("mousedown", 
-	      //   function(d) { 
-	      //     mousedown_link = d; 
-	      //     if (mousedown_link == selected_link) selected_link = null;
-	      //     else selected_link = mousedown_link; 
-	      //     selected_node = null; 
-	      //     redraw(); 
-	      //   })
+		  .attr("marker-end", "url(#arrowhead)");
 
 	  link.exit().remove();
 
@@ -533,27 +476,35 @@ function display_graph(json_data) {
 	  //   .classed("link_selected", function(d) { return d === selected_link; });
 	  //node = node.data(nodes);
 	  node = vis.selectAll("g.gnode").data(nodes);
+	  // node.remove();
 	  opened_node = node.enter().append("g").classed("gnode", true);
+	  console.log(node, opened_node);
 
-	  count = 1;
+	  //count = 1;
 	  //node.enter().append("g").classed("gnode", true).insert("circle")
 	  opened_node.insert("circle")
 	      .attr("class", "node")
 	      .style("fill", function(d) { 
+	      		console.log('fill');
 		  		 if (d.truth == true) {
-
 		  			return "rgb(31, 119, 180)";//"#1f77b4";
 		  		} else {
 		  			return "rgb(174, 199, 232)";
 		  		}
 		  	})
 		  	.attr("fixed", function(d){
+		  				  			console.log('outer be fixed');
 		  		if (d.truth == true) {
+		  			console.log('shoul be fixed');
 		  			d.fixed = true;    //this is kinda hacky, but works
 
-		  			count += 1;
-		  			d.y = (100 * count) - 150;
-		  			d.x = 250;
+		  			//count += 1;
+		  			d.y = (100 * d.constraint_num);
+		  			if (d.truth_height%2 == 0) {
+			  			d.x = width/2 + 10*truth_height;
+			  		} else {
+			  			d.x = width/2 - 10*truth_height;
+			  		}
 		  			return true;
 		  		}
 		  	})

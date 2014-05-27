@@ -113,6 +113,14 @@ class StoriesController < ApplicationController
 	 	redirect_to(:action => :index)
 	 end
 
+	 def getdata
+		@story = Story.find(params[:id])
+		@nodes = @story.nodes
+		@constraints = @story.constraints 
+		@links = @story.links
+		@json_data = JSON.generate((_create_object(@story, @nodes, @links, @constraints)))
+	end
+
 end
 
 
