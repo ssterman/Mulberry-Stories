@@ -298,6 +298,9 @@ function display_graph(json_data) {
 				if (node_text.length > 0) {
 					is_truth = "true";
 					target.truth = "true";
+
+					// constraint_width = target.
+
 				}
 				console.log(target);
 			}
@@ -307,12 +310,12 @@ function display_graph(json_data) {
 				//remove_node_reset_writebox();
 			} else {
 				//console.log(node_text);
-
 				var content = "text=" + node_text;
 				content += "&source=" + $("#submit_sourceID").val();
 				content += "&storyid=" + $("#submit_storyID").val();
 				content += "&userid=" + $("#submit_userID").val();
 				content += "&truth=" + is_truth;
+				// content += "&constraint_width=" + constraint_width;
 				content += "&annotation=" + node_annotation;
 				content += "&constraint_num=" + target.constraint_num;
 
@@ -347,8 +350,6 @@ function display_graph(json_data) {
 			      	  	// alert("RETURN!");
 			      		return d.text.substring(0, 15) + "..."; 
 			      	  });
-			      	if (is_truth) {
-			      	}
 					editing = false;
 					reset_node_data();
 				  }
@@ -482,6 +483,10 @@ function display_graph(json_data) {
 
 	  //count = 1;
 	  //node.enter().append("g").classed("gnode", true).insert("circle")
+
+
+	  var count = 1;
+	  var curConstraintNum = -1;
 	  opened_node.insert("circle")
 	      .attr("class", "node")
 	      .style("fill", function(d) { 
@@ -493,17 +498,30 @@ function display_graph(json_data) {
 		  		}
 		  	})
 		  	.attr("fixed", function(d){
-		  				  			console.log('outer be fixed');
 		  		if (d.truth == true) {
 		  			console.log('shoul be fixed');
 		  			d.fixed = true;    //this is kinda hacky, but works
 
 		  			//count += 1;
+
+		  			// var constraint_width = d3.selectAll(function(dd) {
+		  			// 	console.log('selecting');
+		  			// 	return dd.constraint_num  == d.constraint_num;
+		  			// }).length;
+		  			// console.log("constraintwidth", constraint_width);
+
+		  			if (d.constraint_num == curConstraintNum) {
+		  				count +=1;
+		  			} else {
+		  				count = 1;
+		  				curConstraintNum = d.constraint_num
+		  			}
+
 		  			d.y = (100 * d.constraint_num);
-		  			if (d.truth_height%2 == 0) {
-			  			d.x = width/2 + 10*truth_height;
+		  			if (count%2 == 0) {
+			  			d.x = width/2 + 25*count;
 			  		} else {
-			  			d.x = width/2 - 10*truth_height;
+			  			d.x = width/2 - 25*count;
 			  		}
 		  			return true;
 		  		}

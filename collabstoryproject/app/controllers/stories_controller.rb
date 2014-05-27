@@ -33,7 +33,7 @@ class StoriesController < ApplicationController
 		nodes.each do |node|
 			node_hash = Hash.new
 			node_hash["id"] = node.id
-			node_hash["truth_height"] = node.truth_height
+			# node_hash["truth_height"] = node.truth_height
 			node_hash["text"] = node.text
 			node_hash["truth"] = node.truth
 			node_hash["annotation"] = node.annotation
