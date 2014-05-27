@@ -6,6 +6,7 @@ var editing = false;
 var currNode = null;
 var currLink = null;
 var opened_node = null;
+var selected_ids = null;
 
 //these are global vars for controlling panning
 var panX = 0;
@@ -286,6 +287,10 @@ function display_graph(json_data) {
 		this.submit_el.onclick = function(event) {
 			event.preventDefault();
 
+			selected_ids = selected_node_arr.map(function(el) {
+				return el.id;
+			});
+
 			var url = "/nodes/save";
 			var node_text = $("#submit_text_area").html();
 			console.log("NODE TEXT: " + node_text);
@@ -352,10 +357,23 @@ function display_graph(json_data) {
 			      	  });
 					editing = false;
 					reset_node_data();
+					console.log("selected ids", selected_ids);
 				  }
 				});
 			}
 		}
+	}
+
+	function reset_selected_node_arr(ids) {
+		d3.selectAll(function(d) {
+			if (ids.indexOf(d.id) != 0) {
+				addToSelectedArr(d);
+				return true;
+			} else {
+				return false;
+			}
+		});
+		console.log(selected_node_arr);
 	}
 
 	function reset_node_data() {
@@ -502,14 +520,6 @@ function display_graph(json_data) {
 		  			console.log('shoul be fixed');
 		  			d.fixed = true;    //this is kinda hacky, but works
 
-		  			//count += 1;
-
-		  			// var constraint_width = d3.selectAll(function(dd) {
-		  			// 	console.log('selecting');
-		  			// 	return dd.constraint_num  == d.constraint_num;
-		  			// }).length;
-		  			// console.log("constraintwidth", constraint_width);
-
 		  			if (d.constraint_num == curConstraintNum) {
 		  				count +=1;
 		  			} else {
@@ -611,8 +621,11 @@ function display_graph(json_data) {
 	      .attr("r", 0)
 	    .remove();
 
+	  console.log("selected node arr at redraw", selected_node_arr);
 	  node
 	    .classed("node_selected", function(d) { //return d === selected_node; });
+	    		console.log("setting class");
+	    		console.log(selected_node_arr, selected_node_arr.indexOf(d), d);
 	    		return (selected_node_arr.indexOf(d) != -1);
 	  });
 	  node
@@ -627,6 +640,16 @@ function display_graph(json_data) {
 	    		return false;
 	    	}
 	  });
+
+	  //hackety way of maintaining selections
+	  if (selected_ids) {
+	  	reset_selected_node_arr(selected_ids);
+	  	node.classed("node_selected", function(d) {
+	  		return selected_ids.indexOf(d.id) != -1
+
+	  	});
+	  	selected_ids = null;
+	  }
 
 	  if (d3.event) {
 	    // prevent browser's default behavior
