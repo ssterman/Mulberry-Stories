@@ -246,8 +246,8 @@ function display_graph(json_data) {
       	var index;
       	var switchChild = links.filter(function (d) {
       		for (i = 0; i < length; i++) {
-      			var parent = selected_node_arr[i];
-      			if (d.target == mousedown_node && d.source == parent) {
+      			var parent_id = selected_node_arr[i].id;
+      			if (d.target.id == mousedown_node.id && d.source.id == parent_id) {
 	      			index = i;
       				return true;
       			}
@@ -257,12 +257,14 @@ function display_graph(json_data) {
 	    //if this is an alternate child on the current branch
 	    //replace the current child with the new child
       	if (switchChild.length != 0) {
+      		// console.log("this is switching children");
       		removeFromSelectedArr(index + 1);
       		selected_node_arr.push(mousedown_node);
 
       	//if there's a gap in the tree, delete everything up
       	//to here and start again; may not be optimal behavior
         } else {
+        	// console.log("this is resetting the array");
         	selected_node_arr = [];
         	selected_node_arr.push(mousedown_node);
         }
@@ -315,6 +317,7 @@ function display_graph(json_data) {
 				//remove_node_reset_writebox();
 			} else {
 				//console.log(node_text);
+				var curStoryId = $("#submit_storyID").val();
 				var content = "text=" + node_text;
 				content += "&source=" + $("#submit_sourceID").val();
 				content += "&storyid=" + $("#submit_storyID").val();
@@ -356,7 +359,7 @@ function display_graph(json_data) {
 			      		return d.text.substring(0, 15) + "..."; 
 			      	  });
 					editing = false;
-					reset_node_data();
+					reset_node_data(curStoryId);
 					console.log("selected ids", selected_ids);
 				  }
 				});
@@ -376,8 +379,8 @@ function display_graph(json_data) {
 		console.log(selected_node_arr);
 	}
 
-	function reset_node_data() {
-		var url = "/stories/getdata/3";
+	function reset_node_data(curStoryId) {
+		var url = "/stories/getdata/" + curStoryId;
 		$.ajax({ url: url,
 				  type: 'GET',
 				  beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
@@ -508,7 +511,7 @@ function display_graph(json_data) {
 	  opened_node.insert("circle")
 	      .attr("class", "node")
 	      .style("fill", function(d) { 
-	      		console.log('fill');
+	      		// console.log('fill');
 		  		 if (d.truth == true) {
 		  			return "rgb(31, 119, 180)";//"#1f77b4";
 		  		} else {
@@ -517,7 +520,6 @@ function display_graph(json_data) {
 		  	})
 		  	.attr("fixed", function(d){
 		  		if (d.truth == true) {
-		  			console.log('shoul be fixed');
 		  			d.fixed = true;    //this is kinda hacky, but works
 
 		  			if (d.constraint_num == curConstraintNum) {
@@ -621,11 +623,11 @@ function display_graph(json_data) {
 	      .attr("r", 0)
 	    .remove();
 
-	  console.log("selected node arr at redraw", selected_node_arr);
+	  // console.log("selected node arr at redraw", selected_node_arr);
 	  node
 	    .classed("node_selected", function(d) { //return d === selected_node; });
-	    		console.log("setting class");
-	    		console.log(selected_node_arr, selected_node_arr.indexOf(d), d);
+	    		// console.log("setting class");
+	    		// console.log(selected_node_arr, selected_node_arr.indexOf(d), d);
 	    		return (selected_node_arr.indexOf(d) != -1);
 	  });
 	  node
