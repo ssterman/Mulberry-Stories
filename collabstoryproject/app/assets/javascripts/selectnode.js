@@ -18,8 +18,10 @@ var mouseY;
 var zoom = false;
 
 //need this to stop weird panning behavior
-window.onmousedown = function(e) {e.preventDefault();}
-window.onmouseup = function (e) {zoom = false;}
+$("#vis-wrapper").mousedown(function(e) {
+	e.preventDefault();
+});
+$("#vis-wrapper").mouseup(function (e) {zoom = false;});
 
 
 function init_placeholder() {
