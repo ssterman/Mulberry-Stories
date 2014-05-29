@@ -17,12 +17,6 @@ var mouseY;
 
 var zoom = false;
 
-//need this to stop weird panning behavior
-$("#vis-wrapper").mousedown(function(e) {
-	e.preventDefault();
-});
-$("#vis-wrapper").mouseup(function (e) {zoom = false;});
-
 
 function init_placeholder() {
 	$(".editable_text").addClass('placeholder');
@@ -166,6 +160,7 @@ function display_graph(json_data) {
 		}
 		else {
 			var e = d3.event;
+			e.preventDefault();
 			zoom = true;
 			mouseX = e.pageX;
 			mouseY = e.pageY;
