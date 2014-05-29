@@ -111,10 +111,11 @@ body {
 
 #rwcontainer {
 	width: 49%;
-	height: auto;
+	height: 400px;
 	position: absolute;
 	left: 1px;
 	padding: 10px;
+	overflow: auto;
 }
 
 #write {

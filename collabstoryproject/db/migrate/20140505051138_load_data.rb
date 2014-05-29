@@ -35,8 +35,8 @@ class LoadData < ActiveRecord::Migration
 <p>&ldquo;Harry, I don&rsquo;t think you understand,&rdquo; she said. &ldquo;This is not just the flu. St. Mungo&rsquo;s is overwhelmed with cases. There have been twenty reported deaths in three weeks -- that&rsquo;s thirty-nine percent mortality. It isn&rsquo;t responding to magic, and it isn&rsquo;t responding to the very few antivirals that the wizards have! The only reason the virus hasn&rsquo;t spread to the muggle population yet is because the magical community is so insular. Eventually, there is going to be a secondary contact. It&rsquo;s going to spread, and we have no idea what the mortality rate is going to be among non-magical people. There&rsquo;s an epidemic in the making. The only way to save the wizards is to get a muggle vaccine. And the only way to protect the muggles is if they know.&rdquo;</p>")
   	n1.user = us3
   	n1.truth = false
-    n1.truth_height = 1
-  	n1.truth_height = 0
+    n1.constraint_num = 0
+  	n1.truth_height = 1
   	n1.story = ts1
   	n1.save(:validate => false)
     
@@ -61,8 +61,8 @@ class LoadData < ActiveRecord::Migration
 <p>Jess looks back at the fair. The Ferris wheel glints in the ordinary late afternoon light, and in the sky, the trace of an airplane's tail shoots northward. </p>")
     n2.user = us3
     n2.truth = false
+    n2.constraint_num = 0
     n2.truth_height = 1
-    n2.truth_height = 0
     n2.story = ts2
     n2.save(:validate => false)
 
@@ -72,24 +72,24 @@ class LoadData < ActiveRecord::Migration
       band.  Not many people can beat the band.")
     n3.user = us3
     n3.truth = false
+    n3.constraint_num = 0
     n3.truth_height = 1
-    n3.truth_height = 0
     n3.story = ts3
     n3.save(:validate => false)
 
-    c1 = Constraint.new(:story_id => 1, :title => "Bandaid", :text => "The Ministry attempts to rectify the problem by Obliviating the muggles involved. ", :constraint_num => 1 )
+    c1 = Constraint.new(:story_id => 1, :title => "Bandaid", :text => "The Ministry attempts to rectify the problem by Obliviating the muggles involved. ", :constraint_num => 0 )
     c1.save
 
-    c2 = Constraint.new(:story_id => 1, :title => "The Storm", :text => "News spreads around the world, and several countries declare wizards a menace." , :constraint_num => 2 )
+    c2 = Constraint.new(:story_id => 1, :title => "The Storm", :text => "News spreads around the world, and several countries declare wizards a menace." , :constraint_num => 1 )
     c2.save
 
-    c3 = Constraint.new(:story_id => 1, :title => "Family Ties", :text => "Hermione is put in a situation in which she must decide: save her family? Or the wizards?", :constraint_num =>3 )
+    c3 = Constraint.new(:story_id => 1, :title => "Family Ties", :text => "Hermione is put in a situation in which she must decide: save her family? Or the wizards?", :constraint_num =>2 )
     c3.save
 
-    c4 = Constraint.new(:story_id => 1, :title => "Allegiances", :text => "'Harry, muggles abused you as a child. How can you support them now? Why do you protect them?'", :constraint_num =>4 )
+    c4 = Constraint.new(:story_id => 1, :title => "Allegiances", :text => "'Harry, muggles abused you as a child. How can you support them now? Why do you protect them?'", :constraint_num =>3 )
     c4.save
 
-    c5 = Constraint.new(:story_id => 1, :title => "Taken", :text => "Hermione strained against her shackles. She wondered if there was anyone left who would come for her.", :constraint_num =>5 )
+    c5 = Constraint.new(:story_id => 1, :title => "Taken", :text => "Hermione strained against her shackles. She wondered if there was anyone left who would come for her.", :constraint_num =>4 )
     c5.save
 
 
