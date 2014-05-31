@@ -45,13 +45,13 @@ class LoadData < ActiveRecord::Migration
     ts3b.genre = "fiction";
     ts3b.save(:validate => false)
 
-    ts4a = Story.new(:summary => "Lee and Jamie are a married couple going about life. One day, they receive a letter in the mail informing them that they have been drafted by the government to participate in gladitorial fights.", :title => "")
+    ts4a = Story.new(:summary => "Lee and Jamie are a married couple. It is 2090, but marriage still works the same way. Civic duty, however, does not. Lee and Jamie are drafted into the gladitorial fights, which the government puts on as a lucrative means of population control.", :title => "The Carrying Capacity")
     ts4a.user = us3
     ts4a.genre = "fiction";
     ts4a.save(:validate => false)
 
 
-    ts4b = Story.new(:summary => "", :title => "")
+    ts4b = Story.new(:summary => "Lee and Jamie are a married couple. It is 2090, but marriage still works the same way. Civic duty, however, does not. Lee and Jamie are drafted into the gladitorial fights, which the government puts on as a lucrative means of population control.", :title => "Carrying Capacity")
     ts4b.user = us3
     ts4b.genre = "fiction";
     ts4b.save(:validate => false)
@@ -268,7 +268,7 @@ The halls were narrow, meant more as conduits for wiring and piping than for peo
     c22 = Constraint.new(:story_id => 3, :title => "Suspicions", :text => "Something at work makes Jess suspect that he may need the help of the bow soon.", :constraint_num => 1 )
     c22.save
 
-    c23 = Constraint.new(:story_id => 3, :title => "Strike", :text => "It’s been eight years since the day of the carnival. An arrow strikes his girlfriend’s heart, just as she says “I do”.", :constraint_num =>2 )
+    c23 = Constraint.new(:story_id => 3, :title => "Strike", :text => "It&apos;s been eight years since the day of the carnival. An arrow strikes his girlfriend&apos;s heart, just as she says &quot;I do&quot;.", :constraint_num =>2 )
     c23.save
 
     c24 = Constraint.new(:story_id => 3, :title => "Knowing", :text => "Jess learns something that makes him search desperately for the bow.", :constraint_num =>3 )
@@ -294,21 +294,52 @@ The halls were narrow, meant more as conduits for wiring and piping than for peo
     c35.save
 
 
-    c41 = Constraint.new(:story_id => 7, :title => "", :text => "", :constraint_num => 0 )
+    c41 = Constraint.new(:story_id => 7, :title => "The Decision", :text => "Lee and Jamie must decide: either participate or go bankrupt and surrender their son to the government", :constraint_num => 0 )
     c41.save
 
-    c42 = Constraint.new(:story_id => 7, :title => "", :text => "", :constraint_num => 1 )
+    c42 = Constraint.new(:story_id => 7, :title => "Small Favors", :text => "What a delicious fruit. Jamie had never tasted anything so sweet and so cold.", :constraint_num => 1 )
     c42.save
 
-    c43 = Constraint.new(:story_id => 7, :title => "", :text => "", :constraint_num =>2 )
+    c43 = Constraint.new(:story_id => 7, :title => "Hidden Surprises", :text => "Behind the brush, a camel stirs. Is it a menace? Or a friend?", :constraint_num =>2 )
     c43.save
 
-    c44 = Constraint.new(:story_id => 7, :title => "", :text => "", :constraint_num =>3 )
+    c44 = Constraint.new(:story_id => 7, :title => "Rifts", :text => "Relationship problems. Somehow Lee and Jamie must discover and overcome them.", :constraint_num =>3 )
     c44.save
 
-    c45 = Constraint.new(:story_id => 7, :title => "", :text => "", :constraint_num =>4 )
+    c45 = Constraint.new(:story_id => 7, :title => "Destinations", :text => " Lee and Jamie are on the lam(b)", :constraint_num =>4 )
     c45.save
 
+
+    c51 = Constraint.new(:story_id => 9, :title => "", :text => "", :constraint_num => 0 )
+    c51.save
+
+    c52 = Constraint.new(:story_id => 9, :title => "", :text => "", :constraint_num => 1 )
+    c52.save
+
+    c53 = Constraint.new(:story_id => 9, :title => "", :text => "", :constraint_num =>2 )
+    c53.save
+
+    c54 = Constraint.new(:story_id => 9, :title => "", :text => "", :constraint_num =>3 )
+    c54.save
+
+    c55 = Constraint.new(:story_id => 9, :title => "", :text => "", :constraint_num =>4 )
+    c55.save
+
+
+    c61 = Constraint.new(:story_id => 11, :title => "", :text => "", :constraint_num => 0 )
+    c61.save
+
+    c62 = Constraint.new(:story_id => 11, :title => "", :text => "", :constraint_num => 1 )
+    c62.save
+
+    c63 = Constraint.new(:story_id => 11, :title => "", :text => "", :constraint_num =>2 )
+    c63.save
+
+    c64 = Constraint.new(:story_id => 11, :title => "", :text => "", :constraint_num =>3 )
+    c64.save
+
+    c65 = Constraint.new(:story_id => 11, :title => "", :text => "", :constraint_num =>4 )
+    c65.save
 
   end
 
