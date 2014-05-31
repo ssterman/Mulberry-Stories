@@ -67,27 +67,27 @@ class LoadData < ActiveRecord::Migration
     ts4b.genre = "fiction";
     ts4b.save(:validate => false)
 
-    ts5a = Story.new(:summary => "During a break between cases, Charlie turns up out of the blue, uninvited, at Emily's door and just...doesn't leave. As standard a love story as you choose to make it to be.", :title => "The Home Life")
+    ts5a = Story.new(:summary => "During a break between cases, Charlie turns up out of the blue, uninvited, at Emily&apos;s door and just...doesn&apos;t leave. As standard a love story as you choose to make it to be.", :title => "The Home Life")
     ts5a.user = us3
         ts5a.test_group = 1
     ts5a.genre = "fiction";
     ts5a.save(:validate => false)
 
 
-    ts5b = Story.new(:summary => "During a break between cases, Charlie turns up out of the blue, uninvited, at Emily's door and just...doesn't leave. As standard a love story as you choose to make it to be.", :title => "The Home Life")
+    ts5b = Story.new(:summary => "During a break between cases, Charlie turns up out of the blue, uninvited, at Emily&apos;s door and just...doesn&apos;t leave. As standard a love story as you choose to make it to be.", :title => "The Home Life")
     ts5b.user = us3
         ts5b.test_group = 2
     ts5b.genre = "fiction";
     ts5b.save(:validate => false)
 
-    ts6a = Story.new(:summary => "", :title => "")
+    ts6a = Story.new(:summary => "Nate is a Switcher--someone who switches into another person\'s life, unbidden, every year. He\'s been a waitress, a car salesman, a stockbroker, and then some. Now nearing his 27th birthday, Nate is about to switch again, but this time into someone far less innocuous.", :title => "Switch")
     ts6a.user = us3
         ts6a.test_group = 2
     ts6a.genre = "fiction";
     ts6a.save(:validate => false)
 
 
-    ts6b = Story.new(:summary => "", :title => "")
+    ts6b = Story.new(:summary => "Nate is a Switcher--someone who switches into another person\'s life, unbidden, every year. He\'s been a waitress, a car salesman, a stockbroker, and then some. Now nearing his 27th birthday, Nate is about to switch again, but this time into someone far less innocuous.", :title => "Switch")
     ts6b.user = us3
         ts6b.test_group = 1
     ts6b.genre = "fiction";
@@ -123,16 +123,17 @@ class LoadData < ActiveRecord::Migration
     n2.story = ts1b
     n2.save(:validate => false)
     
-    n3 = Node.new(:text => "<p>It's summer, one of those days that feels like walking through someone's warm, wet breath. A gross day. Jess is wandering around the fairgrounds with Barry Binninger, who's the son of his mom's friend Linda and who whines almost constantly. </p>
-<p>They're walking along the row of games. Jess only has a dollar, so he has to pick something he can win. The ring toss game is bullshit. He's seen probably twenty people lose their money on it since they got here. He's pretty sure the necks of the bottles are too big to toss a ring onto, anyway.</p>
+    n3 = Node.new(:text => "<p>It&apos;s summer, one of those days that feels like walking through someone&apos;s warm, wet breath. A gross day. Jess is wandering around the fairgrounds with Barry Binninger, who&apos;s the son of his mom&apos;s friend Linda and who whines almost constantly. </p>
+<p>They&apos;re walking along the row of games. Jess only has a dollar, so he has to pick something he can win. The ring toss game is bullshit. He&apos;s seen probably twenty people lose their money on it since they got here. He&apos;s pretty sure the necks of the bottles are too big to toss a ring onto, anyway.</p>
 <p>&quot;This place is a total rip-off.&quot; Barry scuffs his way toward the nearest bench and plops down like a pillowcase full of sand.</p>
-<p>Jess looks at the game next to him. The guy manning the booth is pretty sketchy -- red hair slicked back and a missing front tooth. He's holding a bow and arrow.</p>
+<p>Jess looks at the game next to him. The guy manning the booth is pretty sketchy -- red hair slicked back and a missing front tooth. He&apos;s holding a bow and arrow.</p>
 <p>&quot;Wanna try your luck?&quot; the booth guys says. &quot;Winner gets the best prize at the carnival.&quot; </p>
-<p>&quot;Yeah?&quot; Jess says. &quot;What's that? A teddy bear that doesn't smell like shit?&quot;</p>
-<p>The man cracks a smile. &quot;It's a mystery prize. Fifty cents to play.&quot;</p>
+<p>&quot;Yeah?&quot; Jess says. &quot;What&apos;s that? A teddy bear that doesn&apos;t smell like shit?&quot;</p>
+<p>The man cracks a smile. &quot;It&apos;s a mystery prize. Fifty cents to play.&quot;</p>
 <p>Jess is pretty sure he knows what a mystery prize is, and it involves twenty years of therapy after you leave the carnival. &quot;No thanks, man.&quot; </p>
-<p>He turns, and the man lurches forward and grabs his wrist. Jess turns to look at him. The man's eyes are so dilated that they're almost completely black. Jess' stomach lurches and he pulls his hand away.</p>
-<p>&quot;Take the bow,&quot; the man says, and Jess swallows. His heart is suddenly pounding, and he can't say why.</p>")
+<p>He turns, and the man lurches forward and grabs his wrist. Jess turns to look at him. The man&apos;s eyes are so dilated that they&apos;re almost completely black. Jess&apos; stomach lurches and he pulls his hand away.</p>
+<p>&quot;Take the bow,&quot; the man says, and Jess swallows. His heart is suddenly pounding, and he can&apos;t say why.</p>")
+
     n3.user = us3
     n3.truth = false
     n3.constraint_num = 0
@@ -141,16 +142,16 @@ class LoadData < ActiveRecord::Migration
     n3.save(:validate => false)
 
 
-    n4 = Node.new(:text => "<p>It's summer, one of those days that feels like walking through someone's warm, wet breath. A gross day. Jess is wandering around the fairgrounds with Barry Binninger, who's the son of his mom's friend Linda and who whines almost constantly. </p>
-<p>They're walking along the row of games. Jess only has a dollar, so he has to pick something he can win. The ring toss game is bullshit. He's seen probably twenty people lose their money on it since they got here. He's pretty sure the necks of the bottles are too big to toss a ring onto, anyway.</p>
+    n4 = Node.new(:text => "<p>It&apos;s summer, one of those days that feels like walking through someone&apos;s warm, wet breath. A gross day. Jess is wandering around the fairgrounds with Barry Binninger, who&apos;s the son of his mom&apos;s friend Linda and who whines almost constantly. </p>
+<p>They&apos;re walking along the row of games. Jess only has a dollar, so he has to pick something he can win. The ring toss game is bullshit. He&apos;s seen probably twenty people lose their money on it since they got here. He&apos;s pretty sure the necks of the bottles are too big to toss a ring onto, anyway.</p>
 <p>&quot;This place is a total rip-off.&quot; Barry scuffs his way toward the nearest bench and plops down like a pillowcase full of sand.</p>
-<p>Jess looks at the game next to him. The guy manning the booth is pretty sketchy -- red hair slicked back and a missing front tooth. He's holding a bow and arrow.</p>
+<p>Jess looks at the game next to him. The guy manning the booth is pretty sketchy -- red hair slicked back and a missing front tooth. He&apos;s holding a bow and arrow.</p>
 <p>&quot;Wanna try your luck?&quot; the booth guys says. &quot;Winner gets the best prize at the carnival.&quot; </p>
-<p>&quot;Yeah?&quot; Jess says. &quot;What's that? A teddy bear that doesn't smell like shit?&quot;</p>
-<p>The man cracks a smile. &quot;It's a mystery prize. Fifty cents to play.&quot;</p>
+<p>&quot;Yeah?&quot; Jess says. &quot;What&apos;s that? A teddy bear that doesn&apos;t smell like shit?&quot;</p>
+<p>The man cracks a smile. &quot;It&apos;s a mystery prize. Fifty cents to play.&quot;</p>
 <p>Jess is pretty sure he knows what a mystery prize is, and it involves twenty years of therapy after you leave the carnival. &quot;No thanks, man.&quot; </p>
-<p>He turns, and the man lurches forward and grabs his wrist. Jess turns to look at him. The man's eyes are so dilated that they're almost completely black. Jess' stomach lurches and he pulls his hand away.</p>
-<p>&quot;Take the bow,&quot; the man says, and Jess swallows. His heart is suddenly pounding, and he can't say why.</p>")
+<p>He turns, and the man lurches forward and grabs his wrist. Jess turns to look at him. The man&apos;s eyes are so dilated that they&apos;re almost completely black. Jess&apos; stomach lurches and he pulls his hand away.</p>
+<p>&quot;Take the bow,&quot; the man says, and Jess swallows. His heart is suddenly pounding, and he can&apos;t say why.</p>")
     n4.user = us3
     n4.truth = false
     n4.constraint_num = 0
@@ -230,25 +231,25 @@ The halls were narrow, meant more as conduits for wiring and piping than for peo
     n8.story = ts4b
     n8.save(:validate => false)
 
-    n9 = Node.new(:text => "<p>Charlie shows up at Emily's door, duffel bag in one hand, a crate of files in the other.</p>
+    n9 = Node.new(:text => "<p>Charlie shows up at Emily&apos;s door, duffel bag in one hand, a crate of files in the other.</p>
 
 <p>&quot;Damn, I missed you,&quot; Charlie laughs, tackling Emily and sitting on her. &quot;You and your grimace and your stupid hair.&quot; And Charlie ruffles her hair and kisses her on the temple, quick and annoying like, just a slobbery smack of lips on the forehead.</p>
 
 <p>&quot;Buy me dinner, now,&quot; he says then, standing up and offering her a hand.</p>
 
-<p>&quot;Okay?&quot; Emily blinks and slowly nods her head. Really, she can't think of anything else to do.</p>
+<p>&quot;Okay?&quot; Emily blinks and slowly nods her head. Really, she can&apos;t think of anything else to do.</p>
 
-<p>The next day, Emily wakes up with a cup of coffee on her nightstand and ice cold feet pressing hard into her knee under the covers. &quot;Move over,&quot; he says, sliding under the blankets and nudging Emily over not-quite-carefully. &quot;It's fucking freezing out there, Em. Have you never heard of that thing they call a heater?&quot;</p>
+<p>The next day, Emily wakes up with a cup of coffee on her nightstand and ice cold feet pressing hard into her knee under the covers. &quot;Move over,&quot; he says, sliding under the blankets and nudging Emily over not-quite-carefully. &quot;It&apos;s fucking freezing out there, Em. Have you never heard of that thing they call a heater?&quot;</p>
 
 <p>He hands Emily the cup of coffee and stretches dramatically, back popping and joints cracking and absolutely ruining her perfect morning silence. Emily stares at him over the rim of the cup. </p>
 
-<p>&quot;Your bed is awesome,&quot; he says, curling up and stealing Emily's pillow. &quot;Awesome. But your guest futon is a piece of shit.&quot; Charlie closes his eyes, bliss on his face. Emily drinks her coffee and watches him sleep for a half hour before kicking him the stomach and out of the bed.</p>
+<p>&quot;Your bed is awesome,&quot; he says, curling up and stealing Emily&apos;s pillow. &quot;Awesome. But your guest futon is a piece of shit.&quot; Charlie closes his eyes, bliss on his face. Emily drinks her coffee and watches him sleep for a half hour before kicking him the stomach and out of the bed.</p>
 
 <p>&quot;Out, asshole.&quot; Emily says, and alright, even Emily can admit that maybe some of the sting in the threat is lost after half an hour of almost cuddling, but whatever.</p> 
 
-<p>Charlie flips her off from where he's lying on the floor. &quot;You're watching Game of Thrones with me today. Don't even try to get out of it.&quot;</p>
+<p>Charlie flips her off from where he&apos;s lying on the floor. &quot;You&apos;re watching Game of Thrones with me today. Don&apos;t even try to get out of it.&quot;</p>
 
-<p>He languidly picks himself off the floor, and Emily's pretty sure she hears the cackle of laughter from the bathroom.</p>")
+<p>He languidly picks himself off the floor, and Emily&apos;s pretty sure she hears the cackle of laughter from the bathroom.</p>")
     n9.user = us3
     n9.truth = false
     n9.constraint_num = 0
@@ -256,25 +257,25 @@ The halls were narrow, meant more as conduits for wiring and piping than for peo
     n9.story = ts5a
     n9.save(:validate => false)
 
-    n10 = Node.new(:text => "<p>Charlie shows up at Emily's door, duffel bag in one hand, a crate of files in the other.</p>
+    n10 = Node.new(:text => "<p>Charlie shows up at Emily&apos;s door, duffel bag in one hand, a crate of files in the other.</p>
 
 <p>&quot;Damn, I missed you,&quot; Charlie laughs, tackling Emily and sitting on her. &quot;You and your grimace and your stupid hair.&quot; And Charlie ruffles her hair and kisses her on the temple, quick and annoying like, just a slobbery smack of lips on the forehead.</p>
 
 <p>&quot;Buy me dinner, now,&quot; he says then, standing up and offering her a hand.</p>
 
-<p>&quot;Okay?&quot; Emily blinks and slowly nods her head. Really, she can't think of anything else to do.</p>
+<p>&quot;Okay?&quot; Emily blinks and slowly nods her head. Really, she can&apos;t think of anything else to do.</p>
 
-<p>The next day, Emily wakes up with a cup of coffee on her nightstand and ice cold feet pressing hard into her knee under the covers. &quot;Move over,&quot; he says, sliding under the blankets and nudging Emily over not-quite-carefully. &quot;It's fucking freezing out there, Em. Have you never heard of that thing they call a heater?&quot;</p>
+<p>The next day, Emily wakes up with a cup of coffee on her nightstand and ice cold feet pressing hard into her knee under the covers. &quot;Move over,&quot; he says, sliding under the blankets and nudging Emily over not-quite-carefully. &quot;It&apos;s fucking freezing out there, Em. Have you never heard of that thing they call a heater?&quot;</p>
 
 <p>He hands Emily the cup of coffee and stretches dramatically, back popping and joints cracking and absolutely ruining her perfect morning silence. Emily stares at him over the rim of the cup. </p>
 
-<p>&quot;Your bed is awesome,&quot; he says, curling up and stealing Emily's pillow. &quot;Awesome. But your guest futon is a piece of shit.&quot; Charlie closes his eyes, bliss on his face. Emily drinks her coffee and watches him sleep for a half hour before kicking him the stomach and out of the bed.</p>
+<p>&quot;Your bed is awesome,&quot; he says, curling up and stealing Emily&apos;s pillow. &quot;Awesome. But your guest futon is a piece of shit.&quot; Charlie closes his eyes, bliss on his face. Emily drinks her coffee and watches him sleep for a half hour before kicking him the stomach and out of the bed.</p>
 
 <p>&quot;Out, asshole.&quot; Emily says, and alright, even Emily can admit that maybe some of the sting in the threat is lost after half an hour of almost cuddling, but whatever.</p> 
 
-<p>Charlie flips her off from where he's lying on the floor. &quot;You're watching Game of Thrones with me today. Don't even try to get out of it.&quot;</p>
+<p>Charlie flips her off from where he&apos;s lying on the floor. &quot;You&apos;re watching Game of Thrones with me today. Don&apos;t even try to get out of it.&quot;</p>
 
-<p>He languidly picks himself off the floor, and Emily's pretty sure she hears the cackle of laughter from the bathroom.</p>")
+<p>He languidly picks himself off the floor, and Emily&apos;s pretty sure she hears the cackle of laughter from the bathroom.</p>")
     n10.user = us3
     n10.truth = false
     n10.constraint_num = 0
@@ -286,15 +287,15 @@ The halls were narrow, meant more as conduits for wiring and piping than for peo
 
 <p>Over the next few weeks, Charlie and Emily work out a routine of living together. </p>
 
-<p>When Emily climbs out of bed in the morning, Charlie has a pot of coffee waiting for her, and a stack of buttered toast (she doesn't think he can make anything else). Emily will grab them both on the way out the door, grunt her thanks at Charlie, and forget her wallet and keys on the kitchen table. Charlie will chase her out of the apartment and shove them both in Emily's pockets before rushing back inside. Usually before the door closes, and he gets locked out. Sometimes not.</p>
+<p>When Emily climbs out of bed in the morning, Charlie has a pot of coffee waiting for her, and a stack of buttered toast (she doesn&apos;t think he can make anything else). Emily will grab them both on the way out the door, grunt her thanks at Charlie, and forget her wallet and keys on the kitchen table. Charlie will chase her out of the apartment and shove them both in Emily&apos;s pockets before rushing back inside. Usually before the door closes, and he gets locked out. Sometimes not.</p>
 
-<p>At first the whole thing is weird because this is Charlie, her acquaintance-friend for years now, and he does everything his own way, and it's not Emily's way. Emily ends up bitching about the wet towels on the bathroom floor and the weird hipster beers stacked in all her closets, and her now always-sad, empty refrigerator, but still, it's Charlie and so she can't really be all that pissed. </p>
+<p>At first the whole thing is weird because this is Charlie, her acquaintance-friend for years now, and he does everything his own way, and it&apos;s not Emily&apos;s way. Emily ends up bitching about the wet towels on the bathroom floor and the weird hipster beers stacked in all her closets, and her now always-sad, empty refrigerator, but still, it&apos;s Charlie and so she can&apos;t really be all that pissed. </p>
 
-<p>At night, they watch TV together and Charlie's got an opinion about everything. Emily's pretty sure that it's the polar opposite of her opinion on purpose, but she can't prove anything. They don't talk about their respective days at work, or even what they ate for lunch. Instead, they spend an hour debating Jaime and Cersei and who conceded to whom, and Charlie won't shut the fuck up until Emily storms out of the room, slamming her door shut and barricading herself in, promising herself over and over until most of an hour later that she will never again watch GoT with Charlie.</p>
+<p>At night, they watch TV together and Charlie&apos;s got an opinion about everything. Emily&apos;s pretty sure that it&apos;s the polar opposite of her opinion on purpose, but she can&apos;t prove anything. They don&apos;t talk about their respective days at work, or even what they ate for lunch. Instead, they spend an hour debating Jaime and Cersei and who conceded to whom, and Charlie won&apos;t shut the fuck up until Emily storms out of the room, slamming her door shut and barricading herself in, promising herself over and over until most of an hour later that she will never again watch GoT with Charlie.</p>
 
 <p>At least until next week.</p>
 
-<p>She figures that at some point, she should probably why Charlie's here or, even better, why Charlie's apparently decided to move in with her. When Charlie shows up the next day with a crock pot, she figures it's time to broach the subject. </p>")
+<p>She figures that at some point, she should probably why Charlie&apos;s here or, even better, why Charlie&apos;s apparently decided to move in with her. When Charlie shows up the next day with a crock pot, she figures it&apos;s time to broach the subject. </p>")
     n11.user = us3
     n11.truth = false
     n11.constraint_num = 0
@@ -306,15 +307,15 @@ The halls were narrow, meant more as conduits for wiring and piping than for peo
 
 <p>Over the next few weeks, Charlie and Emily work out a routine of living together. </p>
 
-<p>When Emily climbs out of bed in the morning, Charlie has a pot of coffee waiting for her, and a stack of buttered toast (she doesn't think he can make anything else). Emily will grab them both on the way out the door, grunt her thanks at Charlie, and forget her wallet and keys on the kitchen table. Charlie will chase her out of the apartment and shove them both in Emily's pockets before rushing back inside. Usually before the door closes, and he gets locked out. Sometimes not.</p>
+<p>When Emily climbs out of bed in the morning, Charlie has a pot of coffee waiting for her, and a stack of buttered toast (she doesn&apos;t think he can make anything else). Emily will grab them both on the way out the door, grunt her thanks at Charlie, and forget her wallet and keys on the kitchen table. Charlie will chase her out of the apartment and shove them both in Emily&apos;s pockets before rushing back inside. Usually before the door closes, and he gets locked out. Sometimes not.</p>
 
-<p>At first the whole thing is weird because this is Charlie, her acquaintance-friend for years now, and he does everything his own way, and it's not Emily's way. Emily ends up bitching about the wet towels on the bathroom floor and the weird hipster beers stacked in all her closets, and her now always-sad, empty refrigerator, but still, it's Charlie and so she can't really be all that pissed. </p>
+<p>At first the whole thing is weird because this is Charlie, her acquaintance-friend for years now, and he does everything his own way, and it&apos;s not Emily&apos;s way. Emily ends up bitching about the wet towels on the bathroom floor and the weird hipster beers stacked in all her closets, and her now always-sad, empty refrigerator, but still, it&apos;s Charlie and so she can&apos;t really be all that pissed. </p>
 
-<p>At night, they watch TV together and Charlie's got an opinion about everything. Emily's pretty sure that it's the polar opposite of her opinion on purpose, but she can't prove anything. They don't talk about their respective days at work, or even what they ate for lunch. Instead, they spend an hour debating Jaime and Cersei and who conceded to whom, and Charlie won't shut the fuck up until Emily storms out of the room, slamming her door shut and barricading herself in, promising herself over and over until most of an hour later that she will never again watch GoT with Charlie.</p>
+<p>At night, they watch TV together and Charlie&apos;s got an opinion about everything. Emily&apos;s pretty sure that it&apos;s the polar opposite of her opinion on purpose, but she can&apos;t prove anything. They don&apos;t talk about their respective days at work, or even what they ate for lunch. Instead, they spend an hour debating Jaime and Cersei and who conceded to whom, and Charlie won&apos;t shut the fuck up until Emily storms out of the room, slamming her door shut and barricading herself in, promising herself over and over until most of an hour later that she will never again watch GoT with Charlie.</p>
 
 <p>At least until next week.</p>
 
-<p>She figures that at some point, she should probably why Charlie's here or, even better, why Charlie's apparently decided to move in with her. When Charlie shows up the next day with a crock pot, she figures it's time to broach the subject. </p>")
+<p>She figures that at some point, she should probably why Charlie&apos;s here or, even better, why Charlie&apos;s apparently decided to move in with her. When Charlie shows up the next day with a crock pot, she figures it&apos;s time to broach the subject. </p>")
     n12.user = us3
     n12.truth = false
     n12.constraint_num = 0
@@ -322,18 +323,19 @@ The halls were narrow, meant more as conduits for wiring and piping than for peo
     n12.story = ts5b
     n12.save(:validate => false)
 
+<<<<<<< HEAD
 
     # branching nodes
 
-    n3_2 = Node.new(:text => "<p>Barry grabs at his arm, and the touch shocks him out of the paralysis.  &quot;I don't think so,&quot; he tells the man, and turns to walk away. </p><p>Barry doesn't follow.  Jess turns back, his friend's name on his lips dying away at the smirk on the carnie's face.  The man's dilated pupils have swallowed his eyes whole, and Jess thinks he sees stars glinting in the emptiness.  &quot;Take the bow,&quot; he says, and his voice echoes like the rolling thunder of a rocket launch. </p><p>Jess shudders, stumbling into Barry.  His friend is frozen, mouth half open in some smart-alec comment.  The whole fair is frozen, silence pouring into the void spreading from around the booth guy.  The bow hangs between them, balanced eerily across the flat of the man's upheld hand. </p><p>Jess takes hold of it, and knocks the arrow the man offers, accompanied by a gappy grin. &quot;Good boy,&quot; he says, and the words riccochet off Jess's ears until his head is reverberating with echoes. </p><p>He draws the bow back, imitating that Jeremy Renner.  If that blond guy in the Avengers could do this falling off a building, surely he can.  His arm shakes with the effort,  and Jess's brain reminds him that movies have CGI and props.  What the hell is with this bow? It shouldn't be this hard to pull. </p><p>He lets go before he reaches full draw, his muscles rebelling. The arrow flies off the string, straight towards the booth guy.  Jess gasps as the string slaps his arm, carving a red welt across his skin, and the arrow passes through the guy and disappears. </p><p>The carnie laughs, and the world starts moving again.  He snatches the bow back from Jess, cackling.  &quot;Good shot, boy.  Good shot.  That one'll come back to you someday, believe it. Don't forget to thank me when it does.&quot;  He winks. </p> ")
-    n3_2.user = us3
-    n3_2.truth = false
-    n3_2.constraint_num = 0
-    n3_2.truth_height = 1
-    n3_2.story = ts2a
-    n3_2.save(:validate => false)
+    n13 = Node.new(:text => "<p>Barry grabs at his arm, and the touch shocks him out of the paralysis.  &quot;I don't think so,&quot; he tells the man, and turns to walk away. </p><p>Barry doesn't follow.  Jess turns back, his friend's name on his lips dying away at the smirk on the carnie's face.  The man's dilated pupils have swallowed his eyes whole, and Jess thinks he sees stars glinting in the emptiness.  &quot;Take the bow,&quot; he says, and his voice echoes like the rolling thunder of a rocket launch. </p><p>Jess shudders, stumbling into Barry.  His friend is frozen, mouth half open in some smart-alec comment.  The whole fair is frozen, silence pouring into the void spreading from around the booth guy.  The bow hangs between them, balanced eerily across the flat of the man's upheld hand. </p><p>Jess takes hold of it, and knocks the arrow the man offers, accompanied by a gappy grin. &quot;Good boy,&quot; he says, and the words riccochet off Jess's ears until his head is reverberating with echoes. </p><p>He draws the bow back, imitating that Jeremy Renner.  If that blond guy in the Avengers could do this falling off a building, surely he can.  His arm shakes with the effort,  and Jess's brain reminds him that movies have CGI and props.  What the hell is with this bow? It shouldn't be this hard to pull. </p><p>He lets go before he reaches full draw, his muscles rebelling. The arrow flies off the string, straight towards the booth guy.  Jess gasps as the string slaps his arm, carving a red welt across his skin, and the arrow passes through the guy and disappears. </p><p>The carnie laughs, and the world starts moving again.  He snatches the bow back from Jess, cackling.  &quot;Good shot, boy.  Good shot.  That one'll come back to you someday, believe it. Don't forget to thank me when it does.&quot;  He winks. </p> ")
+    n13.user = us3
+    n13.truth = false
+    n13.constraint_num = 0
+    n13.truth_height = 1
+    n13.story = ts2a
+    n13.save(:validate => false)
 
-    n3_3 = Node.new(:text => "<p>He nods and reaches for the bow. In the background, he can hear Barry whining faintly -- &quot;hey man, don't spend all your money here&quot; -- but the words are like waves lapping softly against him. He can only focus on the bow as the man places it into his hands. </p>
+    n14 = Node.new(:text => "<p>He nods and reaches for the bow. In the background, he can hear Barry whining faintly -- &quot;hey man, don't spend all your money here&quot; -- but the words are like waves lapping softly against him. He can only focus on the bow as the man places it into his hands. </p>
 <p>&quot;Aim at heaven,&quot; the man says.</p>
 <p>Jess has only fired a bow in gym, and he wasn't even good at it then. But the arrow slides into place naturally. The pull of his shoulder muscle feels practiced and sure. He releases the arrow and watches as it soars up, up -- impossibly high, over the carnival tent and out of sight.</p>
 <p>Adrenaline rushes out of him and he looks down at the bow. He suddenly feels like he's about to cry. It's the hollow, melancholy feeling of someone revealing the end of a book when you're halfway through. It pierces him cleanly.</p>
@@ -342,22 +344,22 @@ The halls were narrow, meant more as conduits for wiring and piping than for peo
 <p>Jess can't breathe. He gasps, a few ragged breaths. &quot;Keep the money,&quot; he says, and turns away. He stumbles toward the Ferris wheel, and then he's running, running hysterically, out into the parking lot.</p>
 <p>Barry finds him bent double over a red Honda Civic, panting. &quot;Hey man, not cool,&quot; Barry says. &quot;You can't just take off like that.&quot;</p>
 :quot<p>Jess looks back at the fair. The Ferris wheel glints in the ordinary late afternoon light, and in the sky, the trace of an airplane's tail shoots northward. </p>")
-    n3_3.user = us3
-    n3_3.truth = false
-    n3_3.constraint_num = 0
-    n3_3.truth_height = 1
-    n3_3.story = ts2a
-    n3_3.save(:validate => false)
+    n14.user = us3
+    n14.truth = false
+    n14.constraint_num = 0
+    n14.truth_height = 1
+    n14.story = ts2a
+    n14.save(:validate => false)
 
-    n4_2 = Node.new(:text => "<p>Barry grabs at his arm, and the touch shocks him out of the paralysis.  &quot;I don't think so,&quot; he tells the man, and turns to walk away. </p><p>Barry doesn't follow.  Jess turns back, his friend's name on his lips dying away at the smirk on the carnie's face.  The man's dilated pupils have swallowed his eyes whole, and Jess thinks he sees stars glinting in the emptiness.  &quot;Take the bow,&quot; he says, and his voice echoes like the rolling thunder of a rocket launch. </p><p>Jess shudders, stumbling into Barry.  His friend is frozen, mouth half open in some smart-alec comment.  The whole fair is frozen, silence pouring into the void spreading from around the booth guy.  The bow hangs between them, balanced eerily across the flat of the man's upheld hand. </p><p>Jess takes hold of it, and knocks the arrow the man offers, accompanied by a gappy grin. &quot;Good boy,&quot; he says, and the words riccochet off Jess's ears until his head is reverberating with echoes. </p><p>He draws the bow back, imitating that Jeremy Renner.  If that blond guy in the Avengers could do this falling off a building, surely he can.  His arm shakes with the effort,  and Jess's brain reminds him that movies have CGI and props.  What the hell is with this bow? It shouldn't be this hard to pull. </p><p>He lets go before he reaches full draw, his muscles rebelling. The arrow flies off the string, straight towards the booth guy.  Jess gasps as the string slaps his arm, carving a red welt across his skin, and the arrow passes through the guy and disappears. </p><p>The carnie laughs, and the world starts moving again.  He snatches the bow back from Jess, cackling.  &quot;Good shot, boy.  Good shot.  That one'll come back to you someday, believe it. Don't forget to thank me when it does.&quot;  He winks. </p> ")
-    n4_2.user = us3
-    n4_2.truth = false
-    n4_2.constraint_num = 0
-    n4_2.truth_height = 1
-    n4_2.story = ts2b
-    n4_2.save(:validate => false)
+    n15 = Node.new(:text => "<p>Barry grabs at his arm, and the touch shocks him out of the paralysis.  &quot;I don't think so,&quot; he tells the man, and turns to walk away. </p><p>Barry doesn't follow.  Jess turns back, his friend's name on his lips dying away at the smirk on the carnie's face.  The man's dilated pupils have swallowed his eyes whole, and Jess thinks he sees stars glinting in the emptiness.  &quot;Take the bow,&quot; he says, and his voice echoes like the rolling thunder of a rocket launch. </p><p>Jess shudders, stumbling into Barry.  His friend is frozen, mouth half open in some smart-alec comment.  The whole fair is frozen, silence pouring into the void spreading from around the booth guy.  The bow hangs between them, balanced eerily across the flat of the man's upheld hand. </p><p>Jess takes hold of it, and knocks the arrow the man offers, accompanied by a gappy grin. &quot;Good boy,&quot; he says, and the words riccochet off Jess's ears until his head is reverberating with echoes. </p><p>He draws the bow back, imitating that Jeremy Renner.  If that blond guy in the Avengers could do this falling off a building, surely he can.  His arm shakes with the effort,  and Jess's brain reminds him that movies have CGI and props.  What the hell is with this bow? It shouldn't be this hard to pull. </p><p>He lets go before he reaches full draw, his muscles rebelling. The arrow flies off the string, straight towards the booth guy.  Jess gasps as the string slaps his arm, carving a red welt across his skin, and the arrow passes through the guy and disappears. </p><p>The carnie laughs, and the world starts moving again.  He snatches the bow back from Jess, cackling.  &quot;Good shot, boy.  Good shot.  That one'll come back to you someday, believe it. Don't forget to thank me when it does.&quot;  He winks. </p> ")
+    n15.user = us3
+    n15.truth = false
+    n15.constraint_num = 0
+    n15.truth_height = 1
+    n15.story = ts2b
+    n15.save(:validate => false)
 
-    n4_3 = Node.new(:text => "<p>He nods and reaches for the bow. In the background, he can hear Barry whining faintly -- &quot;hey man, don't spend all your money here&quot; -- but the words are like waves lapping softly against him. He can only focus on the bow as the man places it into his hands. </p>
+    n16 = Node.new(:text => "<p>He nods and reaches for the bow. In the background, he can hear Barry whining faintly -- &quot;hey man, don't spend all your money here&quot; -- but the words are like waves lapping softly against him. He can only focus on the bow as the man places it into his hands. </p>
 <p>&quot;Aim at heaven,&quot; the man says.</p>
 <p>Jess has only fired a bow in gym, and he wasn't even good at it then. But the arrow slides into place naturally. The pull of his shoulder muscle feels practiced and sure. He releases the arrow and watches as it soars up, up -- impossibly high, over the carnival tent and out of sight.</p>
 <p>Adrenaline rushes out of him and he looks down at the bow. He suddenly feels like he's about to cry. It's the hollow, melancholy feeling of someone revealing the end of a book when you're halfway through. It pierces him cleanly.</p>
@@ -366,12 +368,44 @@ The halls were narrow, meant more as conduits for wiring and piping than for peo
 <p>Jess can't breathe. He gasps, a few ragged breaths. &quot;Keep the money,&quot; he says, and turns away. He stumbles toward the Ferris wheel, and then he's running, running hysterically, out into the parking lot.</p>
 <p>Barry finds him bent double over a red Honda Civic, panting. &quot;Hey man, not cool,&quot; Barry says. &quot;You can't just take off like that.&quot;</p>
 :quot<p>Jess looks back at the fair. The Ferris wheel glints in the ordinary late afternoon light, and in the sky, the trace of an airplane's tail shoots northward. </p>")
-    n4_3.user = us3
-    n4_3.truth = false
-    n4_3.constraint_num = 0
-    n4_3.truth_height = 1
-    n4_3.story = ts2b
-    n4_3.save(:validate => false)
+    n16.user = us3
+    n16.truth = false
+    n16.constraint_num = 0
+    n16.truth_height = 1
+    n16.story = ts2b
+    n16.save(:validate => false)
+
+    n17 = Node.new(:text => "<p>I squinted over at the clock and groaned. Sixteen more minutes before migration. It couldn&apos;t come soon enough. This time, the habitation had ended with a raucous New Year&apos;s party that lasted almost three days- starting from the obligatory gathering on December 31st, and lasting through New Year&apos;s Day, Then the next, and on into the wee hours of this morning. Say what you want, but steel workers can party. Shedding this body also meant shedding this hangover, and that wasn&apos;t a bad thing. Whoever moves in here is off to a rough start, I suppose, but nothing that can&apos;t be dealt with. Switchers are a resilient bunch.</p>
+
+<p>I&apos;ve been switching since birth. I don&apos;t know how many of us there are, but I know I&apos;m not the only one. Instinctively, we know who the others are when we see them, and we know not to tell the &quot;statics&quot; about what we are. It&apos;s something you are born with, or are not. Every year, you switch. You become someone else. Generally, the body you switch to is roughly the same age as you are chronologically, but that seems to be the only rule. My first four in a row were boys, then with the fifth one, I was introduced to a whole new set of plumbing. I have been white, black, asian, fat, skinny, a parapalegic, and pregnant twice, given birth once. I have been hosted in nineteen different countries in twenty seven years. I quit speculating on what&apos;s in store for me years ago.</p>
+
+<p>The odd thing is, you bring your own memories with you, and acquire the memories of the host...which is, I suppose, pretty handy. You switch in to a new life, and know what you need to know to get by, for the most part. As a five year old, I knew that my mommy was named Karen, Dad was Steve, and I had three older brothers, one of whom picked on me a lot. As a nineteen year old, My boyfriend was Kevin, and I emerged with the same affection for him as my predecessor did, even though my previous switch had been as a junior college pitcher in Wisconsin.</p>
+
+<p>This past year has been pretty interesting. I&apos;m currently a steel worker in Buffalo, New York, and have been gainfully employed for the past year. The year before that, I was a waitress in a tiki bar in Key West. Before that, a car salesman in Chicago, and before that, a floor trader at the New York Stock exchange. I&apos;ve been a surgical resident, a point guard in the Italian version of the NBA, and a stay at home mom. I spent a year as a heroin addict that ended up with me in county jail.
+Would I be a male? Female? American? (That year as a Syrian Rebel kinda sucked, by the way.) I didn&apos;t know, and I didn&apos;t speculate. I only knew I&apos;d be roughly 27 years old, give or take.</p>
+")
+    n17.user = us3
+    n17.truth = false
+    n17.constraint_num = 0
+    n17.truth_height = 1
+    n17.story = ts6a
+    n17.save(:validate => false)
+
+    n18 = Node.new(:text => "<p>I squinted over at the clock and groaned. Sixteen more minutes before migration. It couldn&apos;t come soon enough. This time, the habitation had ended with a raucous New Year&apos;s party that lasted almost three days- starting from the obligatory gathering on December 31st, and lasting through New Year&apos;s Day, Then the next, and on into the wee hours of this morning. Say what you want, but steel workers can party. Shedding this body also meant shedding this hangover, and that wasn&apos;t a bad thing. Whoever moves in here is off to a rough start, I suppose, but nothing that can&apos;t be dealt with. Switchers are a resilient bunch.</p>
+
+<p>I&apos;ve been switching since birth. I don&apos;t know how many of us there are, but I know I&apos;m not the only one. Instinctively, we know who the others are when we see them, and we know not to tell the &quot;statics&quot; about what we are. It&apos;s something you are born with, or are not. Every year, you switch. You become someone else. Generally, the body you switch to is roughly the same age as you are chronologically, but that seems to be the only rule. My first four in a row were boys, then with the fifth one, I was introduced to a whole new set of plumbing. I have been white, black, asian, fat, skinny, a parapalegic, and pregnant twice, given birth once. I have been hosted in nineteen different countries in twenty seven years. I quit speculating on what&apos;s in store for me years ago.</p>
+
+<p>The odd thing is, you bring your own memories with you, and acquire the memories of the host...which is, I suppose, pretty handy. You switch in to a new life, and know what you need to know to get by, for the most part. As a five year old, I knew that my mommy was named Karen, Dad was Steve, and I had three older brothers, one of whom picked on me a lot. As a nineteen year old, My boyfriend was Kevin, and I emerged with the same affection for him as my predecessor did, even though my previous switch had been as a junior college pitcher in Wisconsin.</p>
+
+<p>This past year has been pretty interesting. I&apos;m currently a steel worker in Buffalo, New York, and have been gainfully employed for the past year. The year before that, I was a waitress in a tiki bar in Key West. Before that, a car salesman in Chicago, and before that, a floor trader at the New York Stock exchange. I&apos;ve been a surgical resident, a point guard in the Italian version of the NBA, and a stay at home mom. I spent a year as a heroin addict that ended up with me in county jail.
+Would I be a male? Female? American? (That year as a Syrian Rebel kinda sucked, by the way.) I didn&apos;t know, and I didn&apos;t speculate. I only knew I&apos;d be roughly 27 years old, give or take.</p>
+")
+    n18.user = us3
+    n18.truth = false
+    n18.constraint_num = 0
+    n18.truth_height = 1
+    n18.story = ts6b
+    n18.save(:validate => false)
 
     l1 = Link.new(:story_id => 9, :source => 9, :target => 11)
     l1.save(:validate => false)
@@ -400,7 +434,7 @@ The halls were narrow, meant more as conduits for wiring and piping than for peo
     c3 = Constraint.new(:story_id => 1, :title => "Family Ties", :text => "Hermione is put in a situation in which she must decide: save her family? Or the wizards?", :constraint_num =>2 )
     c3.save
 
-    c4 = Constraint.new(:story_id => 1, :title => "Allegiances", :text => "'Harry, muggles abused you as a child. How can you support them now? Why do you protect them?'", :constraint_num =>3 )
+    c4 = Constraint.new(:story_id => 1, :title => "Allegiances", :text => "&apos;Harry, muggles abused you as a child. How can you support them now? Why do you protect them?&apos;", :constraint_num =>3 )
     c4.save
 
     c5 = Constraint.new(:story_id => 1, :title => "Taken", :text => "Hermione strained against her shackles. She wondered if there was anyone left who would come for her.", :constraint_num =>4 )
@@ -454,35 +488,35 @@ The halls were narrow, meant more as conduits for wiring and piping than for peo
     c45.save
 
 
-    c51 = Constraint.new(:story_id => 9, :title => "Move-in", :text => "Charlie hangs a Bruce Springsteen poster in Emily's room, then puts a toothbrush in the restroom, clothes in the closet...", :constraint_num => 0 )
+    c51 = Constraint.new(:story_id => 9, :title => "Move-in", :text => "Charlie hangs a Bruce Springsteen poster in Emily&apos;s room, then puts a toothbrush in the restroom, clothes in the closet...", :constraint_num => 0 )
     c51.save
 
-    c52 = Constraint.new(:story_id => 9, :title => "Push; Shove", :text => "Over dinner, Emily tells Charlie that she's moving to Brooklyn. She is lying.", :constraint_num => 1 )
+    c52 = Constraint.new(:story_id => 9, :title => "Push; Shove", :text => "Over dinner, Emily tells Charlie that she&apos;s moving to Brooklyn. She is lying.", :constraint_num => 1 )
     c52.save
 
     c53 = Constraint.new(:story_id => 9, :title => "Conflict of Interest", :text => "Emily discovers that Charlie is actually her elusive, rarely-seen boss.", :constraint_num =>2 )
     c53.save
 
-    c54 = Constraint.new(:story_id => 9, :title => "Go For It", :text => "If Emily and Charlie aren't together, one of them goes for it. If they are, one of them goes for the urge to kiss another", :constraint_num =>3 )
+    c54 = Constraint.new(:story_id => 9, :title => "Go For It", :text => "If Emily and Charlie aren&apos;t together, one of them goes for it. If they are, one of them goes for the urge to kiss another", :constraint_num =>3 )
     c54.save
 
     c55 = Constraint.new(:story_id => 9, :title => "Removal", :text => "Emily removes the Bruce Springsteen poster from her wall.", :constraint_num =>4 )
     c55.save
 
 
-    c61 = Constraint.new(:story_id => 11, :title => "", :text => "", :constraint_num => 0 )
+    c61 = Constraint.new(:story_id => 11, :title => "Baggage", :text => "Wow. I&apos;d never had to deal with this sort of baggage before.", :constraint_num => 0 )
     c61.save
 
-    c62 = Constraint.new(:story_id => 11, :title => "", :text => "", :constraint_num => 1 )
+    c62 = Constraint.new(:story_id => 11, :title => "Intuition", :text => "She smiled a winning smile. I was immediately drawn to her, but intuition and 27 people&apos;s experiences warned me to hold back.", :constraint_num => 1 )
     c62.save
 
-    c63 = Constraint.new(:story_id => 11, :title => "", :text => "", :constraint_num =>2 )
+    c63 = Constraint.new(:story_id => 11, :title => "Danger/Luck", :text => "Thank god. The gun had misfired.", :constraint_num =>2 )
     c63.save
 
-    c64 = Constraint.new(:story_id => 11, :title => "", :text => "", :constraint_num =>3 )
+    c64 = Constraint.new(:story_id => 11, :title => "Back Again", :text => "I never thought I&apos;d be back here, in this hellhole. But here I was, and I needed to make a plan.", :constraint_num =>3 )
     c64.save
 
-    c65 = Constraint.new(:story_id => 11, :title => "", :text => "", :constraint_num =>4 )
+    c65 = Constraint.new(:story_id => 11, :title => "Truth", :text => "I&apos;d never questioned *why* I was the way I was, but now the truth, unbidden, had revealed itself to me.", :constraint_num =>4 )
     c65.save
 
   end
