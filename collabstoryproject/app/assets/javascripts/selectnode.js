@@ -359,10 +359,8 @@ function display_graph(json_data) {
 			      	  		return node_annotation;
 			      	  	} else if (d.text.indexOf("<p>") == 0) {
 			      	  		// alert("ABBREVIATE!");
-			      	  		alert(decodeURI(d.text.substring(3, 18) + "..."));
 			      	  		return decodeURI(d.text.substring(3, 18) + "...");
 			      	  	}
-			      	  	alert(decodeURI(d.text.substring(0, 15) + "..."));
 			      		return decodeURI(d.text.substring(0, 15) + "..."); 
 			      	  });
 					editing = false;
