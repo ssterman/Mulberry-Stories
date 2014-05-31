@@ -7,6 +7,7 @@ var currNode = null;
 var currLink = null;
 var opened_node = null;
 var selected_ids = null;
+var constraints_on = true;
 
 //these are global vars for controlling panning
 var panX = 0;
@@ -39,6 +40,11 @@ function display_graph(json_data) {
 
 	var color = d3.scale.category20();
 	console.log(json_data);
+	if (json_data.constraints.length == 0) {
+		constraints_on = false;
+		$("#add_constraint").hide();
+		$("#constraint-bar").hide();
+	}
 
 	// mouse event vars
 	var selected_node = null,
@@ -216,21 +222,23 @@ function display_graph(json_data) {
 	}
 
 	function updateConstraintBar(index) {
-		$(".constraint").removeClass("constraint-finished");
-		$(".constraint").removeClass("constraint-selected");
-		$( ".constraint-tabs-list li:eq(" + index + ")" ).addClass("constraint-selected");
-		$( ".constraint-selected" ).prevAll().addClass("constraint-finished");
+		if (constraints_on) {
+			$(".constraint").removeClass("constraint-finished");
+			$(".constraint").removeClass("constraint-selected");
+			$( ".constraint-tabs-list li:eq(" + index + ")" ).addClass("constraint-selected");
+			$( ".constraint-selected" ).prevAll().addClass("constraint-finished");
 
-			// setup constraints bar text
-		$(".constraint").each(function( i ) {
-			//console.log(json_data);
-			if (i <= index) {
-  				$(this).text(json_data.constraints[i].title.toUpperCase());
-  			} else {
-  				var str = "Event " + (i + 1);
-  				$(this).text(str.toUpperCase());
-  			}
-		});
+				// setup constraints bar text
+			$(".constraint").each(function( i ) {
+				//console.log(json_data);
+				if (i <= index) {
+	  				$(this).text(json_data.constraints[i].title.toUpperCase());
+	  			} else {
+	  				var str = "Event " + (i + 1);
+	  				$(this).text(str.toUpperCase());
+	  			}
+			});	
+		}
 	}
 
 	//constraints on multiselect paths
@@ -350,10 +358,11 @@ function display_graph(json_data) {
 			      	  		return node_annotation;
 			      	  	} else if (d.text.indexOf("<p>") == 0) {
 			      	  		// alert("ABBREVIATE!");
-			      	  		return d.text.substring(3, 18) + "...";
+			      	  		alert(decodeURI(d.text.substring(3, 18) + "..."));
+			      	  		return decodeURI(d.text.substring(3, 18) + "...");
 			      	  	}
-			      	  	// alert("RETURN!");
-			      		return d.text.substring(0, 15) + "..."; 
+			      	  	alert(decodeURI(d.text.substring(0, 15) + "..."));
+			      		return decodeURI(d.text.substring(0, 15) + "..."); 
 			      	  });
 					editing = false;
 					reset_node_data(curStoryId);
@@ -610,7 +619,7 @@ function display_graph(json_data) {
       	  	} else if (d.annotation && d.annotation != "") {
       	  		return d.annotation;
       	  	} else if (d.text.indexOf("<p>") == 0) {
-      	  		return d.text.substring(3, 18) + "..."; 
+      	  		return unescape(d.text.substring(3, 18) + "..."); 
       	  	} else {
       			return d.text.substring(0, 15) + "..."; 
       		}
