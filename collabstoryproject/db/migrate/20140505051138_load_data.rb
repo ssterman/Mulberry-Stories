@@ -199,7 +199,15 @@ The halls were narrow, meant more as conduits for wiring and piping than for peo
     n6.save(:validate => false)
 
 
-    n7 = Node.new(:text => "")
+    n7 = Node.new(:text => "<p>&ldquo;Mail&rsquo;s here.&rdquo;</p>
+<p> Jamie tossed the stack of letters on the kitchen table, dropping her jacket across the back of a chair and bending down to unlace her muddy boots.  Lee leaned against the sink, his back to her, a shadow against the pale glow of dusk that had clawed its way into the alley and through their kitchen window. Soap suds spotted his arms, sleeves pushed up to his elbows, but the sink had drained to empty. &ldquo;Power&rsquo;s out again.&rdquo; </p>
+<p>&ldquo;You okay?&rdquo; Jamie toggled the light switch, not disbelieving him, but trying anyway.  The elevator had been out on the way up, but that wasn&rsquo;t altogether uncommon. The bulb on the ceiling stayed stubbornly dark; the apartment oddly quiet without the hum of appliances or music from the neighbors&rsquo; stereo thumping through the walls. </p>
+<p>Lee&rsquo;s shoulders slumped a bit.  The water hissed on and he rinsed his hands off, patting them dry with a towel.  &ldquo;Dinner&rsquo;s in the fridge,&rdquo; he said. &ldquo;Anything other than bills?&rdquo; </p>
+<p>Jamie blew out a slow breath, letting frustration seep out with the air.  She flipped through envelopes and junk magazines, sorting the pile into crap and bills. </p> 
+<p>&ldquo;Something,&rdquo; she said, squinting at a long envelope with an official seal on the front.  It was too dark to make out clearly. &ldquo;Looks like jury duty.&rdquo; She held it out. </p>
+<p>Lee took it from the far end, his fingers staying a letter&rsquo;s length from hers.  She saw the distance more clearly than the words on the envelope, watching his hands as he moved to the window to tilt it to the fading light.  Paper tearing joined the drip of the faucet in the heavy silence of the power outage. </p>
+<p>The letter drifted down like a wilted leaf to settle in the damp sink. Lee turned to her, and his eyes had more expression in them than he&rsquo;d shown her in weeks. For a moment, something almost like happiness thrilled through her. </p>
+<p>&ldquo;We&rsquo;ve been called up,&rdquo; he said, and her stomach turned to stone. &ldquo;We&rsquo;ve been called to the Arena.&rdquo; </p>")
     n7.user = us3
     n7.truth = false
     n7.constraint_num = 0
@@ -207,7 +215,15 @@ The halls were narrow, meant more as conduits for wiring and piping than for peo
     n7.story = ts4a
     n7.save(:validate => false)
 
-    n8 = Node.new(:text => "")
+    n8 = Node.new(:text => "<p>&ldquo;Mail&rsquo;s here.&rdquo;</p>
+<p> Jamie tossed the stack of letters on the kitchen table, dropping her jacket across the back of a chair and bending down to unlace her muddy boots.  Lee leaned against the sink, his back to her, a shadow against the pale glow of dusk that had clawed its way into the alley and through their kitchen window. Soap suds spotted his arms, sleeves pushed up to his elbows, but the sink had drained to empty. &ldquo;Power&rsquo;s out again.&rdquo; </p>
+<p>&ldquo;You okay?&rdquo; Jamie toggled the light switch, not disbelieving him, but trying anyway.  The elevator had been out on the way up, but that wasn&rsquo;t altogether uncommon. The bulb on the ceiling stayed stubbornly dark; the apartment oddly quiet without the hum of appliances or music from the neighbors&rsquo; stereo thumping through the walls. </p>
+<p>Lee&rsquo;s shoulders slumped a bit.  The water hissed on and he rinsed his hands off, patting them dry with a towel.  &ldquo;Dinner&rsquo;s in the fridge,&rdquo; he said. &ldquo;Anything other than bills?&rdquo; </p>
+<p>Jamie blew out a slow breath, letting frustration seep out with the air.  She flipped through envelopes and junk magazines, sorting the pile into crap and bills. </p> 
+<p>&ldquo;Something,&rdquo; she said, squinting at a long envelope with an official seal on the front.  It was too dark to make out clearly. &ldquo;Looks like jury duty.&rdquo; She held it out. </p>
+<p>Lee took it from the far end, his fingers staying a letter&rsquo;s length from hers.  She saw the distance more clearly than the words on the envelope, watching his hands as he moved to the window to tilt it to the fading light.  Paper tearing joined the drip of the faucet in the heavy silence of the power outage. </p>
+<p>The letter drifted down like a wilted leaf to settle in the damp sink. Lee turned to her, and his eyes had more expression in them than he&rsquo;d shown her in weeks. For a moment, something almost like happiness thrilled through her. </p>
+<p>&ldquo;We&rsquo;ve been called up,&rdquo; he said, and her stomach turned to stone. &ldquo;We&rsquo;ve been called to the Arena.&rdquo; </p>")
     n8.user = us3
     n8.truth = false
     n8.constraint_num = 0
