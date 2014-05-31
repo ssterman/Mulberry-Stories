@@ -108,6 +108,7 @@ class LoadData < ActiveRecord::Migration
   	n1.story = ts1a
   	n1.save(:validate => false)
 
+
     n2 = Node.new(:text => "<p>&ldquo;But the Ministry forbade you from doing this,&rdquo; Harry hissed. &ldquo;Even McGonagall said no!&rdquo; He glanced over his shoulder again, but they would have heard anyone coming up the astronomy tower stairs, and he and Hermione were still alone.</p>
 
 <p>&ldquo;I&rsquo;ve already done it, Harry.&rdquo; Hermione&rsquo;s earnestness had always been a bit scary, but she&rsquo;d never done something this crazy with it before. SPEW was one thing, but exposing the wizarding world to the muggles? Against the headmistress&rsquo;s specific orders? &ldquo;If we don&rsquo;t get the wizards vaccinated, more people are going to die.&rdquo;</p>
@@ -131,22 +132,14 @@ class LoadData < ActiveRecord::Migration
 <p>The man cracks a smile. &quot;It's a mystery prize. Fifty cents to play.&quot;</p>
 <p>Jess is pretty sure he knows what a mystery prize is, and it involves twenty years of therapy after you leave the carnival. &quot;No thanks, man.&quot; </p>
 <p>He turns, and the man lurches forward and grabs his wrist. Jess turns to look at him. The man's eyes are so dilated that they're almost completely black. Jess' stomach lurches and he pulls his hand away.</p>
-<p>&quot;Take the bow,&quot; the man says, and Jess swallows. His heart is suddenly pounding, and he can't say why.</p>
-<p>He nods and reaches for the bow. In the background, he can hear Barry whining faintly -- &quot;hey man, don't spend all your money here&quot; -- but the words are like waves lapping softly against him. He can only focus on the bow as the man places it into his hands. </p>
-<p>&quot;Aim at heaven,&quot; the man says.</p>
-<p>Jess has only fired a bow in gym, and he wasn't even good at it then. But the arrow slides into place naturally. The pull of his shoulder muscle feels practiced and sure. He releases the arrow and watches as it soars up, up -- impossibly high, over the carnival tent and out of sight.</p>
-<p>Adrenaline rushes out of him and he looks down at the bow. He suddenly feels like he's about to cry. It's the hollow, melancholy feeling of someone revealing the end of a book when you're halfway through. It pierces him cleanly.</p>
-<p>&quot;He who would take your life,&quot; the man says, &quot;now take his.&quot;</p><p>&quot;What?&quot; Jess says.</p>
-<p>&quot;Now take his,&quot; the man says. </p>
-<p>Jess can't breathe. He gasps, a few ragged breaths. &quot;Keep the money,&quot; he says, and turns away. He stumbles toward the Ferris wheel, and then he's running, running hysterically, out into the parking lot.</p>
-<p>Barry finds him bent double over a red Honda Civic, panting. &quot;Hey man, not cool,&quot; Barry says. &quot;You can't just take off like that.&quot;</p>
-:quot<p>Jess looks back at the fair. The Ferris wheel glints in the ordinary late afternoon light, and in the sky, the trace of an airplane's tail shoots northward. </p>")
+<p>&quot;Take the bow,&quot; the man says, and Jess swallows. His heart is suddenly pounding, and he can't say why.</p>")
     n3.user = us3
     n3.truth = false
     n3.constraint_num = 0
     n3.truth_height = 1
     n3.story = ts2a
     n3.save(:validate => false)
+
 
     n4 = Node.new(:text => "<p>It's summer, one of those days that feels like walking through someone's warm, wet breath. A gross day. Jess is wandering around the fairgrounds with Barry Binninger, who's the son of his mom's friend Linda and who whines almost constantly. </p>
 <p>They're walking along the row of games. Jess only has a dollar, so he has to pick something he can win. The ring toss game is bullshit. He's seen probably twenty people lose their money on it since they got here. He's pretty sure the necks of the bottles are too big to toss a ring onto, anyway.</p>
@@ -157,16 +150,7 @@ class LoadData < ActiveRecord::Migration
 <p>The man cracks a smile. &quot;It's a mystery prize. Fifty cents to play.&quot;</p>
 <p>Jess is pretty sure he knows what a mystery prize is, and it involves twenty years of therapy after you leave the carnival. &quot;No thanks, man.&quot; </p>
 <p>He turns, and the man lurches forward and grabs his wrist. Jess turns to look at him. The man's eyes are so dilated that they're almost completely black. Jess' stomach lurches and he pulls his hand away.</p>
-<p>&quot;Take the bow,&quot; the man says, and Jess swallows. His heart is suddenly pounding, and he can't say why.</p>
-<p>He nods and reaches for the bow. In the background, he can hear Barry whining faintly -- &quot;hey man, don't spend all your money here&quot; -- but the words are like waves lapping softly against him. He can only focus on the bow as the man places it into his hands. </p>
-<p>&quot;Aim at heaven,&quot; the man says.</p>
-<p>Jess has only fired a bow in gym, and he wasn't even good at it then. But the arrow slides into place naturally. The pull of his shoulder muscle feels practiced and sure. He releases the arrow and watches as it soars up, up -- impossibly high, over the carnival tent and out of sight.</p>
-<p>Adrenaline rushes out of him and he looks down at the bow. He suddenly feels like he's about to cry. It's the hollow, melancholy feeling of someone revealing the end of a book when you're halfway through. It pierces him cleanly.</p>
-<p>&quot;He who would take your life,&quot; the man says, &quot;now take his.&quot;</p><p>&quot;What?&quot; Jess says.</p>
-<p>&quot;Now take his,&quot; the man says. </p>
-<p>Jess can't breathe. He gasps, a few ragged breaths. &quot;Keep the money,&quot; he says, and turns away. He stumbles toward the Ferris wheel, and then he's running, running hysterically, out into the parking lot.</p>
-<p>Barry finds him bent double over a red Honda Civic, panting. &quot;Hey man, not cool,&quot; Barry says. &quot;You can't just take off like that.&quot;</p>
-<p>Jess looks back at the fair. The Ferris wheel glints in the ordinary late afternoon light, and in the sky, the trace of an airplane's tail shoots northward. </p>")
+<p>&quot;Take the bow,&quot; the man says, and Jess swallows. His heart is suddenly pounding, and he can't say why.</p>")
     n4.user = us3
     n4.truth = false
     n4.constraint_num = 0
@@ -338,11 +322,74 @@ The halls were narrow, meant more as conduits for wiring and piping than for peo
     n12.story = ts5b
     n12.save(:validate => false)
 
+
+    # branching nodes
+
+    n3_2 = Node.new(:text => "<p>Barry grabs at his arm, and the touch shocks him out of the paralysis.  &quot;I don't think so,&quot; he tells the man, and turns to walk away. </p><p>Barry doesn't follow.  Jess turns back, his friend's name on his lips dying away at the smirk on the carnie's face.  The man's dilated pupils have swallowed his eyes whole, and Jess thinks he sees stars glinting in the emptiness.  &quot;Take the bow,&quot; he says, and his voice echoes like the rolling thunder of a rocket launch. </p><p>Jess shudders, stumbling into Barry.  His friend is frozen, mouth half open in some smart-alec comment.  The whole fair is frozen, silence pouring into the void spreading from around the booth guy.  The bow hangs between them, balanced eerily across the flat of the man's upheld hand. </p><p>Jess takes hold of it, and knocks the arrow the man offers, accompanied by a gappy grin. &quot;Good boy,&quot; he says, and the words riccochet off Jess's ears until his head is reverberating with echoes. </p><p>He draws the bow back, imitating that Jeremy Renner.  If that blond guy in the Avengers could do this falling off a building, surely he can.  His arm shakes with the effort,  and Jess's brain reminds him that movies have CGI and props.  What the hell is with this bow? It shouldn't be this hard to pull. </p><p>He lets go before he reaches full draw, his muscles rebelling. The arrow flies off the string, straight towards the booth guy.  Jess gasps as the string slaps his arm, carving a red welt across his skin, and the arrow passes through the guy and disappears. </p><p>The carnie laughs, and the world starts moving again.  He snatches the bow back from Jess, cackling.  &quot;Good shot, boy.  Good shot.  That one'll come back to you someday, believe it. Don't forget to thank me when it does.&quot;  He winks. </p> ")
+    n3_2.user = us3
+    n3_2.truth = false
+    n3_2.constraint_num = 0
+    n3_2.truth_height = 1
+    n3_2.story = ts2a
+    n3_2.save(:validate => false)
+
+    n3_3 = Node.new(:text => "<p>He nods and reaches for the bow. In the background, he can hear Barry whining faintly -- &quot;hey man, don't spend all your money here&quot; -- but the words are like waves lapping softly against him. He can only focus on the bow as the man places it into his hands. </p>
+<p>&quot;Aim at heaven,&quot; the man says.</p>
+<p>Jess has only fired a bow in gym, and he wasn't even good at it then. But the arrow slides into place naturally. The pull of his shoulder muscle feels practiced and sure. He releases the arrow and watches as it soars up, up -- impossibly high, over the carnival tent and out of sight.</p>
+<p>Adrenaline rushes out of him and he looks down at the bow. He suddenly feels like he's about to cry. It's the hollow, melancholy feeling of someone revealing the end of a book when you're halfway through. It pierces him cleanly.</p>
+<p>&quot;He who would take your life,&quot; the man says, &quot;now take his.&quot;</p><p>&quot;What?&quot; Jess says.</p>
+<p>&quot;Now take his,&quot; the man says. </p>
+<p>Jess can't breathe. He gasps, a few ragged breaths. &quot;Keep the money,&quot; he says, and turns away. He stumbles toward the Ferris wheel, and then he's running, running hysterically, out into the parking lot.</p>
+<p>Barry finds him bent double over a red Honda Civic, panting. &quot;Hey man, not cool,&quot; Barry says. &quot;You can't just take off like that.&quot;</p>
+:quot<p>Jess looks back at the fair. The Ferris wheel glints in the ordinary late afternoon light, and in the sky, the trace of an airplane's tail shoots northward. </p>")
+    n3_3.user = us3
+    n3_3.truth = false
+    n3_3.constraint_num = 0
+    n3_3.truth_height = 1
+    n3_3.story = ts2a
+    n3_3.save(:validate => false)
+
+    n4_2 = Node.new(:text => "<p>Barry grabs at his arm, and the touch shocks him out of the paralysis.  &quot;I don't think so,&quot; he tells the man, and turns to walk away. </p><p>Barry doesn't follow.  Jess turns back, his friend's name on his lips dying away at the smirk on the carnie's face.  The man's dilated pupils have swallowed his eyes whole, and Jess thinks he sees stars glinting in the emptiness.  &quot;Take the bow,&quot; he says, and his voice echoes like the rolling thunder of a rocket launch. </p><p>Jess shudders, stumbling into Barry.  His friend is frozen, mouth half open in some smart-alec comment.  The whole fair is frozen, silence pouring into the void spreading from around the booth guy.  The bow hangs between them, balanced eerily across the flat of the man's upheld hand. </p><p>Jess takes hold of it, and knocks the arrow the man offers, accompanied by a gappy grin. &quot;Good boy,&quot; he says, and the words riccochet off Jess's ears until his head is reverberating with echoes. </p><p>He draws the bow back, imitating that Jeremy Renner.  If that blond guy in the Avengers could do this falling off a building, surely he can.  His arm shakes with the effort,  and Jess's brain reminds him that movies have CGI and props.  What the hell is with this bow? It shouldn't be this hard to pull. </p><p>He lets go before he reaches full draw, his muscles rebelling. The arrow flies off the string, straight towards the booth guy.  Jess gasps as the string slaps his arm, carving a red welt across his skin, and the arrow passes through the guy and disappears. </p><p>The carnie laughs, and the world starts moving again.  He snatches the bow back from Jess, cackling.  &quot;Good shot, boy.  Good shot.  That one'll come back to you someday, believe it. Don't forget to thank me when it does.&quot;  He winks. </p> ")
+    n4_2.user = us3
+    n4_2.truth = false
+    n4_2.constraint_num = 0
+    n4_2.truth_height = 1
+    n4_2.story = ts2b
+    n4_2.save(:validate => false)
+
+    n4_3 = Node.new(:text => "<p>He nods and reaches for the bow. In the background, he can hear Barry whining faintly -- &quot;hey man, don't spend all your money here&quot; -- but the words are like waves lapping softly against him. He can only focus on the bow as the man places it into his hands. </p>
+<p>&quot;Aim at heaven,&quot; the man says.</p>
+<p>Jess has only fired a bow in gym, and he wasn't even good at it then. But the arrow slides into place naturally. The pull of his shoulder muscle feels practiced and sure. He releases the arrow and watches as it soars up, up -- impossibly high, over the carnival tent and out of sight.</p>
+<p>Adrenaline rushes out of him and he looks down at the bow. He suddenly feels like he's about to cry. It's the hollow, melancholy feeling of someone revealing the end of a book when you're halfway through. It pierces him cleanly.</p>
+<p>&quot;He who would take your life,&quot; the man says, &quot;now take his.&quot;</p><p>&quot;What?&quot; Jess says.</p>
+<p>&quot;Now take his,&quot; the man says. </p>
+<p>Jess can't breathe. He gasps, a few ragged breaths. &quot;Keep the money,&quot; he says, and turns away. He stumbles toward the Ferris wheel, and then he's running, running hysterically, out into the parking lot.</p>
+<p>Barry finds him bent double over a red Honda Civic, panting. &quot;Hey man, not cool,&quot; Barry says. &quot;You can't just take off like that.&quot;</p>
+:quot<p>Jess looks back at the fair. The Ferris wheel glints in the ordinary late afternoon light, and in the sky, the trace of an airplane's tail shoots northward. </p>")
+    n4_3.user = us3
+    n4_3.truth = false
+    n4_3.constraint_num = 0
+    n4_3.truth_height = 1
+    n4_3.story = ts2b
+    n4_3.save(:validate => false)
+
     l1 = Link.new(:story_id => 9, :source => 9, :target => 11)
     l1.save(:validate => false)
 
     l2 = Link.new(:story_id => 10, :source => 10, :target => 12)
     l2.save(:validate => false)
+
+    l3 = Link.new(:story_id => 3, :source => 3, :target => 13)
+    l3.save(:validate => false)
+
+    l3_1 = Link.new(:story_id => 3, :source => 3, :target => 14)
+    l3_1.save(:validate => false)
+
+    l4 = Link.new(:story_id => 4, :source => 4, :target => 15)
+    l4.save(:validate => false)
+
+    l4_1 = Link.new(:story_id => 4, :source => 4, :target => 16)
+    l4_1.save(:validate => false)
 
     c1 = Constraint.new(:story_id => 1, :title => "Bandaid", :text => "The Ministry attempts to rectify the problem by Obliviating the muggles involved. ", :constraint_num => 0 )
     c1.save
