@@ -29,14 +29,14 @@ class LoadData < ActiveRecord::Migration
 
   	ts2a = Story.new(:summary => "On his 18th birthday, Jess shoots a mystic bow said to protect him by killing whomever is destined to one day kill him, three seconds before they attempt to. Seeing whom the arrow hits changes him forever.", :title => "The Guardian Bow")
   	ts2a.user = us3
-    ts2a.test_group = 2
+    ts2a.test_group = 1
     ts2a.genre = "fiction";
   	ts2a.save(:validate => false)
 
 
     ts2b = Story.new(:summary => "On his 18th birthday, Jess shoots a mystic bow said to protect him by killing whomever is destined to one day kill him, three seconds before they attempt to. Seeing whom the arrow hits changes him forever.", :title => "Guardian Bow")
     ts2b.user = us3
-    ts2b.test_group = 1
+    ts2b.test_group = 2
     ts2b.genre = "fiction";
     ts2b.save(:validate => false)
 
@@ -56,14 +56,14 @@ class LoadData < ActiveRecord::Migration
 
     ts4a = Story.new(:summary => "Lee and Jamie are a married couple. It is 2090, but marriage still works the same way. Civic duty, however, does not. Lee and Jamie are drafted into the gladitorial fights, which the government puts on as a lucrative means of population control.", :title => "The Carrying Capacity")
     ts4a.user = us3
-        ts4a.test_group = 2
+        ts4a.test_group = 1
     ts4a.genre = "fiction";
     ts4a.save(:validate => false)
 
 
     ts4b = Story.new(:summary => "Lee and Jamie are a married couple. It is 2090, but marriage still works the same way. Civic duty, however, does not. Lee and Jamie are drafted into the gladitorial fights, which the government puts on as a lucrative means of population control.", :title => "Carrying Capacity")
     ts4b.user = us3
-        ts4b.test_group = 1
+        ts4b.test_group = 2
     ts4b.genre = "fiction";
     ts4b.save(:validate => false)
 
@@ -82,14 +82,14 @@ class LoadData < ActiveRecord::Migration
 
     ts6a = Story.new(:summary => "Nate is a Switcher--someone who switches into another person\'s life, unbidden, every year. He\'s been a waitress, a car salesman, a stockbroker, and then some. Now nearing his 27th birthday, Nate is about to switch again, but this time into someone far less innocuous.", :title => "Switch")
     ts6a.user = us3
-        ts6a.test_group = 2
+        ts6a.test_group = 1
     ts6a.genre = "fiction";
     ts6a.save(:validate => false)
 
 
     ts6b = Story.new(:summary => "Nate is a Switcher--someone who switches into another person\'s life, unbidden, every year. He\'s been a waitress, a car salesman, a stockbroker, and then some. Now nearing his 27th birthday, Nate is about to switch again, but this time into someone far less innocuous.", :title => "Switch")
     ts6b.user = us3
-        ts6b.test_group = 1
+        ts6b.test_group = 2
     ts6b.genre = "fiction";
     ts6b.save(:validate => false)
 
