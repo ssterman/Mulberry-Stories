@@ -67,14 +67,14 @@ class LoadData < ActiveRecord::Migration
     ts4b.genre = "fiction";
     ts4b.save(:validate => false)
 
-    ts5a = Story.new(:summary => "", :title => "")
+    ts5a = Story.new(:summary => "During a break between cases, Charlie turns up out of the blue, uninvited, at Emily's door and just...doesn't leave. As standard a love story as you choose to make it to be.", :title => "The Home Life")
     ts5a.user = us3
         ts5a.test_group = 1
     ts5a.genre = "fiction";
     ts5a.save(:validate => false)
 
 
-    ts5b = Story.new(:summary => "", :title => "")
+    ts5b = Story.new(:summary => "During a break between cases, Charlie turns up out of the blue, uninvited, at Emily's door and just...doesn't leave. As standard a love story as you choose to make it to be.", :title => "The Home Life")
     ts5b.user = us3
         ts5b.test_group = 2
     ts5b.genre = "fiction";
@@ -246,7 +246,25 @@ The halls were narrow, meant more as conduits for wiring and piping than for peo
     n8.story = ts4b
     n8.save(:validate => false)
 
-    n9 = Node.new(:text => "")
+    n9 = Node.new(:text => "<p>Charlie shows up at Emily's door, duffel bag in one hand, a crate of files in the other.</p>
+
+<p>&quot;Damn, I missed you,&quot; Charlie laughs, tackling Emily and sitting on her. &quot;You and your grimace and your stupid hair.&quot; And Charlie ruffles her hair and kisses her on the temple, quick and annoying like, just a slobbery smack of lips on the forehead.</p>
+
+<p>&quot;Buy me dinner, now,&quot; he says then, standing up and offering her a hand.</p>
+
+<p>&quot;Okay?&quot; Emily blinks and slowly nods her head. Really, she can't think of anything else to do.</p>
+
+<p>The next day, Emily wakes up with a cup of coffee on her nightstand and ice cold feet pressing hard into her knee under the covers. &quot;Move over,&quot; he says, sliding under the blankets and nudging Emily over not-quite-carefully. &quot;It's fucking freezing out there, Em. Have you never heard of that thing they call a heater?&quot;</p>
+
+<p>He hands Emily the cup of coffee and stretches dramatically, back popping and joints cracking and absolutely ruining her perfect morning silence. Emily stares at him over the rim of the cup. </p>
+
+<p>&quot;Your bed is awesome,&quot; he says, curling up and stealing Emily's pillow. &quot;Awesome. But your guest futon is a piece of shit.&quot; Charlie closes his eyes, bliss on his face. Emily drinks her coffee and watches him sleep for a half hour before kicking him the stomach and out of the bed.</p>
+
+<p>&quot;Out, asshole.&quot; Emily says, and alright, even Emily can admit that maybe some of the sting in the threat is lost after half an hour of almost cuddling, but whatever.</p> 
+
+<p>Charlie flips her off from where he's lying on the floor. &quot;You're watching Game of Thrones with me today. Don't even try to get out of it.&quot;</p>
+
+<p>He languidly picks himself off the floor, and Emily's pretty sure she hears the cackle of laughter from the bathroom.</p>")
     n9.user = us3
     n9.truth = false
     n9.constraint_num = 0
@@ -254,7 +272,25 @@ The halls were narrow, meant more as conduits for wiring and piping than for peo
     n9.story = ts5a
     n9.save(:validate => false)
 
-    n10 = Node.new(:text => "")
+    n10 = Node.new(:text => "<p>Charlie shows up at Emily's door, duffel bag in one hand, a crate of files in the other.</p>
+
+<p>&quot;Damn, I missed you,&quot; Charlie laughs, tackling Emily and sitting on her. &quot;You and your grimace and your stupid hair.&quot; And Charlie ruffles her hair and kisses her on the temple, quick and annoying like, just a slobbery smack of lips on the forehead.</p>
+
+<p>&quot;Buy me dinner, now,&quot; he says then, standing up and offering her a hand.</p>
+
+<p>&quot;Okay?&quot; Emily blinks and slowly nods her head. Really, she can't think of anything else to do.</p>
+
+<p>The next day, Emily wakes up with a cup of coffee on her nightstand and ice cold feet pressing hard into her knee under the covers. &quot;Move over,&quot; he says, sliding under the blankets and nudging Emily over not-quite-carefully. &quot;It's fucking freezing out there, Em. Have you never heard of that thing they call a heater?&quot;</p>
+
+<p>He hands Emily the cup of coffee and stretches dramatically, back popping and joints cracking and absolutely ruining her perfect morning silence. Emily stares at him over the rim of the cup. </p>
+
+<p>&quot;Your bed is awesome,&quot; he says, curling up and stealing Emily's pillow. &quot;Awesome. But your guest futon is a piece of shit.&quot; Charlie closes his eyes, bliss on his face. Emily drinks her coffee and watches him sleep for a half hour before kicking him the stomach and out of the bed.</p>
+
+<p>&quot;Out, asshole.&quot; Emily says, and alright, even Emily can admit that maybe some of the sting in the threat is lost after half an hour of almost cuddling, but whatever.</p> 
+
+<p>Charlie flips her off from where he's lying on the floor. &quot;You're watching Game of Thrones with me today. Don't even try to get out of it.&quot;</p>
+
+<p>He languidly picks himself off the floor, and Emily's pretty sure she hears the cackle of laughter from the bathroom.</p>")
     n10.user = us3
     n10.truth = false
     n10.constraint_num = 0
@@ -262,21 +298,51 @@ The halls were narrow, meant more as conduits for wiring and piping than for peo
     n10.story = ts5b
     n10.save(:validate => false)
 
-    n11 = Node.new(:text => "")
+    n11 = Node.new(:text => "<p>---------------------------------------------------------------------------------------</p>
+
+<p>Over the next few weeks, Charlie and Emily work out a routine of living together. </p>
+
+<p>When Emily climbs out of bed in the morning, Charlie has a pot of coffee waiting for her, and a stack of buttered toast (she doesn't think he can make anything else). Emily will grab them both on the way out the door, grunt her thanks at Charlie, and forget her wallet and keys on the kitchen table. Charlie will chase her out of the apartment and shove them both in Emily's pockets before rushing back inside. Usually before the door closes, and he gets locked out. Sometimes not.</p>
+
+<p>At first the whole thing is weird because this is Charlie, her acquaintance-friend for years now, and he does everything his own way, and it's not Emily's way. Emily ends up bitching about the wet towels on the bathroom floor and the weird hipster beers stacked in all her closets, and her now always-sad, empty refrigerator, but still, it's Charlie and so she can't really be all that pissed. </p>
+
+<p>At night, they watch TV together and Charlie's got an opinion about everything. Emily's pretty sure that it's the polar opposite of her opinion on purpose, but she can't prove anything. They don't talk about their respective days at work, or even what they ate for lunch. Instead, they spend an hour debating Jaime and Cersei and who conceded to whom, and Charlie won't shut the fuck up until Emily storms out of the room, slamming her door shut and barricading herself in, promising herself over and over until most of an hour later that she will never again watch GoT with Charlie.</p>
+
+<p>At least until next week.</p>
+
+<p>She figures that at some point, she should probably why Charlie's here or, even better, why Charlie's apparently decided to move in with her. When Charlie shows up the next day with a crock pot, she figures it's time to broach the subject. </p>")
     n11.user = us3
     n11.truth = false
     n11.constraint_num = 0
     n11.truth_height = 1
-    n11.story = ts6a
+    n11.story = ts5a
     n11.save(:validate => false)
 
-    n12 = Node.new(:text => "")
+    n12 = Node.new(:text => "<p>---------------------------------------------------------------------------------------</p>
+
+<p>Over the next few weeks, Charlie and Emily work out a routine of living together. </p>
+
+<p>When Emily climbs out of bed in the morning, Charlie has a pot of coffee waiting for her, and a stack of buttered toast (she doesn't think he can make anything else). Emily will grab them both on the way out the door, grunt her thanks at Charlie, and forget her wallet and keys on the kitchen table. Charlie will chase her out of the apartment and shove them both in Emily's pockets before rushing back inside. Usually before the door closes, and he gets locked out. Sometimes not.</p>
+
+<p>At first the whole thing is weird because this is Charlie, her acquaintance-friend for years now, and he does everything his own way, and it's not Emily's way. Emily ends up bitching about the wet towels on the bathroom floor and the weird hipster beers stacked in all her closets, and her now always-sad, empty refrigerator, but still, it's Charlie and so she can't really be all that pissed. </p>
+
+<p>At night, they watch TV together and Charlie's got an opinion about everything. Emily's pretty sure that it's the polar opposite of her opinion on purpose, but she can't prove anything. They don't talk about their respective days at work, or even what they ate for lunch. Instead, they spend an hour debating Jaime and Cersei and who conceded to whom, and Charlie won't shut the fuck up until Emily storms out of the room, slamming her door shut and barricading herself in, promising herself over and over until most of an hour later that she will never again watch GoT with Charlie.</p>
+
+<p>At least until next week.</p>
+
+<p>She figures that at some point, she should probably why Charlie's here or, even better, why Charlie's apparently decided to move in with her. When Charlie shows up the next day with a crock pot, she figures it's time to broach the subject. </p>")
     n12.user = us3
     n12.truth = false
     n12.constraint_num = 0
     n12.truth_height = 1
-    n12.story = ts6b
+    n12.story = ts5b
     n12.save(:validate => false)
+
+    l1 = Link.new(:story_id => 9, :source => 9, :target => 11)
+    l1.save(:validate => false)
+
+    l2 = Link.new(:story_id => 10, :source => 10, :target => 12)
+    l2.save(:validate => false)
 
     c1 = Constraint.new(:story_id => 1, :title => "Bandaid", :text => "The Ministry attempts to rectify the problem by Obliviating the muggles involved. ", :constraint_num => 0 )
     c1.save
@@ -341,19 +407,19 @@ The halls were narrow, meant more as conduits for wiring and piping than for peo
     c45.save
 
 
-    c51 = Constraint.new(:story_id => 9, :title => "", :text => "", :constraint_num => 0 )
+    c51 = Constraint.new(:story_id => 9, :title => "Move-in", :text => "Charlie hangs a Bruce Springsteen poster in Emily's room, then puts a toothbrush in the restroom, clothes in the closet...", :constraint_num => 0 )
     c51.save
 
-    c52 = Constraint.new(:story_id => 9, :title => "", :text => "", :constraint_num => 1 )
+    c52 = Constraint.new(:story_id => 9, :title => "Push; Shove", :text => "Over dinner, Emily tells Charlie that she's moving to Brooklyn. She is lying.", :constraint_num => 1 )
     c52.save
 
-    c53 = Constraint.new(:story_id => 9, :title => "", :text => "", :constraint_num =>2 )
+    c53 = Constraint.new(:story_id => 9, :title => "Conflict of Interest", :text => "Emily discovers that Charlie is actually her elusive, rarely-seen boss.", :constraint_num =>2 )
     c53.save
 
-    c54 = Constraint.new(:story_id => 9, :title => "", :text => "", :constraint_num =>3 )
+    c54 = Constraint.new(:story_id => 9, :title => "Go For It", :text => "If Emily and Charlie aren't together, one of them goes for it. If they are, one of them goes for the urge to kiss another", :constraint_num =>3 )
     c54.save
 
-    c55 = Constraint.new(:story_id => 9, :title => "", :text => "", :constraint_num =>4 )
+    c55 = Constraint.new(:story_id => 9, :title => "Removal", :text => "Emily removes the Bruce Springsteen poster from her wall.", :constraint_num =>4 )
     c55.save
 
 
