@@ -224,10 +224,10 @@ function display_graph(json_data) {
 			// setup constraints bar text
 		$(".constraint").each(function( i ) {
 			//console.log(json_data);
-			if (i < index) {
+			if (i <= index) {
   				$(this).text(json_data.constraints[i].title.toUpperCase());
   			} else {
-  				var str = "Event " + (index + 1);
+  				var str = "Event " + (i + 1);
   				$(this).text(str.toUpperCase());
   			}
 		});

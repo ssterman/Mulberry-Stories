@@ -96,6 +96,9 @@ body {
 }
 
 .constraint-selected {
+    opacity: 1;
+    color: rgb(31, 119, 180);
+    border-color: rgb(31, 119, 180);
 }
 
 #vis-wrapper {
