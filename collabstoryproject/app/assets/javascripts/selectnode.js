@@ -70,6 +70,7 @@ function display_graph(json_data) {
 			if ($("#submit_text_area").html().length === 0) {
 				$("#submit_text_area").hide();
 			}
+			$("#rwcontainer").animate({"scrollTop": $('#rwcontainer')[0].scrollHeight}, "fast");
 		} else {
 			$("#submit_text_area2").hide();
 			$("#constraint_content").hide();
