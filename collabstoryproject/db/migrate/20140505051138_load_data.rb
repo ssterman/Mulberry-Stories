@@ -5,6 +5,9 @@ class LoadData < ActiveRecord::Migration
   	us1 = User.new(:username => "steph", :password => "pickles", :first_name => "Steph", :last_name => "D")
   	us2 = User.new(:username => "jj", :password => "pickles", :first_name => "JJ", :last_name => "L")
     us3 = User.new(:username => "skipper", :password => "pickles", :first_name => "Jess", :last_name => "L")
+    us1.test_group = 1;
+    us2.test_group = 2;
+    us3.test_group = 1;
     us1.save
     us2.save
     us3.save
@@ -12,6 +15,7 @@ class LoadData < ActiveRecord::Migration
   	ts1a = Story.new(:summary => "A virus is ripping through the wizarding community that potions cannot cure. Against the wishes of the wizarding world, Hermione, now in her 7th year,
      recruits muggle scientists to help in creating a vaccine in order save everyone from a long and wasting death. But in doing so, she has revealed the wizarding world to the muggles...", :title => "The Muggle Virus")
   	ts1a.user = us3
+    ts1a.test_group = 1
     ts1a.genre = "fiction";
   	ts1a.save(:validate => false)
 
@@ -19,62 +23,73 @@ class LoadData < ActiveRecord::Migration
     ts1b = Story.new(:summary => "A virus is ripping through the wizarding community that potions cannot cure. Against the wishes of the wizarding world, Hermione, now in her 7th year,
      recruits muggle scientists to help in creating a vaccine in order save everyone from a long and wasting death. But in doing so, she has revealed the wizarding world to the muggles...", :title => "Muggle Virus")
     ts1b.user = us3
+    ts1b.test_group = 2
     ts1b.genre = "fiction";
     ts1b.save(:validate => false)
 
   	ts2a = Story.new(:summary => "On his 18th birthday, Jess shoots a mystic bow said to protect him by killing whomever is destined to one day kill him, three seconds before they attempt to. Seeing whom the arrow hits changes him forever.", :title => "The Guardian Bow")
   	ts2a.user = us3
+    ts2a.test_group = 2
     ts2a.genre = "fiction";
   	ts2a.save(:validate => false)
 
 
     ts2b = Story.new(:summary => "On his 18th birthday, Jess shoots a mystic bow said to protect him by killing whomever is destined to one day kill him, three seconds before they attempt to. Seeing whom the arrow hits changes him forever.", :title => "Guardian Bow")
     ts2b.user = us3
+    ts2b.test_group = 1
     ts2b.genre = "fiction";
     ts2b.save(:validate => false)
 
 
     ts3a = Story.new(:summary => "Gwen is working as a lowly spaceship janitor, dreaming of the day when she can fly her own ship. One day during her daily rounds, she discovers a stowaway in a utility closet who might just be the ticket to her success.", :title => "The Space Stowaway")
     ts3a.user = us3
+    ts3a.test_group = 1
     ts3a.genre = "fiction";
     ts3a.save(:validate => false)
 
 
     ts3b = Story.new(:summary => "Gwen is working as a lowly spaceship janitor, dreaming of the day when she can fly her own ship. One day during her daily rounds, she discovers a stowaway in a utility closet who might just be the ticket to her success.", :title => "Space Stowaway")
     ts3b.user = us3
+        ts3b.test_group = 2
     ts3b.genre = "fiction";
     ts3b.save(:validate => false)
 
     ts4a = Story.new(:summary => "Lee and Jamie are a married couple. It is 2090, but marriage still works the same way. Civic duty, however, does not. Lee and Jamie are drafted into the gladitorial fights, which the government puts on as a lucrative means of population control.", :title => "The Carrying Capacity")
     ts4a.user = us3
+        ts4a.test_group = 2
     ts4a.genre = "fiction";
     ts4a.save(:validate => false)
 
 
     ts4b = Story.new(:summary => "Lee and Jamie are a married couple. It is 2090, but marriage still works the same way. Civic duty, however, does not. Lee and Jamie are drafted into the gladitorial fights, which the government puts on as a lucrative means of population control.", :title => "Carrying Capacity")
     ts4b.user = us3
+        ts4b.test_group = 1
     ts4b.genre = "fiction";
     ts4b.save(:validate => false)
 
     ts5a = Story.new(:summary => "", :title => "")
     ts5a.user = us3
+        ts5a.test_group = 1
     ts5a.genre = "fiction";
     ts5a.save(:validate => false)
 
 
     ts5b = Story.new(:summary => "", :title => "")
     ts5b.user = us3
+        ts5b.test_group = 2
     ts5b.genre = "fiction";
     ts5b.save(:validate => false)
 
     ts6a = Story.new(:summary => "", :title => "")
     ts6a.user = us3
+        ts6a.test_group = 2
     ts6a.genre = "fiction";
     ts6a.save(:validate => false)
 
 
     ts6b = Story.new(:summary => "", :title => "")
     ts6b.user = us3
+        ts6b.test_group = 1
     ts6b.genre = "fiction";
     ts6b.save(:validate => false)
 

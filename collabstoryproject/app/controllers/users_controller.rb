@@ -39,6 +39,7 @@ class UsersController < ApplicationController
 		user = User.new
 		user.first_name = params[:user][:first_name]
 		user.last_name = params[:user][:last_name]
+		user.test_group = params[:user][:test_group]
 		user.username = params[:user][:username]
 		user.password = params[:user][:password]
 		user.password_confirmation = params[:user][:password_confirmation]

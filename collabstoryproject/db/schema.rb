@@ -59,6 +59,7 @@ ActiveRecord::Schema.define(version: 20140505051138) do
     t.string   "summary"
     t.string   "title"
     t.string   "genre"
+    t.integer  "test_group"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -69,6 +70,7 @@ ActiveRecord::Schema.define(version: 20140505051138) do
     t.string   "username"
     t.string   "password_digest"
     t.string   "salt"
+    t.integer  "test_group"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

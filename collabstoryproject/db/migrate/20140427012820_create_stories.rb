@@ -5,6 +5,7 @@ class CreateStories < ActiveRecord::Migration
 		t.string :summary
 		t.string :title
 		t.string :genre
+		t.integer :test_group
       t.timestamps
     end
   end

@@ -11,10 +11,12 @@
 	<div class="small_spacer"></div>
 	<!-- display title and summary for all stories -->
 	<% for s in @stories do %>
-		<div> <b>Title:</b> <%= link_to(s.title, controller: "stories", action: "view", id: s.id) %> </div>
-		<div> <b>Summary:</b> <%= s.summary%> </div>
-		<div> <b>Type:</b> <%= s.genre %> </div>
-		<div class="small_spacer"></div>
+		<% if s.test_group == User.find(session[:id]).test_group %>
+			<div> <b>Title:</b> <%= link_to(s.title, controller: "stories", action: "view", id: s.id) %> </div>
+			<div> <b>Summary:</b> <%= s.summary%> </div>
+			<div> <b>Type:</b> <%= s.genre %> </div>
+			<div class="small_spacer"></div>
+		<%end %>
 	<%end%>
 
 <%end%>

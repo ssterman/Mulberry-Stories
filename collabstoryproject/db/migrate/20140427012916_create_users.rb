@@ -6,6 +6,7 @@ class CreateUsers < ActiveRecord::Migration
     	t.string	:username
     	t.string	:password_digest
     	t.string	:salt
+        t.integer   :test_group
 
     	    #add_column :users, :first_name, :string
     #add_column :users, :last_name, :string
