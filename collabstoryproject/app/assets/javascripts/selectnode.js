@@ -356,12 +356,20 @@ function display_graph(json_data) {
 			      	  	if (d.text == "") {
 			      	  		return "";
 			      	  	} else if (node_annotation!= ""){
-			      	  		return node_annotation;
+			      	  		cleanp = node_annotation;
+			      	  		cleanp = cleanp.replace(/&ldquo;/g, "\"");
+			      	  		cleanp = cleanp.replace(/&apos;/g, "\'");
+			      	  		return cleanp;
 			      	  	} else if (d.text.indexOf("<p>") == 0) {
 			      	  		// alert("ABBREVIATE!");
-			      	  		return decodeURI(d.text.substring(3, 18) + "...");
+			      	  		cleanp = d.text.substr(3);
+			      	  		cleanp = cleanp.replace(/&ldquo;/g, "\"");
+			      	  		cleanp = cleanp.replace(/&apos;/g, "\'");
+			      	  		return cleanp.substring(0, 16) + "...";
 			      	  	}
-			      		return decodeURI(d.text.substring(0, 15) + "..."); 
+			      	  	cleanp = d.text.replace(/&ldquo;/g, "\"");
+			      	  	cleanp = cleanp.replace(/&apos;/g, "\'");
+			      		return cleanp.substring(0, 16) + "..."; 
 			      	  });
 					editing = false;
 					reset_node_data(curStoryId);
@@ -616,11 +624,21 @@ function display_graph(json_data) {
       	  	if (d.text == "") {
       	  		return "";
       	  	} else if (d.annotation && d.annotation != "") {
-      	  		return d.annotation;
+      	  		cleanp = d.annotation.replace(/&ldquo;/g, "\"");
+			    cleanp = cleanp.replace(/&apos;/g, "\'");
+			    return cleanp;
       	  	} else if (d.text.indexOf("<p>") == 0) {
-      	  		return unescape(d.text.substring(3, 18) + "..."); 
+      	  		cleanp = d.text.substr(3);
+      	  		cleanp = cleanp.replace(/&ldquo;/g, "\"");
+			    cleanp = cleanp.replace(/&apos;/g, "\'");
+			    cleanp = cleanp.replace(/<div>/g, "");
+			    cleanp = cleanp.replace(/<i>/g, "");
+      	  		return cleanp.substring(0, 16) + "..."; 
       	  	} else {
-      			return d.text.substring(0, 15) + "..."; 
+      	  		cleanp = d.text.replace(/&ldquo;/g, "\"");
+			    cleanp = cleanp.replace(/&apos;/g, "\'");
+			    cleanp = cleanp.replace(/<div>/g, "");
+      			return cleanp.substring(0, 16) + "..."; 
       		}
       	  });
 
