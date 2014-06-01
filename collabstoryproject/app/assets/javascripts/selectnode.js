@@ -1,3 +1,5 @@
+
+
 //drag to add reference: http://bl.ocks.org/benzguo/4370043
 //arrows reference: http://logogin.blogspot.com/2013/02/d3js-arrowhead-markers.html
 
@@ -542,12 +544,18 @@ function display_graph(json_data) {
 		  				curConstraintNum = d.constraint_num
 		  			}
 
-		  			d.y = (100 * d.constraint_num);
+		  			d.y = (100 * d.constraint_num + 50);
 		  			if (count%2 == 0) {
 			  			d.x = width/2 + 25*count;
 			  		} else {
 			  			d.x = width/2 - 25*count;
 			  		}
+		  			return true;
+		  			//!!!!!!!!!!!super hacky.  change the node id that evaluate to true if you add any new stories
+		  		} else if (d.id < 13) {
+		  			d.fixed = true;
+		  			d.x = width/2;
+		  			d.y = 50;
 		  			return true;
 		  		}
 		  	})
