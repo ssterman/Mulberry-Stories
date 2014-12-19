@@ -49,7 +49,7 @@ class StoriesController < ApplicationController
 		@stories = Story.find(:all)
 		@nodes_hash = {}
 		for story in @stories do
-			conds = "story_id == " + story.id.to_s
+			conds = "story_id = " + story.id.to_s
 			@nodes_hash[story.id] = Node.find(:all, :conditions => conds)
 		end
 	end
