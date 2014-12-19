@@ -1,0 +1,6 @@
+<h1>Users</h1>
+
+ <% for u in @users do %>
+	<div> <%= link_to(u.username, controller: "users", action: "view", id: u.id) %> </div>
+	<div class="small_spacer"></div>
+<%end%>

@@ -1,0 +1,56 @@
+<div style="margin:0 auto;">
+
+			<%= form_for(@story, :url => {:controller => "stories", :action => "create"}) do |f| %>
+			  	<%=f.text_field :title, id: "title_field"%>
+			  	<%=f.text_field :summary, id: "summary_field" %> 	
+			  	<br/><br/>	
+				<%= f.radio_button(:genre, "fiction") %>
+				<%= f.label(:genre_fiction, "fiction") %>
+				<%= f.radio_button(:genre, "non-fiction") %>
+				<%= f.label(:genre_non_fiction, "non-fiction") %>
+	  			<%=f.hidden_field :user_id, :value => session[:id] %>
+
+				<div class="small_spacer"></div>
+		  		<!--<div id="truth_container"> Add truth nodes to your story. The order in which you list them is the order they will appear in the story. <p> You can submit up to 5 truth nodes; leave blank if you want fewer. </p>-->
+
+		  		<div id="first_node">
+		  			<%= f.fields_for :nodes do |n| %>
+		  				<%= n.label :text, "Write the first passage for your story" %>
+		  				<%= n.text_area :text, id:"text", class: "truth_input"  %>
+
+		  			<% end %>
+		  		</div>
+
+		  		<div id="truth container"> Add constraints to your story. Which events have to happen? <p>The order in which you create them below is the order that other writers have to attempt to fulfill them in. You can create up to 5 storyline points.</p> </div>
+		  			<div class="small_spacer"></div>
+				</div>
+
+				<%= f.fields_for :constraints do |b| %>
+					<%= b.label :text, "Write a fixed storyline event" %><br />
+					<%= b.text_field :title, id:"title", class: "truth_title"%>
+					<%= b.text_area :text, :rows => 10, class: "truth_input" %><br />
+   				<% end %>
+
+				<!-- <div id="add_truth_node" onclick="add_tn_form()">+</div> -->
+
+	  			<br><%=f.submit "Save", id: "submit_new_story", class: "new_story_button" %>
+	  		<% end %>
+
+</div>
+
+			<%= form_tag(controller: "stories", action: "index") do %>
+			  <%= submit_tag("Cancel", id: "cancel_new_story", class: "new_story_button") %>
+			<% end %>
+  		
+		<script>
+		// var count = 0;
+		// 	function add_tn_form() {
+		// 		var el = document.getElementById("truth_container");
+		// 		el.innerHTML = el.innerHTML + '<textarea class="truth_input" id="truth_"' + count + '>write a truth scene...</textarea><div class="small_spacer"></div>'
+		// 		count += 1;
+		// 	}
+
+     	$("#title_field").attr("placeholder", "Title");
+     	$("#summary_field").attr("placeholder", "Summary");
+     	$(".truth_title").attr("placeholder", "Constraint Teaser");
+		</script>

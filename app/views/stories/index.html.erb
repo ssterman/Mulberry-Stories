@@ -1,0 +1,22 @@
+
+
+<h1>Multipath Collaborative Stories</h1>
+<h3>Explore these stories through the interactive visualization; drag from a node to add scenes, and drag between nodes to connect scenes together!</h3>
+
+<% if session[:id] %>
+	<%= link_to ("Create New Story"), :controller => "stories", :action => "new" %>
+	<div class="small_spacer"></div>
+	<%= link_to ("Browse Users"), :controller => "users", :action => "index" %>
+	
+	<div class="small_spacer"></div>
+	<!-- display title and summary for all stories -->
+	<% for s in @stories do %>
+		<% if s.test_group == User.find(session[:id]).test_group %>
+			<div> <b>Title:</b> <%= link_to(s.title, controller: "stories", action: "view", id: s.id) %> </div>
+			<div> <b>Summary:</b> <%= s.summary%> </div>
+			<div> <b>Type:</b> <%= s.genre %> </div>
+			<div class="small_spacer"></div>
+		<%end %>
+	<%end%>
+
+<%end%>

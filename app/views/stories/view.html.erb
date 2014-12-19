@@ -1,0 +1,87 @@
+
+<% if session[:id] %>
+	<h1 class="title"> <%= @story.title %> </h1>
+	<h2 class="summary"> <%= @story.summary %> </h2> 
+
+	<div class="break"></div>
+
+	<!-- the container for visualization -->
+
+
+	<!-- the read/write interface; should only be able to edit your own nodes; until have users and logins, no editing allowed, only creating new nodes-->
+	<div id="rwcontainer">
+	<!-- 	<div class="read"></div>-->
+		<div id="read">
+		</div>
+		<div id="write">
+			<div id="submit_text_area" class="editable_text" contenteditable="true" class="placeholder">
+			</div>
+
+			<div id="add_constraint" class="plus"></div>
+			<div id="constraint_content"></div>
+			<div id="submit_text_area2" class="editable_text" contenteditable="true" class="placeholder">
+			</div>
+			<%= form_tag :html => {:id => 'write-box'} do %>
+				<%= hidden_field_tag('submit_sourceID', :value => "some value" ) %>
+				<%= hidden_field_tag('submit_storyID', :value => "some value") %>
+				<%= hidden_field_tag('submit_userID', :value => "some value") %>
+				<%= hidden_field_tag('submit_truth', :value => "false") %>
+<!-- 				<%= hidden_field_tag('submit_truth_height', :value => 0) %>
+ -->				<%= hidden_field_tag('submit_constraint_num', :value => 0) %>		
+
+			<% end %>		
+		</div>
+		<div id="add_link">
+			<%= form_for(@link, :url => {:controller => "links", :action => "save_link"}, :html => {:id => "new_link_connection"}) do |f| %>
+			  	<%=f.hidden_field :source, :value => "some value" %>
+			  	<%=f.hidden_field :target, :value => "some value" %> 		
+	  			<%=f.hidden_field :story_id, :value => @story.id %>
+	  			<%=f.hidden_field :user_id, :value => session[:id] %>
+	  			<%=f.submit "Save" %>
+	  		<% end %>
+		</div>
+	</div>
+	<div id="vis-wrapper">
+		<div id="constraint-bar">
+
+		<nav class="constraint-tabs">
+			<ul class="constraint-tabs-list">
+				<li class="constraint">EVENT 1</li>
+				<li class="constraint">EVENT 2</li>
+				<li class="constraint">EVENT 3</li>
+				<li class="constraint">EVENT 4</li>
+				<li class="constraint">EVENT 5</li>
+			</ul>
+		</nav>
+
+		</div>
+
+		<div class="vis" id="viscontainer">
+
+		</div>
+	</div>
+	<footer id="publish-bar">
+		<nav class="publish-nav">
+			<section id="tags" href="#" class="left">
+				<label class="tag-label" for="tags" title="Tags">
+					<span class="hidden"></span>
+					<div class="tags-div" style="max_width:400px;"></div>
+					<input type="hidden" class="tags-holder" id="tags-holder">
+					<input class="tag-input" id="tag-input" type="text" maxLength="22" placeholder="Tagline ex. Harry chooses to fight">
+				</label>
+			</section>
+			<div class="right">
+				<span id="error_msg">Empty passages don't add much!</span>
+				<button type="button" id="submit_node" class="write_btn">Publish</button>
+				<button type="button" id="cancel_btn" class="write_btn">Delete</button>		
+			</div>
+		</nav>
+	</footer>
+<% end %>
+
+<script>
+	display_graph(<%=raw @json_data %>);
+	$("#error_msg").hide();
+	$("#submit_storyID").val(<%=@story.id %>);
+	$("#submit_userID").val(<%=session[:id]%>);
+</script>

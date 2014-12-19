@@ -1,0 +1,7 @@
+<h1>Nodes</h1>
+
+ <% for n in @nodes do %>
+ 	<div> <b> <%= Story.find(n.story_id).title %>(<%=n.story_id%>): node: <%=n.id%> </b> </div>
+	<div> <%=n.text[0, 100].html_safe %> </div>
+	<div class="small_spacer"></div>
+<%end%>

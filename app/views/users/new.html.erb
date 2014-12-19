@@ -1,0 +1,41 @@
+<% @title = "Register" %>
+<div>
+	<h1><%=@title%></h1>
+	<% if flash[:alert] %><%= flash[:alert] %><%end%>
+	<% if !session[:id] %>
+    <% @user = flash[:user]
+      if !@user
+        @user = User.new
+      else %>
+        <% @user.errors.each{|attr, err| %><p><%="The " + attr.to_s + " " + err + "." %></p><% } %>
+
+      <% end %>
+		<%= form_for(User.new, :url => {:action => :create}) do |form| %>
+		<table class="form">
+			<tr>
+				<td>
+					  <%= form.label(:first_name, "First Name: ") %>
+ 					  <%= form.text_field(:first_name, :value => @user.first_name) %>
+ 					  <%= form.label(:last_name, "Last Name: ") %>
+  					<%= form.text_field(:last_name, :value => @user.last_name) %>
+  					<%= form.label(:username, "Login Username: ") %>
+  					<%= form.text_field(:username, :value => @user.username) %><br />
+  					<%= form.label(:password, "Please enter your password: ") %>
+  					<%= form.password_field(:password) %>
+  					<%= form.label(:password_confirmation, "Please re-enter your password: ") %>
+  					<%= form.password_field(:password_confirmation) %> <br />
+            <%= form.label(:test_group, "Test Group Number (This is 1 or 2): ") %>
+            <%= form.number_field(:test_group, :value => @user.test_group) %>  
+  				</td>
+  			</tr>
+  			<tr>
+  				<td>
+  					<%= form.submit "Register" %>
+  				</td>
+  			</tr>
+  		</table>
+		<% end %>
+	<% else %>
+		<p>You are already logged in.  If you want to register, please log out first.</p>
+	<% end %>
+</div>
