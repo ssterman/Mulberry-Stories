@@ -33,6 +33,11 @@ class NodesController < ApplicationController
   		redirect_to :controller => 'stories', :action => :view, :id => new_node.story
 	end
 
+  def index
+    temp = Node.find(:all)
+    @nodes = temp.sort {|x,y| x.story_id <=> y.story_id}
+  end
+
 	def _create_link(source, target)
 		new_link = Link.new
 		new_link.source = source

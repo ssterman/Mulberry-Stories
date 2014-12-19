@@ -12,6 +12,6 @@
  <% for n in @contributed do %>
  	<% s = Story.find(n.story_id) %>
 	<div> <b>Title:</b> <%= link_to(s.title, controller: "stories", action: "view", id: s.id) %> </div>
-	<div> <b>Scene: </b> <%= n.text %> </div>
+	<div> <b>Scene: </b> <%= n.text.html_safe %> </div>
 	<div class="small_spacer"></div>
 <%end%>

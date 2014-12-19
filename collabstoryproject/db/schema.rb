@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140601164057) do
+ActiveRecord::Schema.define(version: 20141219050301) do
 
   create_table "constraints", force: true do |t|
     t.integer  "story_id"
@@ -42,7 +42,6 @@ ActiveRecord::Schema.define(version: 20140601164057) do
     t.integer  "truth_height",   default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "is_start"
   end
 
   create_table "sessions", force: true do |t|
@@ -63,6 +62,7 @@ ActiveRecord::Schema.define(version: 20140601164057) do
     t.integer  "test_group"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "start_node_id"
   end
 
   create_table "users", force: true do |t|

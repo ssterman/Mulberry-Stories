@@ -1,6 +1,48 @@
 class StoriesController < ApplicationController
 	include ActionView::Helpers::TextHelper
 
+
+	def analyze
+		# words per node
+		nodes = Node.find(:all)
+		@len_arr = []
+		for n in nodes do
+			arr = n.text.split(" ")
+			len = arr.length
+			@len_arr << len
+		end
+		sum = 0
+		for l in @len_arr do
+			sum += l
+		end
+		@len_arr.sort!{|a, b| a <=> b}
+		@avg = sum / @len_arr.length
+
+		# nodes fulfilling constraints
+		@story_arr = [
+			[0,0,0,0,0],
+			[0,0,0,0,0],
+			[0,0,0,0,0],
+			[0,0,0,0,0],
+			[0,0,0,0,0],
+			[0,0,0,0,0],
+			[0,0,0,0,0],
+			[0,0,0,0,0],
+			[0,0,0,0,0],
+			[0,0,0,0,0],
+			[0,0,0,0,0],
+			[0,0,0,0,0],
+		]
+		for n in nodes do 
+			if (n.truth && n.story_id != 13)
+				puts n.story_id				
+				@story_arr[n.story_id - 1][n.constraint_num - 1] += 1
+			end
+		end
+		puts @story_arr
+
+	end
+
 	# lists all the stories with links to their interfaces
 	def index
 		logger.info "D"
@@ -30,6 +72,7 @@ class StoriesController < ApplicationController
 		story_hash["nodes"] = Array.new
 		story_hash["links"] = Array.new
 		story_hash["constraints"] = Array.new
+		story_hash["start"] = story.start_node_id
 		nodes.each do |node|
 			node_hash = Hash.new
 			node_hash["id"] = node.id
@@ -109,6 +152,8 @@ class StoriesController < ApplicationController
 	 		@node.save
 	 	end
 
+	 	@story.start_node_id = @node.id
+	 	@story.save
 
 	 	redirect_to(:action => :index)
 	 end

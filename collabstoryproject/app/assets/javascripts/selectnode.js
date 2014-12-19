@@ -303,7 +303,6 @@ function display_graph(json_data) {
 
 			var url = "/nodes/save";
 			var node_text = $("#submit_text_area").html();
-			console.log("NODE TEXT: " + node_text);
 			var node_annotation = $("#tag-input").val();
 			//console.log("annotation is: " + node_annotation);
 			var is_truth = "false";
@@ -326,7 +325,7 @@ function display_graph(json_data) {
 			} else {
 				//console.log(node_text);
 				var curStoryId = $("#submit_storyID").val();
-				var content = "text=" + node_text;
+				var content = "text=" + node_text.replace('&nbsp;','');
 				content += "&source=" + $("#submit_sourceID").val();
 				content += "&storyid=" + $("#submit_storyID").val();
 				content += "&userid=" + $("#submit_userID").val();
@@ -334,6 +333,7 @@ function display_graph(json_data) {
 				// content += "&constraint_width=" + constraint_width;
 				content += "&annotation=" + node_annotation;
 				content += "&constraint_num=" + target.constraint_num;
+				console.log("NODE TEXT: " + node_text);
 
 				console.log("Truth is: " + is_truth, "constraint_num is : " + target.constraint_num);
 
@@ -551,14 +551,20 @@ function display_graph(json_data) {
 			  			d.x = width/2 - 25*count;
 			  		}
 		  			return true;
-		  			//!!!!!!!!!!!super hacky.  change the node id that evaluate to true if you add any new stories
-		  		} else if (d.id < 13) {
+		  		} else if (d.id == json_data.start) {
 		  			d.fixed = true;
 		  			d.x = width/2;
 		  			d.y = 50;
 		  			return true;
 		  		}
 		  	})
+		  .style("fill", function(d) { 
+		  	if (d.id == json_data.start){ 
+		  	    return "green";
+		  	} else {
+		  		return d3.scale.category20();
+		  	}
+		  })
 	      .on("mousedown", 
 	        function(d) { 
 	        	console.log("inner mousedown");
