@@ -11,12 +11,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141219050301) do
+ActiveRecord::Schema.define(version: 20141219064419) do
 
   create_table "constraints", force: true do |t|
     t.integer  "story_id"
-    t.string   "title"
-    t.string   "text"
+    t.text     "title",          limit: 255
+    t.text     "text",           limit: 255
     t.integer  "constraint_num"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(version: 20141219050301) do
   end
 
   create_table "nodes", force: true do |t|
-    t.string   "text"
+    t.text     "text",           limit: 255
     t.integer  "user_id"
     t.integer  "story_id"
     t.integer  "weight"
@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(version: 20141219050301) do
     t.integer  "constraint_num"
     t.integer  "constraint_id"
     t.string   "annotation"
-    t.integer  "truth_height",   default: 0
+    t.integer  "truth_height",               default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -56,7 +56,7 @@ ActiveRecord::Schema.define(version: 20141219050301) do
 
   create_table "stories", force: true do |t|
     t.integer  "user_id"
-    t.string   "summary"
+    t.text     "summary",       limit: 255
     t.string   "title"
     t.string   "genre"
     t.integer  "test_group"
